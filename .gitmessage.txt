@@ -1,0 +1,20 @@
+[#] : :: 
+
+
+################
+# [#이슈번호] <commit종류>: :<이모지>: <커밋내용>
+# 예시 : [#5] wip: :gear: 사이드바 스켈레톤 구현중
+
+################
+#|Commit 종류|이모지|Commit 타입|
+#|-----------|--------------|----------|
+#|Initial commit|🎉 `:tada:`|init:|
+#|New Feature|✨`:sparkles:`|feat:|
+#|Bug Fix    |🐛`:bug:`     |bug:|
+#|Working In Process |⚙`:gear:`|wip:|
+#|Refactor Code|🔨 `:hammer:`|refactor:|
+#|Documentation|📚 `:books:`|docs:|
+#|Styling UI| 🎨`:art:`|style:|
+#|Env & Structure  | 📁 `:file_folder:` | set:|
+#|Conflict  | 🔀 `:twisted_rightwards_arrows:` | conflict:|
+################
