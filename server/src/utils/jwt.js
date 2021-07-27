@@ -1,8 +1,16 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config/config');
+const dotenv = require('dotenv');
 const error = require('../constants/error');
 const CustomError = require('../errors/custom-error');
 const db = require('../models');
+
+dotenv.config();
+
+const jwtOptions = {
+	algorithm: 'HS256',
+	expiresIn: '30m',
+	issuer: 'deal6',
+};
 
 /**
  * @param {object} user - DB 에서 조회한 결과
@@ -15,11 +23,11 @@ const createJWT = (user) => {
 		pk: user.pk,
 		id: user.id,
 	};
-	return jwt.sign(payload, config.jwt.secretKey, config.jwt.options);
+	return jwt.sign(payload, process.env.JWT_KEY, jwtOptions);
 };
 
 const verifyJWT = async (token) => {
-	const decodeToken = jwt.verify(token, config.jwt.secretKey);
+	const decodeToken = jwt.verify(token, process.env.JWT_KEY);
 
 	if (!decodeToken) {
 		throw new CustomError(error.JWT_TOKEN_INVALID_ERROR);
