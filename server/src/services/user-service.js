@@ -2,22 +2,19 @@ const db = require('../models');
 const success = require('../constants/success');
 const error = require('../constants/error');
 const CustomError = require('../errors/custom-error');
-const hashedPassword = require('../utils/bcrypt');
+const { createHash, verifyPassword } = require('../utils/bcrypt');
+
 const signIn = async (req, res, next) => {
 
 }
 
 const signUp = async (req, res, next) => {
     try {
-        let { id, password } = req.body;
+        const { id, password } = req.body;
 
-        let password = hashedPassword(password);
-    
         const [user, isCreated] = await db.User.findOrCreate({
             where: { id },
-            defaults: {
-                password        
-            }
+            defaults: { password: createHash(password) }
         });
     
         if (!isCreated) {
@@ -27,11 +24,8 @@ const signUp = async (req, res, next) => {
         const { code, message } = success.DEFAULT_CREATE;
 
         res.status(code).json({ message, user });
-
     } catch (e) {
         next(e); 
-
-
     }
 }
 
