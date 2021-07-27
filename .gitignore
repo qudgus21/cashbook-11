@@ -1,5 +1,7 @@
 .DS_Store
 
+dist
+
 *.pem
 
 .env
@@ -7,4 +9,6 @@
 node_modules/
 
 package-lock.json
+
+config.json
 
