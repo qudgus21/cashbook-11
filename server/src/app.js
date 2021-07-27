@@ -3,8 +3,20 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const router = require('./routes');
-
+const db = require('./models');
+const errorHandler = require('./middlewares/error-handler');
 const app = express();
+
+const isForced = false;
+
+db.sequelize.sync({force: isForced}).then(()=> {
+    if (process.env.NODE_ENV === 'test') return;
+
+    console.log('DB is connected successfully and forced', isForced);
+    console.log('==================================');
+}).catch(e => {
+    console.error('DB connection error',e);
+});
 
 dotenv.config();
 
@@ -15,10 +27,11 @@ app.use(express.json());
 
 app.use('/api', router);
 
-app.get('/', (req, res) => {
-    res.send('Cashbook 11 server start!');
-});
+app.use(errorHandler);
 
-app.listen(3000, () => {
-    console.log('아무말 3000 포트');
+const port = process.env.PORT || 3000;
+
+
+app.listen(port, () => {
+    console.log(`병영생활 화이팅~! ${port} 포트 개방`);
 })
