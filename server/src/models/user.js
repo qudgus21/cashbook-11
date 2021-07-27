@@ -16,13 +16,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         createdAt: {
-            type: DataTypes.DATE(1),
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP(1)'),
-        },
-        updatedAt: {
-            type: DataTypes.DATE(1),
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP(1) ON UPDATE CURRENT_TIMESTAMP(1)'),
-        },
+            type: 'DATETIME DEFAULT CURRENT_TIMESTAMP'
+          },
+          updatedAt: {
+            type: 'DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+          }
     }, {
         tableName: 'User',
         timestamps: false
