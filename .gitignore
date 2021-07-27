@@ -1,0 +1,10 @@
+.DS_Store
+
+*.pem
+
+.env
+
+node_modules/
+
+package-lock.json
+
