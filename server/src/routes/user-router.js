@@ -1,6 +1,6 @@
 const express = require('express');
 const { signIn, signUp, updateUserInfo, logout } = require('../services/user-service');
-const { decodeJWT } = require('../middlewares/decode-jwt');
+const decodeJWT = require('../middlewares/decode-jwt');
 const router = express.Router();
 
 router.post('/signin', signIn);
