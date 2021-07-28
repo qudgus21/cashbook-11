@@ -7,8 +7,13 @@ module.exports = {
   entry: './src/main.ts',
   module: {
     rules: [
+      { test: /\.tsx?$/, 
+        use: {
+          loader: "ts-loader",
+        },
+      },
       {
-        test: /\.(ts|js)$/,
+        test: /\.(js)$/,
         use: {
           loader: 'babel-loader',
         },
