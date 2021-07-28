@@ -1,9 +1,8 @@
-import { TemplateLiteral } from "estree";
-
 export default class Component {
     $target: Element;
     props?: any;
     state: any;
+
     constructor ($target: Element, props?: any) {
       this.$target = $target;
       this.props = props;
@@ -19,15 +18,20 @@ export default class Component {
       if (template) {
         this.$target.innerHTML = template;
         this.mounted();
-        this.didMount();
       }
     }
-    didMount() {}
     setEvent () {}
     setState (newState: any) {
       this.state = { ...this.state, ...newState };
       this.render();
     }
+
+    /*
+    update() {
+      // notify 시, 해당 함수가 실행된다. 
+    }
+    */
+
     addEvent (eventType: string, selector: string, callback: Function) {
       const children : Element[] = [...Array.from(this.$target.querySelectorAll(selector))];
       const isTarget = ($target) => children.includes($target) || $target.closest(selector);
