@@ -1,3 +1,5 @@
+import { TemplateLiteral } from "estree";
+
 export default class Component {
     $target: Element;
     props?: any;
@@ -9,9 +11,9 @@ export default class Component {
       this.setEvent();
       this.render();
     }
-    setup () {}
+    setup () {};
     mounted () {}
-    template () { return ''; }
+    template (): any { return ''; }
     render () {
       const template = this.template();
       if (template) {
