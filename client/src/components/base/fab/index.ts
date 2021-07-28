@@ -1,4 +1,6 @@
 import Component from "../../../core/component";
+import api from "../../../utils/api";
+import { $ } from '../../../utils/select';
 
 export default class Fab extends Component {
 
@@ -32,6 +34,15 @@ export default class Fab extends Component {
 
             const id = $('.container-fab .input-id').get().value;
             const password = $('.container-fab .input-password').get().value;
+
+            const response = await api('POST', '/user/signup', { id, password });
+            
+            if (response.isFail) {
+                /* 스낵바를 띄워야 합니다. */
+            } else {
+                /* 성공했다고 스낵바를 띄웁니다. 뭔가 색깔을 다르게 띄워줘볼까 고민중입니다. */
+            }
         });
     }
 }
+
