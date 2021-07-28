@@ -10,9 +10,30 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(
+    process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(
+    config.database, 
+    config.username, 
+    config.password, {
+      logging: false,
+      host: config.host,
+      dialect: config.dialect,
+      timezone: "+09:00",
+      define: {
+        charset: "utf8mb4",
+        dialectOptions: {
+          collate: "utf8mb4_general_ci"
+        }
+      },
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+      }
+    }
+  );
 }
 
 fs
