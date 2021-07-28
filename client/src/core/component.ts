@@ -2,7 +2,6 @@ export default class Component {
     $target: Element;
     props?: any;
     state: any;
-    // subject?: any;
 
     constructor ($target: Element, props?: any) {
       this.$target = $target;

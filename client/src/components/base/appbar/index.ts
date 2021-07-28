@@ -1,4 +1,3 @@
-import { TemplateLiteral } from "estree";
 import Component from "../../../core/component";
 import { navigateTo } from "../../../core/router";
 import { dateStore } from "../../../models";
@@ -10,6 +9,7 @@ export default class Appbar extends Component {
         return ` 
             <div class="container-appbar">
                 <div>우아한 가계부</div>
+                <div>
                     <button 
                         class="button button-prev"
                     >&lt;</button>
@@ -56,7 +56,6 @@ export default class Appbar extends Component {
 
         this.addEvent('click', '.button-prev', ({target})=>{
             dateStore.moveToPreviousMonth();
-            historyStore.changeData(dateStore.state);
             this.render(); // 바뀐 부분만 바꿔주는 것을 반영하면 좋을 것 같다.
         })
 
