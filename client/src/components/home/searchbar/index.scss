@@ -1,0 +1,55 @@
+@import '../../../color.scss';
+
+.wrapper-searchbar{
+    z-index: 1;
+    position: fixed;
+    top: 14%;
+
+    &, .container-searchbar {
+        width: 100%;
+    }
+
+    .container-searchbar{
+        display: flex;
+        justify-content: center;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        height: 5rem;
+        background-color: $OFF_WHITE;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+        li {
+            width: 15%;
+            flex-grow: 1;
+            height: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            padding-left: 1rem;
+            font-size: 0.8rem;
+            color: $PRIMARY;
+            font-weight: bold;
+
+        }
+
+        button {
+            width: 5%;
+            height: 50%;
+            margin-right: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: $PRIMARY;
+            border: 2px solid $PRIMARY;
+            border-radius: 0.2rem;
+            background-color: white;
+        }
+    }
+
+
+}
