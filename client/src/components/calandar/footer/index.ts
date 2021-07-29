@@ -10,10 +10,14 @@ export default class Footer extends Component {
         }
     }
     
-    template (): string { 
+    template(): string {
         return ` 
-            <div class="container-daybar">
-                푸터
+            <div class="container-footer">
+                <div>
+                    <span>총수입 1, 822, 480</span>&nbsp;&nbsp;
+                    <span>총 지출 834,640</span>
+                </div>
+                <div>${`총계&nbsp; 987,840`}</div>
             </div>
         `
     }
