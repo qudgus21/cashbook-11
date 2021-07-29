@@ -8,7 +8,7 @@ dotenv.config();
 
 const jwtOptions = {
 	algorithm: 'HS256',
-	expiresIn: '30m',
+	expiresIn: '3600m',
 	issuer: 'deal6',
 };
 
