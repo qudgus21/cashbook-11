@@ -1,3 +1,5 @@
+@import "../../../color.scss";
+
 
 .wrapper-content{
     margin-top: 5rem;
@@ -12,23 +14,23 @@
         display: flex;
         justify-content: center;
         width: 65%;
-        height: 100vh;
     }
 
     .calendar {
         width: 100%;
-
-        .dates {
+        border-left: 1px solid  $BORDER;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);        .dates {
             display: flex;
             flex-flow: row wrap;
-
             .date {
+                background-color: $OFF_WHITE;
                 position: relative;
                 width: calc(100% / 7);
                 height: auto;
                 text-align: right;
-                border-right: 1px solid #333333;
-                border-bottom: 1px solid #333333;
+                border-right: 1px solid $BORDER;
+                border-bottom: 1px solid  $BORDER;
 
                 .dateNum{
                     position: absolute;
@@ -36,8 +38,24 @@
                     bottom: 0;
                     padding: 0.3rem;
                 }
+
+                &:nth-child(1){
+                    border-top-left-radius: 15px;
+                }
+                &:nth-child(7){
+                    border-top-right-radius: 15px;
+                }
+
+                &:nth-child(29){
+                    border-bottom-left-radius: 15px;
+                }
+
+                &:nth-child(35){
+                    border-bottom-right-radius: 15px;
+                }
+
                 &:nth-child(-n+7){
-                    border-top: 1px solid #333333;
+                    border-top: 1px solid  $BORDER;
                 }
 
                 &:after{
@@ -48,11 +66,11 @@
 
                 &:nth-child(7n + 1) {
                     color: #D13E3E;
-                    border-left: 1px solid #333333;
                 }
                 
                 &:nth-child(7n) {
                     color: #396EE2;
+
                 }    
             }
         }
