@@ -1,30 +1,66 @@
+@import '../../../../color.scss';
+
+
 .modal-content {
     .form {
         display: flex;
         flex-direction: column;
-        align-items: center;
         text-align: center;
-        width: 100%;
-        height: 3rem;
-    
+        
+        h1{
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        label{
+            text-align: left;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+
         input {
-            border: 1px solid gray;
-            border-radius: 0.5rem;
-            width: 90%;
-            
+            border: none;
+            outline: none;
+            border: 1px solid $PLACEHOLDER;
+            background-color: $BACKGROUND;
+            margin-bottom:2rem;
+            padding: 0.9rem 0.5rem;
+            border-radius: 10px;           
+
+            &:last-child{
+                margin-bottom: 2.5rem;
+            }
+
+            &:active, &:focus{
+                border : 1px solid $PRIMARY;
+            }
         }
     }
     
-    .button-signin,
-    .button-signup {
-        margin-left: 1rem;
-        margin-right: 1rem;
-        border-radius: 0.5rem;
+
+    button {
+        border :none;
+        outline :none;
+        margin-bottom: 1.4rem;
+        padding: 0.7rem;
+        border-radius: 15px;
+        cursor: pointer;
+    }   
+
+    .button-signin, .button-signup{
+        background-color: $PRIMARY;
     }
+
+    .button-github{
+        background-color: $CANCEL;
+    }
+
     
+
     .button-move-signup {
-        border: none;
-        background: none;
+        cursor: pointer;
+        text-align: center;
+        font-size: 0.9rem;
     }
 }
 

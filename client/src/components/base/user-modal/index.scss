@@ -1,3 +1,5 @@
+@import '../../../color.scss';
+
 .modal {
     position: fixed;
     display: flex;
@@ -10,7 +12,7 @@
     
     
     .modal-background {
-        z-index: 5;
+        z-index: 2;
         position: fixed;
         top: 0;
         left: 0;
@@ -21,13 +23,12 @@
     
     .modal-content {
         z-index: 10;
-        background-color: white;
         display: flex;
         flex-direction: column;
-        width: 20rem;
-        height: 10rem;
+        background-color: $OFF_WHITE;
+        width: 30rem;
         border-radius: 0.5rem;
-        justify-content: space-around;
+        padding: 1.7rem 3.3rem;
     }
 }
 
