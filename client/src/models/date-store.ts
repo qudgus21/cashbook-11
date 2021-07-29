@@ -12,7 +12,18 @@ export default class DateStore extends Observable {
             month: time.getMonth() + 1,
             historys: null,
         };
+        this.setup();
     }
+
+    
+    async setup() {
+        const { year, month} = this.state
+        this.getAllHistory(year, month)
+        let historys = await this.getAllHistory(year, month)
+        this.setState({ year, month, historys });
+    }
+
+    
 
     setState(nextState: { year: number; month: number; historys: any;}) {
         this.state = nextState;
