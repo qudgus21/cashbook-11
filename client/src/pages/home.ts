@@ -10,13 +10,8 @@ export default class Home extends Component {
         this.state = {
             history
         }
-
-        dateStore.subscribe(this.update.bind(this));
     }
 
-    update() {
-        this.render();
-    }
     
     template (): string { 
         return ` 

@@ -74,17 +74,20 @@ export default class Appbar extends Component {
     }
 
     setEvent(){        
-        this.addEvent('click', '.button-home', ({target})=>{
+        this.addEvent('click', '.button-home', ({ target }) => {
+            dateStore.setup()
             navigateTo('/home');
             this.currentPageImg()
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
+            dateStore.setup()
             navigateTo('/calendar');
             this.currentPageImg()
         })
 
-        this.addEvent('click', '.button-statistics', ({target})=>{
+        this.addEvent('click', '.button-statistics', ({ target }) => {
+            dateStore.setup()
             navigateTo('/statistics');
             this.currentPageImg()
         })
