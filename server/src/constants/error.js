@@ -23,6 +23,12 @@ module.exports = {
 		serverMessage: 'No such user error',
 	},
 
+	WRONG_PASSWORD_ERROR: {
+		code: 400,
+		errorMessage: '비밀번호가 틀렸습니다.',
+		serverMessage: 'Wrong password',
+	},
+
 	JWT_TOKEN_INVALID_ERROR: {
 		code: 401,
 		errorMessage: '검증되지 않은 token 입니다.',
