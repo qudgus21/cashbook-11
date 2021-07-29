@@ -8,8 +8,11 @@ import Modal from './components/base/user-modal';
 
 window.addEventListener('load', router);
 
-window.addEventListener('popstate', router);
+window.addEventListener('popstate', () => {
+    router();
+    appbar.currentPageImg(history.state.url.split('/').pop());
+});
 
-new Appbar($('.appbar').get());
+const appbar = new Appbar($('.appbar').get());
 new Fab($('.fab').get());
 new Modal($('.modal-user').get());

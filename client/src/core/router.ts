@@ -6,7 +6,7 @@ const pathToRegex = (path) =>
 	new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
 const navigateTo = (url, props = null) => {
-	history.pushState(props, null, url); // props는 popstate시 자연스럽게 비워진다!
+	history.pushState({url}, null , url); // props는 popstate시 자연스럽게 비워진다!
 	router();
 };
 

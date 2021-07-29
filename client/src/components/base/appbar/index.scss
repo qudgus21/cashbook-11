@@ -1,5 +1,57 @@
-.container-appbar {
+@import '../../../color.scss';
+
+.container-appbar{
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+    height: 17vh;
+    background-color: $PRIMARY;
+    color: $OFF_WHITE;
+    position: fixed;
+    width: 100%;
+    img {
+        cursor: pointer;
+        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .date-controll{
+        display: flex;
+        font-size: 1.3rem;
+        
+        .date{
+            width: 5rem;
+            margin: 0 3.5rem;
+            text-align: center;
+
+            >:first-child{
+                position: relative;
+                bottom: 0.8rem;
+                font-size: 2rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .page-controll{
+        display: flex;
+
+        img {
+            filter: invert(93%) sepia(13%) saturate(828%) hue-rotate(124deg) brightness(95%) contrast(85%);
+            &:hover{
+                filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+            }
+        }
+
+        .active{
+            filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+        }
+
+        >*{
+            margin: 0.7rem;
+        }
+    }
 }
