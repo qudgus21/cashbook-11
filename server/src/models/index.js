@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const userPayTrend = require('./user-pay-trend');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
@@ -54,5 +55,20 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.User.hasMany(db.History);
+db.History.belongsTo(db.User);
+
+db.User.belongsToMany(db.PayType, { through: db.UserPayType });
+db.PayType.belongsToMany(db.User, { through: db.UserPayType });
+
+db.User.belongsToMany(db.Category, { through: db.UserPayTrend });
+db.Category.belongsToMany(db.User, { through: db.UserPayTrend });
+
+db.PayType.hasMany(db.History);
+db.History.belongsTo(db.PayType);
+
+db.Category.hasMany(db.History);
+db.History.belongsTo(db.Category);
 
 module.exports = db;
