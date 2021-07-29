@@ -1,23 +1,31 @@
 import Component from "../core/component";
+import Daybar from "../components/calandar/daybar";
+import Content from "../components/calandar/content";
+import Footer from "../components/calandar/footer";
+import "../components/calandar/index.scss";
+
+import { $ } from "../utils/select";
 
 export default class Calendar extends Component {
     
     setup () {
-        this.state = {
-            year: 2021,
-            month: 7,
-        }
+        this.state = {}
     }
     
     template (): string { 
         return ` 
             <div class="container-calendar">
-                달력
+                <div class="wrapper-daybar"></div>
+                <div class="wrapper-content"></div>
+                <div class="wrapper-footer"></div>
             </div>
         `
     }
 
-    mounted () {
+    mounted() {
+        new Daybar($('.container-calendar .wrapper-daybar').get())
+        new Content($('.container-calendar .wrapper-content').get())
+        new Footer($('.container-calendar .wrapper-footer').get())
     }
 
     setEvent(){
