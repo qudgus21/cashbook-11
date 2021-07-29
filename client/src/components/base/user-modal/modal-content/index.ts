@@ -63,7 +63,7 @@ export default class ModalContent extends Component {
             } else {
                 document.cookie = encodeURIComponent('JWT')+ '='+ encodeURIComponent(response.JWT);
                 addClassSelector($('.modal').get(), 'hidden');
-                window.location.href = '/home'; // 이 부분을 개선하면 좋을 것 같습니다.
+                navigateTo(window.location.pathname);
             }
         });
 
