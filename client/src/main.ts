@@ -7,7 +7,11 @@ import { $ } from './utils/select';
 
 window.addEventListener('load', router);
 
-window.addEventListener('popstate', router);
-
-new Appbar($('.appbar').get());
+const appbar = new Appbar($('.appbar').get());
 new Fab($('.fab').get());
+
+window.addEventListener('popstate', () => {
+    router();
+    appbar.currentPageImg(history.state.url.split('/').pop());
+});
+
