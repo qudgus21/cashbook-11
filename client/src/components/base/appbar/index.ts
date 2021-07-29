@@ -6,6 +6,9 @@ import './index.scss';
 
 export default class Appbar extends Component {
     
+    setup() {
+        dateStore.subscribe(this.setTitle.bind(this));
+    }
 
     template (): any { 
         return ` 
@@ -17,8 +20,8 @@ export default class Appbar extends Component {
                         <img src="../../../src/assets/chevron-left.svg"/>
                     </div>
                     <div class="date">
-                        <div>${dateStore.state.month}월</div>
-                        <div>${dateStore.state.year}</div>                   
+                        <div class="title-month">${dateStore.state.month}월</div>
+                        <div class="title-year">${dateStore.state.year}</div>                   
                     </div>
                     <div class="button-next">
                         <img src="../../../src/assets/chevron-right.svg"/>
@@ -39,6 +42,13 @@ export default class Appbar extends Component {
             </div>
         `
     }
+
+
+    setTitle() {
+        $('.container-appbar .title-month').get().textContent = `${dateStore.state.month}월`
+        $('.container-appbar .title-year').get().textContent = `${dateStore.state.year}`
+    }
+
 
 
     currentPageImg(history?: any) {
