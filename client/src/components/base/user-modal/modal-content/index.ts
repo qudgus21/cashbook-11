@@ -3,6 +3,7 @@ import Component from "../../../../core/component";
 import api from "../../../../utils/api";
 import { $ } from '../../../../utils/select';
 import { addClassSelector } from '../../../../utils/selectHandler';
+import { navigateTo } from '../../../../core/router';
 
 export default class ModalContent extends Component {
 
@@ -58,10 +59,11 @@ export default class ModalContent extends Component {
             const response = await api('POST', '/user/signin', { id, password });
             
             if (response.isFail) {
-                /* 스낵바를 띄워야 합니다. */
                 alert(response.message);
             } else {
-                alert(response.message);
+                document.cookie = encodeURIComponent('JWT')+ '='+ encodeURIComponent(response.JWT);
+                addClassSelector($('.modal').get(), 'hidden');
+                window.location.href = '/home'; // 이 부분을 개선하면 좋을 것 같습니다.
             }
         });
 
