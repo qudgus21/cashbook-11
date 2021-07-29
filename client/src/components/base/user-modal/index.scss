@@ -27,30 +27,7 @@
         width: 20rem;
         height: 10rem;
         border-radius: 0.5rem;
-        
         justify-content: space-around;
-
-        input {
-            border: 1px solid gray;
-            border-radius: 0.5rem;
-            width: 90%;
-            
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 100%;
-            height: 3rem;
-        }
-
-        .button-signup {
-            margin-left: 1rem;
-            margin-right: 1rem;
-            border-radius: 0.5rem;
-        }
     }
 }
 
