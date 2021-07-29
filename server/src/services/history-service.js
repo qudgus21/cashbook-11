@@ -21,17 +21,23 @@ const getAllHistoryByFilter = async (req, res, next) => {
         const where = {};
 
         if (startDate && endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate() + 1);
+ 
             where.time = {
-                [Op.between]: [new Date(startDate), new Date(endDate)], // 추후 다음날 오전 12시로 처리해야한다. 
+                [Op.between]: [new Date(startDate), new Date(endDate)],
             };
         } else if (startDate) {
-            where.value = {
+            where.time = {
                 [Op.gte]: new Date(startDate),
-            }
+            };
         } else if (endDate) {
-            where.value = {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate() + 1);
+            
+            where.time = {
                 [Op.lte]: new Date(endDate),
-            }
+            };
         }
 
         if (CategoryPk) {
