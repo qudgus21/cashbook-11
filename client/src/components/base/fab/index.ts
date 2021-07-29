@@ -1,6 +1,8 @@
+import './index.scss';
 import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
+import { removeClassSelector } from '../../../utils/selectHandler';
 
 export default class Fab extends Component {
 
@@ -9,17 +11,10 @@ export default class Fab extends Component {
     }
     
     template (): string { 
-        return`  
+        return`
             <div class="container-fab">
-                <button>유저</button>
-                <form>
-                    <label for="id">아이디<label/>
-                    <input type="text" name="id" class="input-id" placeholder="아이디를 입력하세요"/>
-                    <label for="password">비밀번호<label/>
-                    <input type="password" name="password" class="input-password" placeholder="비밀번호를 입력하세요"/>
-                </form>
-                <button class="button-signup">회원가입</button>
-                <button>글쓰기</button>
+                <button class="button button-user">유저</button>
+                <button class="button button-write">글쓰기</button>
             </div>
         `;
     }
@@ -29,19 +24,16 @@ export default class Fab extends Component {
     }
 
     setEvent() {
-        this.addEvent('click','.button-signup', async (e) => {
+        this.addEvent('click','.button-user', (e) => {
             e.preventDefault();
 
-            const id = $('.container-fab .input-id').get().value;
-            const password = $('.container-fab .input-password').get().value;
+            removeClassSelector($('.modal').get(), 'hidden');
+        });
 
-            const response = await api('POST', '/user/signup', { id, password });
-            
-            if (response.isFail) {
-                /* 스낵바를 띄워야 합니다. */
-            } else {
-                /* 성공했다고 스낵바를 띄웁니다. 뭔가 색깔을 다르게 띄워줘볼까 고민중입니다. */
-            }
+        this.addEvent('click','.button-write', (e) => {
+            e.preventDefault();
+
+            alert("아직 미완성이에요!");
         });
     }
 }

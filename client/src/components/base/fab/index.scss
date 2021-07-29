@@ -1,0 +1,28 @@
+@import '../../../color.scss';
+
+.container-fab {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 9rem;
+    justify-content: space-between;
+    border: none;
+    border-radius:2rem;
+    bottom: 3rem;
+    right: 3rem;
+        
+    .button {
+        border: none;
+        background-color: $PLACEHOLDER;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 2rem;
+        box-shadow: 3px 2px 5px 2px #dadce0;
+        cursor: pointer;
+        color: $OFF_WHITE;
+        font-weight: bold;
+        font-size: large;
+    }
+}
+    
+    
