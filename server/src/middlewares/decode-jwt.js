@@ -6,15 +6,13 @@ module.exports = async (req, res, next) => {
 	console.log('decodeJWT Middleware called');
 
 
-	const token = req.headers["x-access-token"]
+	const token = req.headers["x-access-token"];
 
-
-	if (token) {
+	if (token != undefined) {
 		try {
 			const user = await verifyJWT(token);
 
 			req.user = user;
-
 			
 			next();
 		} catch (err) {
