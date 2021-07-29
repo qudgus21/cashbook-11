@@ -12,13 +12,6 @@ export default class Home extends Component {
         }
     }
 
-    getdata = () => {
-        //api => setstate
-    }
-
-    update() {
-        
-    }
     
     template (): string { 
         return ` 

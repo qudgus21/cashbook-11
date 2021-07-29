@@ -26,21 +26,62 @@
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
         li {
-            width: 15%;
-            flex-grow: 1;
+            width: 10rem;
             height: 2.5rem;
             display: flex;
             flex-direction: column;
             padding-left: 1rem;
-            font-size: 0.8rem;
-            color: $PRIMARY;
-            font-weight: bold;
+            border-right: 1px solid gray;
 
+            label {
+                font-size: 0.8rem;
+                color: $PRIMARY;
+                font-weight: bold;
+                height: 1rem;
+            }
+
+            input, select {
+                margin-right: 1rem;
+                font-size: 1rem;
+                border: none;
+            }
+            &.li-date {
+                flex-grow: 8;
+                padding-right: 1rem;
+            }
+
+            &.li-content {
+                flex-grow: 2;
+            }
+
+            &.li-paytype {
+                // flex-grow: 1;
+            }
+
+            &.li-price {
+                flex-grow: 2;
+                padding-right: 1rem;
+                border: none;
+            }
+
+            .container-price {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+
+                input {
+                    width: 0;
+                    flex-grow: 1;
+                    text-align: center;
+                }
+            }
         }
 
         button {
-            width: 5%;
-            height: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
             margin-right: 1rem;
             font-size: 2rem;
             font-weight: bold;
@@ -48,8 +89,7 @@
             border: 2px solid $PRIMARY;
             border-radius: 0.2rem;
             background-color: white;
+            margin-left: 0.5rem;
         }
     }
-
-
 }
