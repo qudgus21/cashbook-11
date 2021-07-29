@@ -1,3 +1,5 @@
+import './reset.scss';
+import './index.scss';
 import Appbar from "./components/base/appbar";
 import Fab from "./components/base/fab";
 import { router } from './core/router';
