@@ -46,11 +46,11 @@
                     border-top-right-radius: 15px;
                 }
 
-                &:nth-child(29){
+                &:nth-child(36){
                     border-bottom-left-radius: 15px;
                 }
 
-                &:nth-child(35){
+                &:last-child{
                     border-bottom-right-radius: 15px;
                 }
 
@@ -72,6 +72,14 @@
                     color: #396EE2;
 
                 }    
+
+                &.notCurrent{
+                    color: $BORDER;
+                }
+
+                &.today{
+                    background-color: $BACKGROUND;
+                }
             }
         }
     }
