@@ -21,7 +21,6 @@ export default class Home extends Component {
     template (): string { 
         return ` 
             <div class="container-home">
-                홈 ${dateStore.state.month}
             </div>
         `
     }

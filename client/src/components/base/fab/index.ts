@@ -20,6 +20,7 @@ export default class Fab extends Component {
                     <img src="../../../src/assets/add_white.svg"/>
                 </button>
             </div>
+            <button class="button-test">토큰 테스트 버튼-> 1번유저정보 수정</button>
         `;
     }
 
@@ -27,7 +28,19 @@ export default class Fab extends Component {
 
     }
 
+    async updateUser() { 
+        const response: any = await api('GET', '/user/update/1');
+
+    }
+
     setEvent() {
+
+        this.addEvent('click', '.button-test', (e) => { 
+            e.preventDefault();
+            this.updateUser();
+        })
+
+
         this.addEvent('click','.button-user', (e) => {
             e.preventDefault();
             if ($('.container-daybar').get()){ 

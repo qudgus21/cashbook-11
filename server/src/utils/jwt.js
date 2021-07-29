@@ -30,7 +30,7 @@ const verifyJWT = async (token) => {
 		throw new CustomError(error.JWT_TOKEN_INVALID_ERROR);
 	}
 
-	const user = await db.User.findOne(decodeToken.id);
+	const user = await db.User.findOne({ where: { pk : decodeToken.pk}});
 
 	if (!user || isInvalidPayLoad(decodeToken, user)) {
 		throw new CustomError(error.JWT_TOKEN_INVALID_ERROR);
