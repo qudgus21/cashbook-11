@@ -14,15 +14,12 @@ const jwtOptions = {
 
 /**
  * @param {object} user - DB 에서 조회한 결과
- * @param {string} user.id - user의 id
- * @param {string} user.pk - user의 pk
+ * @param {number} user.id - user의 id
+ * @param {number} user.pk - user의 pk
  * @returns {string} JWT 입니다.
  */
-const createJWT = (user) => {
-	const payload = {
-		pk: user.pk,
-		id: user.id,
-	};
+const createJWT = ({pk, id}) => {
+	const payload = { pk, id };
 	return jwt.sign(payload, process.env.JWT_KEY, jwtOptions);
 };
 
