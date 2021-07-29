@@ -9,6 +9,6 @@ router.post('/signup', signUp);
 
 router.post('/logout', decodeJWT, logout);
 
-router.put('/update/:pk', decodeJWT, updateUserInfo);
+router.get('/update/:pk',  decodeJWT, updateUserInfo);
 
 module.exports = router;
