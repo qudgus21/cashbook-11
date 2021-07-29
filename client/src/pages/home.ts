@@ -10,15 +10,11 @@ export default class Home extends Component {
         this.state = {
             history
         }
+
         dateStore.subscribe(this.update.bind(this));
     }
 
-    getdata = () => {
-        //api => setstate
-    }
-
     update() {
-        
         this.render();
     }
     
