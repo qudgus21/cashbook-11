@@ -1,5 +1,6 @@
 import Component from "../../../core/component";
 import { dateStore } from "../../../models";
+import { getDates } from "../../../utils/date";
 import { $ } from "../../../utils/select";
 import './index.scss'   
 
@@ -22,36 +23,38 @@ export default class Content extends Component {
         `
     }
 
-    makeCalendar() { 
-        const viewYear = dateStore.state.year;
-        const viewMonth = dateStore.state.month;
-        const prevLast = new Date(viewYear, viewMonth-1, 0);
-        const thisLast = new Date(viewYear, viewMonth, 0);
-        const pldate = prevLast.getDate();
-        const plday = prevLast.getDay();
-        const tldate = thisLast.getDate();
-        const tlday = thisLast.getDay();
-        const thisDates = []; const prevDates = []; const nextDates = [];
-        const days = Array(tldate+1).keys()
-        while(true) {
-            let iteratorResult = days.next();
-            if ( iteratorResult.done === true ) break;
-            thisDates.push(iteratorResult.value);
-          }
-        if (plday !== 6) {
-            for (let i = 0; i < plday + 1; i++) {
-              prevDates.unshift(pldate - i);
-            }
+    paintCalendar(dates: any): void {
+        const storeYear = dateStore.state.year;
+        const storeMonth = dateStore.state.month;
+        const now = new Date
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+        const currentDate = now.getDate();
+        let isNow = false;
+        if (storeYear === currentYear && storeMonth === currentMonth) {
+            isNow = true;
         }
-        for (let i = 1; i < 7 - tlday; i++) {nextDates.push(i);}
-        const dates = prevDates.concat(thisDates.slice(1), nextDates);
+        let notCurrent = true;
         dates.forEach((date, i) => {
+            if (notCurrent && date === 1) {
+                notCurrent = false;
+            } else if(!notCurrent && date === 1){ 
+                notCurrent = true;
+            }
             dates[i] = `
-            <div class="date">
+            <div class="date${notCurrent?` notCurrent`:``}${!notCurrent&&isNow&&date===currentDate?` today`:``}">
                 <div class="dateNum">${date}</div>
             </div>`;
         })
         $('.dates').get().innerHTML = dates.join('');
+        const $cells = $('.dates .date').getAll();
+        if ($cells.length === 35) { 
+            $cells[28].style.borderBottomLeftRadius = "15px";
+        }
+    }
+
+    makeCalendar() { 
+        this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
     }
 
     mounted() {
