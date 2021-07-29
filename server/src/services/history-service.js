@@ -7,6 +7,7 @@ const Op = db.Sequelize.Op;
 
 const getAllHistoryByFilter = async (req, res, next) => {
     try {
+        const user = req.user;
 
         let { 
             startDate,      // '2021-05-20'
@@ -19,6 +20,8 @@ const getAllHistoryByFilter = async (req, res, next) => {
         } = req.query;
 
         const where = {};
+
+        where.UserPk = user.pk;
 
         if (startDate && endDate) {
             endDate = new Date(endDate);

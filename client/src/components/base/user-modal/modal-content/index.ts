@@ -69,6 +69,7 @@ export default class ModalContent extends Component {
             } else {
                 setCookie('JWT', response.JWT, 1);
                 addClassSelector($('.modal').get(), 'hidden');
+                alert('로그인에 성공했습니다!');
                 navigateTo(window.location.pathname);
             }
         });
