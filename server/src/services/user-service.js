@@ -16,16 +16,18 @@ const signIn = async (req, res, next) => {
         if (!user) {
             throw new CustomError(error.LOGIN_ERROR);
         }
-
-        if (verifyPassword({hash: user.password, password})) {
+        
+        if (!verifyPassword({hash: user.password, password})) {
             throw new CustomError(error.WRONG_PASSWORD_ERROR);
         }
 
-        res.cookie('JWT', createJWT(user))
+        const JWT = createJWT(user);
 
         const { code, message } = success.LOGIN;
+        
+        user.password = '';
 
-        res.status(code).json({ message, user });
+        res.status(code).json({ message, user, JWT });
     } catch (e) {
         next(e); 
     }
