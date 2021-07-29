@@ -17,8 +17,7 @@ const api = async (method: string, url: string, data = {}) => {
 
     try
     {
-        console.log(options)
-        console.log(`${apiHost}${url}`)
+    
         let response: any = await fetch(`${apiHost}${url}`, options);
         
         const result = await response.json();
@@ -26,7 +25,6 @@ const api = async (method: string, url: string, data = {}) => {
         if (!response.ok) {
             throw new Error(result.message);
         }
-
         return result;
     } catch (e) {
         return { isFail: true, message: e.message };
