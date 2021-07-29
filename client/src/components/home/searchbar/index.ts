@@ -70,16 +70,18 @@ export default class SearchBar extends Component {
     getSelectLiteralTemplate(
         dataSet: any[], 
         label: {name: string, text: string}) {
-        if (!dataSet) return '';
         
         return `
             <label name="${label.name}">${label.text}</label>
             <select class="select-${label.name}" name="${label.name}">
                 <option selected disabled>선택하세요</option>
                 <option value="0">선택안함</option>
-                ${dataSet.map((data) => {
-                    return `<option value="${data.pk}">${data.name}</option>`;
-                }).join('\n')}
+                ${dataSet 
+                    ? dataSet.map((data) => {
+                        return `<option value="${data.pk}">${data.name}</option>`;
+                    }).join('\n')
+                    : 
+                    ''}
                 ${(label.text === '결제수단') ? `<option value="-1">추가</option>`: ''}
             </select>
         `;
