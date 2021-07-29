@@ -3,6 +3,8 @@ import Component from "../../../../core/component";
 import api from "../../../../utils/api";
 import { $ } from '../../../../utils/select';
 import { addClassSelector } from '../../../../utils/selectHandler';
+import { navigateTo } from '../../../../core/router';
+import { setCookie } from '../../../../utils/cookie';
 
 export default class ModalContent extends Component {
 
@@ -18,7 +20,7 @@ export default class ModalContent extends Component {
 
     mounted () {}
 
-    signInTemplate() {
+    signInTemplate(): string {
         return `
             <form class="form">
                 <label for="id">아이디</label>
@@ -31,7 +33,7 @@ export default class ModalContent extends Component {
         `;
     }
 
-    signUpTemplate() {
+    signUpTemplate(): string {
         return `
             <form class="form">
                 <label for="id">아이디</label>
@@ -55,13 +57,14 @@ export default class ModalContent extends Component {
 
             const { id, password } = this.getIdAndPasswordFromInput();
 
-            const response = await api('POST', '/user/signin', { id, password });
+            const response: any = await api('POST', '/user/signin', { id, password });
             
             if (response.isFail) {
-                /* 스낵바를 띄워야 합니다. */
                 alert(response.message);
             } else {
-                alert(response.message);
+                setCookie('JWT', response.JWT, 1);
+                addClassSelector($('.modal').get(), 'hidden');
+                navigateTo(window.location.pathname);
             }
         });
 
@@ -71,7 +74,7 @@ export default class ModalContent extends Component {
 
             const { id, password } = this.getIdAndPasswordFromInput();
 
-            const response = await api('POST', '/user/signup', { id, password });
+            const response: any = await api('POST', '/user/signup', { id, password });
             
             if (response.isFail) {
                 /* 스낵바를 띄워야 합니다. */
@@ -88,9 +91,9 @@ export default class ModalContent extends Component {
         });
     }
 
-    getIdAndPasswordFromInput() {
-        const id = $('.form .input-id').get().value;
-        const password = $('.form .input-password').get().value;
+    getIdAndPasswordFromInput(): { id: string, password: string } {
+        const id: string = $('.form .input-id').get().value;
+        const password: string = $('.form .input-password').get().value;
         return { id, password }; 
     }
 }
