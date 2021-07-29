@@ -23,6 +23,8 @@ const signIn = async (req, res, next) => {
 
         const JWT = createJWT(user);
 
+        res.cookie('JWT', JWT);
+
         const { code, message } = success.LOGIN;
         
         user.password = '';
