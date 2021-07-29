@@ -10,6 +10,7 @@ export default class Appbar extends Component {
     template (): any { 
         return ` 
             <div class="container-appbar">
+                <div></div>
                 <h1 class="title">우아한 가계부</h1>
                 <div class="date-controll">
                     <div class="button-prev">
@@ -34,6 +35,7 @@ export default class Appbar extends Component {
                         <img src="../../../src/assets/calendar.svg"/>
                     </div>
                 </div>
+                <div></div>
             </div>
         `
     }

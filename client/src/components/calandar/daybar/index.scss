@@ -1,0 +1,31 @@
+@import '../../../color.scss';
+
+.wrapper-daybar{
+    z-index: 1;
+    position: fixed;
+    top: 14%;
+
+    &, .container-daybar, ul {
+        width: 100%;
+    }
+
+    .container-daybar{
+        display: flex;
+        justify-content: center;
+    }
+
+    ul{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.3rem;
+        background-color: $OFF_WHITE;
+        width: 65%;
+        border-radius: 15px;
+        box-shadow: 3px 4px 3px 2px #dadce0;
+
+        >li{
+            margin: calc(45% / 7);
+        }
+    }
+}

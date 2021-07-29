@@ -1,0 +1,60 @@
+
+.wrapper-content{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+
+    &, .container-content {
+        width: 100%;
+    }
+
+    .container-content{
+        display: flex;
+        justify-content: center;
+        width: 65%;
+        height: 100vh;
+    }
+
+    .calendar {
+        width: 100%;
+
+        .dates {
+            display: flex;
+            flex-flow: row wrap;
+
+            .date {
+                position: relative;
+                width: calc(100% / 7);
+                height: auto;
+                text-align: right;
+                border-right: 1px solid #333333;
+                border-bottom: 1px solid #333333;
+
+                .dateNum{
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    padding: 0.3rem;
+                }
+                &:nth-child(-n+7){
+                    border-top: 1px solid #333333;
+                }
+
+                &:after{
+                    content: "";
+                    display: block;
+                    padding-top: 100%;
+                }
+
+                &:nth-child(7n + 1) {
+                    color: #D13E3E;
+                    border-left: 1px solid #333333;
+                }
+                
+                &:nth-child(7n) {
+                    color: #396EE2;
+                }    
+            }
+        }
+    }
+}
