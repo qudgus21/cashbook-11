@@ -29,7 +29,6 @@ const verifyJWT = async (token) => {
 	if (!decodeToken) {
 		throw new CustomError(error.JWT_TOKEN_INVALID_ERROR);
 	}
-	console.log(decodeToken);
 
 	const user = await db.User.findOne({ where: { id: decodeToken.id }});
 
