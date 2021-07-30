@@ -5,8 +5,7 @@ const { verifyJWT } = require('../utils/jwt');
 module.exports = async (req, res, next) => {
 	console.log('decodeJWT Middleware called');
 
-
-	const token = req.headers["x-access-token"];
+	const token = req.headers.authorization.split(' ')[1]
 
 	if (token != undefined) {
 		try {

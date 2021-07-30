@@ -1,7 +1,7 @@
 import Observable from "../core/observable";
 import api from "../utils/api";
 import { getDates } from "../utils/date";
-
+import { getCookie } from "../utils/cookie";
 export default class DateStore extends Observable {
     state: { year: number; month: number; historys: any; };
 
@@ -12,11 +12,15 @@ export default class DateStore extends Observable {
             month: time.getMonth() + 1,
             historys: null,
         };
-        this.setup();
+        
+        if (getCookie('JWT')) { 
+            this.setup();
+        }
     }
 
     
     async setup() {
+
         const { year, month} = this.state
         this.getAllHistory(year, month)
         let historys = await this.getAllHistory(year, month)

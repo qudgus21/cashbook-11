@@ -8,7 +8,7 @@ const api = async (method: string, url: string, data = {}) => {
         method, 
         headers: {
             'Content-Type': 'application/json',
-            'x-access-token' : getCookie('JWT')
+            'Authorization': 'Bearer' + ' ' + getCookie('JWT')
         }
     };
 
