@@ -3,6 +3,7 @@ import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { removeClassSelector } from '../../../utils/selectHandler';
+import DailyHistory from '../../base/daily-history';
 
 export default class Content extends Component {
 
@@ -12,12 +13,12 @@ export default class Content extends Component {
     
     template (): string { 
         return `
-
+            <div class="wrapper-content"></div>
         `;
     }
 
     mounted () {
-
+        new DailyHistory($('.wrapper-content').get());
     }
 
     setEvent() {
