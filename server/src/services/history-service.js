@@ -23,6 +23,7 @@ const getAllHistoryByFilter = async (req, res, next) => {
 
         where.UserPk = user.pk;
 
+
         if (startDate && endDate) {
             endDate = new Date(endDate);
             endDate.setDate(endDate.getDate() + 1);
