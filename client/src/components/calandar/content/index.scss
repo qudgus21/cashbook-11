@@ -8,6 +8,10 @@
 
     &, .container-content {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     .container-content{
@@ -32,6 +36,7 @@
                 border-right: 1px solid $BORDER;
                 border-bottom: 1px solid  $BORDER;
 
+                
                 .dateNum{
                     position: absolute;
                     right: 0;
@@ -80,7 +85,49 @@
                 &.today{
                     background-color: $BACKGROUND;
                 }
+
+
+                .day-history{
+                    position: absolute;
+                    text-align: left;
+                    padding: 0.8rem;
+                    font-size: 1rem;
+                    > * {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .day-total{
+                        color: $PRIMARY;
+                    }
+                    
+                    .day-consume{
+                        color : $ERROR;
+                    }
+
+                    .day-income{
+
+                    }
+                }
             }
+        }
+    }
+
+    .footer{
+        width: 100%;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        font-size:0.9rem;
+        color: $BODY;
+
+        >:first-child{
+            position: relative;
+            left: 1rem;
+        }
+
+        >:nth-child(2){
+            position: relative;
+            right: 1rem;
         }
     }
 }

@@ -1,7 +1,6 @@
 import Component from "../core/component";
 import Daybar from "../components/calandar/daybar";
 import Content from "../components/calandar/content";
-import Footer from "../components/calandar/footer";
 import "../components/calandar/index.scss";
 
 import { $ } from "../utils/select";
@@ -25,7 +24,6 @@ export default class Calendar extends Component {
     mounted() {
         new Daybar($('.container-calendar .wrapper-daybar').get())
         new Content($('.container-calendar .wrapper-content').get())
-        new Footer($('.container-calendar .wrapper-footer').get())
     }
 
     setEvent(){

@@ -19,16 +19,52 @@ export default class Content extends Component {
                 <div class="calendar">
                     <div class="dates"></div>
                 </div>
+                <div class="footer">
+                    <div>
+                        <span class="total-income">총 수입 &nbsp;${123123}</span>&nbsp;&nbsp;&nbsp;
+                        <span class="total-consume">총 지출 &nbsp;${123123}</span>
+                    </div>
+                    <div class="total-sum">
+                        총계 &nbsp;${123213}
+                    </div>
+                </div>
             </div>
         `
     }
 
 
-    
+    makeValueTemplate (dayHistory){
+        if (dayHistory === undefined) return ``
+
+        let consume = dayHistory.consume;
+        let income = dayHistory.income;
+        let total = consume + income;
+
+        return`
+            ${consume!==0 && income !==0 ?`<div class="day-total">${total}</div>`:`` }
+            ${consume!==0 ?`<div class="day-consume">${consume}</div>`:`` }
+            ${income !==0 ?`<div class="day-income">${income}</div>`:`` }
+        `
+    }
+
+    makeFooterData(historyData) {
+        let totalConsume = 0;
+        let totalIncome = 0;
+        let totalSum = 0;
+        historyData.forEach((history) => {
+            totalConsume += history.consume
+            totalIncome += history.income
+        })
+        totalSum = totalConsume + totalIncome;
+
+        $('.total-income').get().textContent = `총 수입 ${totalIncome}`
+        $('.total-consume').get().textContent = `총 지출 ${totalConsume}`
+        $('.total-sum').get().textContent = `총계 ${totalSum}`
+    }
 
 
     paintCalendar(dates: any): void {
-        const historyData = this.sortHistory(dateStore.state.historys)
+        const historyData = this.sortHistory(dateStore.state.historys);
         const storeYear = dateStore.state.year;
         const storeMonth = dateStore.state.month;
         const now = new Date
@@ -45,7 +81,6 @@ export default class Content extends Component {
             let idx =  historyData.findIndex(item => { 
                 return item.date === date;
             })
-            console.log(historyData[idx])
             return historyData[idx]
         }
 
@@ -60,9 +95,9 @@ export default class Content extends Component {
             dates[i] = `
             <div class="date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
                 ${!notCurrent ? 
-                `
-                    <div>${dayHistory === undefined ? ``:`${dayHistory.income}`}</div>
-                    <div>${dayHistory === undefined ? ``:`${dayHistory.consume}`}</div>
+                `   <div class="day-history">
+                    ${this.makeValueTemplate(dayHistory)}
+                    </div>
                 `: ``}
                 <div class="dateNum">${date}</div>  
             </div>`;
@@ -75,12 +110,13 @@ export default class Content extends Component {
                 $cells[28].style.borderBottomLeftRadius = "15px";
             }
         }
+        this.makeFooterData(historyData);
     }
-
 
     makeCalendar() {
         this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
     }
+
 
     sortHistory(historys: any): any {
         let sorted = [];
