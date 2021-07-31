@@ -3,16 +3,30 @@ import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
-import DailyHistory from '../../base/month-history';
 import Filter from '../filter';
 import { checkLogin } from '../../../utils/cookie';
-
+import { dateStore } from '../../../models';
+import MonthHistory from '../../base/month-history';
 export default class Content extends Component {
 
     setup () {
         this.state = {};
+        
+        dateStore.subscribe(this.update.bind(this));
+    }
+
+    update() {
+        console.log('content 의 update 가 dateStore 에 의해 호출되었습니다.');
+        
+        this.setState();
     }
     
+    setState(historys?:object) {
+        this.state.historys = historys ?? dateStore.getHistorys();
+        console.log(this.state.historys, "너냐? ");
+        this.render();
+    }
+
     template (): string { 
         return `
             <div class="container-filter">안녕하세요 누구신가요? </div>
@@ -22,12 +36,18 @@ export default class Content extends Component {
 
     mounted () {
         // TODO
-        if (checkLogin(false)) { 
+        if (!checkLogin(false)) { 
             addClassSelector($('.container-filter').get(), 'hidden');
             $('.wrapper-month-history').get().innerHTML = this.getLoginImgTemplate();
         } else {
-            new Filter($('.container-filter').get());
-            new DailyHistory($('.wrapper-month-history').get());
+            new Filter(
+                $('.container-filter').get(), 
+                { historys : this.state.historys }
+            );
+            new MonthHistory(
+                $('.wrapper-month-history').get(), 
+                { historys: this.state.historys } 
+            );
         }
     }
 
