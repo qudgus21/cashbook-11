@@ -55,10 +55,6 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.js', '.json', '.scss'],
-    alias: {
-       '@assets' : path.resolve(__dirname, './src/assets'),
-       '@': path.resolve(__dirname, './src'),
-    },
   },
   output: { 
     path: path.join(__dirname, './dist'), 
