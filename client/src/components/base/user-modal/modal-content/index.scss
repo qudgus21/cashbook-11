@@ -21,9 +21,9 @@
         input {
             border: none;
             outline: none;
-            border: 1px solid $PLACEHOLDER;
+            height: 3rem;
+
             background-color: $BACKGROUND;
-            margin-bottom:2rem;
             padding: 0.9rem 0.5rem;
             border-radius: 10px;           
 
@@ -34,7 +34,19 @@
             &:active, &:focus{
                 border : 1px solid $PRIMARY;
             }
+
+
         }
+
+        .input-alert{
+            font-size: 0.8rem;
+            text-align: left;
+            color: $ERROR;
+            margin: 0.5rem 0 2rem 0.2rem;
+            height: 0.5rem;
+        }
+
+ 
     }
     
 
@@ -51,13 +63,17 @@
         background-color: $PRIMARY;
     }
 
+    button.yet{
+        background-color: $PLACEHOLDER;
+    }
+
     .button-github{
         background-color: $CANCEL;
     }
 
     
 
-    .button-move-signup {
+    .button-move-signup, .button-move-signin {
         cursor: pointer;
         text-align: center;
         font-size: 0.9rem;

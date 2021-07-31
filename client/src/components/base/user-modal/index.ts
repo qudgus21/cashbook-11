@@ -3,6 +3,8 @@ import './index.scss';
 import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
+import { removeModal } from '../../../utils/modal';
+
 import { addClassSelector,removeClassSelector } from '../../../utils/selectHandler';
 import ModalContent from './modal-content';
 
@@ -31,12 +33,7 @@ export default class Modal extends Component {
     setEvent() {
         this.addEvent('click','.modal .modal-background', (e) => {
             e.preventDefault();
-
-            if ($('.container-daybar').get()){ 
-                removeClassSelector($('.container-daybar').get(), 'opacity');
-            }
-            removeClassSelector($('.appbar').get(), 'opacity');
-            addClassSelector($('.modal').get(), 'hidden');
+            removeModal();
         });
     }
 }
