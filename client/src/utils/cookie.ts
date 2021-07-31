@@ -1,6 +1,3 @@
-import Snackbar from "../components/base/snackbar";
-import { $ } from "../utils/select";
-
 export const setCookie = (key: string, value: string, days: number) => {
     let expireDate: Date = new Date();
     expireDate.setDate(expireDate.getDate() + days);
@@ -23,14 +20,3 @@ export const getCookie = (key: string): string => {
         }
     }
 };
-
-
-export const checkLogin = (isSnackShown?:Boolean): Boolean => { 
-    if (!getCookie('JWT')) {
-        if (isSnackShown) { 
-            new Snackbar($('.snackbar').get(), { msg: '로그인 해주세요.', duration: 2000, backgroundColor: 'red' });
-        }
-        return false;
-    }
-    return true;
-}

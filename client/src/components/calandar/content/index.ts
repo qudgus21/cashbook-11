@@ -10,7 +10,7 @@ export default class Content extends Component {
         this.state = {
 
         }
-        // dateStore.subscribe(this.makeCalendar.bind(this));
+        dateStore.subscribe(this.makeCalendar.bind(this));
     }
     
     template (): string { 
@@ -145,7 +145,6 @@ export default class Content extends Component {
 
 
     mounted() {
-        this.makeCalendar();
     }
 
     setEvent(){

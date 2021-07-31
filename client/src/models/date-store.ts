@@ -1,10 +1,7 @@
 import Observable from "../core/observable";
 import api from "../utils/api";
 import { getDates } from "../utils/date";
-import { checkLogin } from "../utils/cookie";
-import Snackbar from "../components/base/snackbar";
-import { $ } from "../utils/select"
-
+import { getCookie } from "../utils/cookie";
 export default class DateStore extends Observable {
     state: { year: number; month: number; historys: any; };
 
@@ -16,31 +13,29 @@ export default class DateStore extends Observable {
             historys: null,
         };
         
-        if (checkLogin(true)) { 
+        if (getCookie('JWT')) { 
             this.setup();
         }
     }
 
     
     async setup() {
+
         const { year, month} = this.state
+        this.getAllHistory(year, month)
         let historys = await this.getAllHistory(year, month)
         this.setState({ year, month, historys });
     }
 
     
 
-    setState(nextState: { year: number; month: number; historys: any;}) {   
+    setState(nextState: { year: number; month: number; historys: any;}) {
         this.state = nextState;
         this.notify(this.state);
     }
 
 
     async getAllHistory(year: number, month: number) {
-        if (!checkLogin(true)) { 
-            return;
-        }
-
         let dates = getDates(year , month)
         let startDate:any = 1;
         let endDate:any;
@@ -70,10 +65,7 @@ export default class DateStore extends Observable {
 
 
     async moveToPreviousMonth() {
-        if (!checkLogin(true)) { 
-            return;
-        }
-
+        console.log('실행')
 
         let { year, month } = this.state;
         if (this.state.month === 1) {
@@ -90,11 +82,6 @@ export default class DateStore extends Observable {
     }
 
     async moveToNextMonth() {
-        if (!checkLogin(true)) { 
-            return;
-        }
-
-
         let { year, month } = this.state;
 
         if (this.state.month === 12) {
