@@ -56,7 +56,7 @@ export default class ModalContent extends Component {
                 <div class="input-alert">4자</div>
             </form>
             <button class="button-signin">로그인</button>
-            <button class="button-github">깃허브로그인</button>
+            <a href="https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://localhost:3000/api/oauth/callback"><button id="button-github">깃허브로그인</button></a>
             <div class="button-move-signup">회원가입 하러가기</div>
         `;
     }
@@ -108,6 +108,34 @@ export default class ModalContent extends Component {
             e.preventDefault();
             this.setState({ isSignInForm : true });
         });
+
+        this.addEvent('click', '#button-github', () => { this.githuLogin()})
+    }
+
+    async githuLogin() {
+        // await api('POST', '/oauth/github', {
+        //     client_id: "ac4c75cd733116b5db3b",
+        //     redirect_uri : "http://localhost:3000/api/oauth/callback"
+        // })
+
+        // window.open('https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://localhost:3000/api/oauth/callback')
+
+        
+
+        // const response = await fetch(`https://github.com/login/oauth/access_token`, {
+        //     method: 'GET',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: {
+        //       client_id    : GITHUB_CLIENT_ID,
+        //       client_secret: GITHUB_CLIENT_SECRET,
+        //       code
+        //     }
+        //   })
+
+
+        // console.log('깃헙로그인')
     }
 
 
