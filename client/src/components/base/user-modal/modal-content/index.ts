@@ -4,7 +4,7 @@ import api from "../../../../utils/api";
 import { $ } from '../../../../utils/select';
 import { addClassSelector ,removeClassSelector} from '../../../../utils/selectHandler';
 import { navigateTo } from '../../../../core/router';
-import { setCookie } from '../../../../utils/cookie';
+import { setCookie, checkLogin } from '../../../../utils/cookie';
 import Snackbar from "../../snackbar"
 import { removeModal } from '../../../../utils/modal';
 import { dateStore} from "../../../../models";
@@ -20,19 +20,29 @@ export default class ModalContent extends Component {
         };
     }
     
-    template (): string { 
-        return this.state.isSignInForm 
-        ? this.signInTemplate()
-        : this.signUpTemplate();
+    template(): string { 
+        return checkLogin() ? this.logoutTemplate() : this.state.isSignInForm ? this.signInTemplate() : this.signUpTemplate();
     }
 
     mounted() {
-        if (!this.state.isSignInForm) {
-            this.canSignup()
-        } else { 
-            this.canSignin()
+        if (!checkLogin()) { 
+            this.state.isSignInForm ? this.canSignin() : this.canSignup();
         }
     }
+
+
+    logoutTemplate(): string { 
+        return `
+            <div class="modal-logout">
+                <div>현재 계정에서 로그이웃 하시겠습니까?</div>
+                <div class="buttons-logout">
+                    <button id="button-logout-cancle">취소</button>
+                    <button id="button-logout-confirm">확인</button>
+                </div>
+            </div>
+        `
+    }
+
 
     signInTemplate(): string {
         return `
@@ -42,7 +52,7 @@ export default class ModalContent extends Component {
                 <input type="text" name="id" class="input-id" id="input-signin-id" placeholder="아이디를 입력하세요"/>
                 <div class="input-alert">4자</div>
                 <label for="password">비밀번호</label>
-                <input type="password" name="password" class="input-password" id="input-signin-password" placeholder="비밀번호를 입력하세요"/>
+                <input type="password" name="current-password" class="input-password" id="input-signin-password" placeholder="비밀번호를 입력하세요"/>
                 <div class="input-alert">4자</div>
             </form>
             <button class="button-signin">로그인</button>
@@ -68,69 +78,99 @@ export default class ModalContent extends Component {
     }
     
     setEvent() {
-
         this.addEvent('click','.modal .modal-background', (e) => {
             e.preventDefault();
             removeModal();
         });
-
         this.addEvent('click','.button-signin', async (e) => {
             e.preventDefault();
-            
-            if (this.canSignin()) {
-                const { id, password } = this.getIdAndPasswordFromInput();
-                const response: any = await api('POST', '/user/signin', { id, password });
-                if (response.isFail) {
-                    new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 , backgroundColor: 'red'});
-                } else {
-                    setCookie('JWT', response.JWT, 1);
-                    new Snackbar($('.snackbar').get(), { msg: '로그인에 성공했습니다.', duration: 2000 });
-                    removeModal();
-                    dateStore.setup()
-                    navigateTo(window.location.pathname);
-                }
-            } else { 
-                new Snackbar($('.snackbar').get(), { msg: '아이디와 비밀번호를 입력해주세요', duration: 2000, backgroundColor: 'red'});
-            }
+            this.signinHandler(e);
         });
-
-
-
+        this.addEvent('keyup', '#input-signin-id', (e) => { this.canSignin() });
+        this.addEvent('keyup', '#input-signin-password', (e) => { this.canSignin() });
         this.addEvent('click','.button-signup', async (e) => {
             e.preventDefault();
-            if (this.canSignup()) {
-                const { id, password } = this.getIdAndPasswordFromInput();
-                const response: any = await api('POST', '/user/signup', { id, password });
-                if (response.isFail) {
-                    new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
-                } else {
-                    new Snackbar($('.snackbar').get(), { msg: '회원가입 성공', duration: 2000 });
-                    this.setState({ isSignInForm: true , isSignupId: false, isSignupPassword : false});
-                }
-            } else {
-                new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: 'red'});
-            }
+            this.signupHandler(e);
         });
-
+        this.addEvent('keyup', '#input-signup-id', (e) => { this.canSignup() });
+        this.addEvent('keyup', '#input-signup-password', (e) => { this.canSignup() });
+        this.addEvent('click', '#button-logout-cancle', () => {removeModal();});
+        this.addEvent('click', '#button-logout-confirm', () => { this.logout() });
+        
 
         this.addEvent('click','.button-move-signup', async (e) => {
             e.preventDefault();
             this.setState({ isSignInForm : false });
         });
 
+
         this.addEvent('click','.button-move-signin', async (e) => {
             e.preventDefault();
             this.setState({ isSignInForm : true });
         });
-
-        this.addEvent('keyup', '#input-signin-in', (e) => { this.canSignin() })
-        this.addEvent('keyup', '#input-signin-password', (e) => { this.canSignin() })
-        this.addEvent('keyup', '#input-signup-id', (e) => { this.canSignup() })
-        this.addEvent('keyup', '#input-signup-password', (e) => { this.canSignup() })
     }
 
 
-    signupIdValidation ():void {
+    async signupHandler(e) { 
+        if (this.canSignup()) {
+            const { id, password } = this.getIdAndPasswordFromInput();
+            const response: any = await api('POST', '/user/signup', { id, password });
+            if (response.isFail) {
+                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+            } else {
+                new Snackbar($('.snackbar').get(), { msg: '회원가입 성공', duration: 2000 });
+                this.setState({ isSignInForm: true , isSignupId: false, isSignupPassword : false});
+            }
+        } else {
+            new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: 'red'});
+        }
+    }
+
+
+
+    async signinHandler(e) { 
+        if (this.canSignin()) {
+            const { id, password } = this.getIdAndPasswordFromInput();
+            const response: any = await api('POST', '/user/signin', { id, password });
+            if (response.isFail) {
+                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 , backgroundColor: 'red'});
+            } else {
+                setCookie('JWT', response.JWT, 1);
+                new Snackbar($('.snackbar').get(), { msg: '로그인에 성공했습니다.', duration: 2000 });
+                removeModal();
+                dateStore.setup()
+                this.afterLogin();
+                navigateTo(window.location.pathname);
+            }
+        } else { 
+            new Snackbar($('.snackbar').get(), { msg: '아이디와 비밀번호를 입력해주세요', duration: 2000, backgroundColor: 'red'});
+        }
+    }
+
+    logout(): void {
+        setCookie('JWT', 'none', 0);
+        $('.button-user img').get().src = "../../../src/assets/account.svg"
+        removeModal();
+        navigateTo('/home');
+
+        const $imgs = $('.container-appbar .page-controll img').getAll();
+        $imgs.forEach(img => { img.classList.remove('active') });
+        $imgs[0].classList.add('active');
+
+        this.setState({
+            isSignInForm: true
+        })
+    }
+
+    afterLogin(): void {
+        $('.button-user img').get().src = "../../../src/assets/on-off-button.svg"
+        this.setState({
+            isSignInForm: true
+        })
+    }
+
+
+    signupIdValidation(): void {
         const $idInput = $('#input-signup-id').get(); 
         const idValue = $idInput.value;
         const $idAlert = $idInput.nextElementSibling;

@@ -4,6 +4,7 @@ import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
 import { addModal } from '../../../utils/modal';
+import { checkLogin } from '../../../utils/cookie';
 
 export default class Fab extends Component {
 
@@ -15,7 +16,9 @@ export default class Fab extends Component {
         return`
             <div class="container-fab">
                 <button class="button button-user">
-                    <img src="../../../src/assets/account.svg"/>
+                    ${checkLogin() ? 
+                    `<img src="../../../src/assets/on-off-button.svg"/>` :
+                    `<img src="../../../src/assets/account.svg"/>`}
                 </button>
                 <button class="button button-write">
                     <img src="../../../src/assets/add_white.svg"/>
