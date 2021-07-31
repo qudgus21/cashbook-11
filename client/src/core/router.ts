@@ -1,12 +1,14 @@
 import Calendar from '../pages/calendar';
 import Home from '../pages/home';
 import Statistics from '../pages/statistics';
+import { checkLogin } from "../utils/cookie";
+
 
 const pathToRegex = (path) =>
 	new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
 const navigateTo = (url, props = null) => {
-	history.pushState({url}, null , url); // props는 popstate시 자연스럽게 비워진다!
+	history.pushState({ url }, null, url);
 	router();
 };
 
@@ -15,7 +17,7 @@ const router = () => {
 		{ path: '/home', view: Home },
 		{ path: '/calendar', view: Calendar },
 		{ path: '/statistics', view: Statistics },
-	];
+	];	
 
 	let match = routes.map((route) => {
 		return {
@@ -32,9 +34,18 @@ const router = () => {
 	}
 
 	const $content = document.querySelector('.content');
-	// $content.scrollTop = 0;
 	$content.innerHTML = '';
-	new match.route.view($content);
+
+
+
+	if (checkLogin(true)) {
+		new match.route.view($content);
+	} else if (match.route.path === '/home') {
+		new Home($content);
+	} else {
+		history.pushState(null, null, '/home');
+		new Home($content);
+	}
 };
 
 export { router, navigateTo };

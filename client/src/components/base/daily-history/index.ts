@@ -3,7 +3,7 @@ import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
-import { getCookie } from '../../../utils/cookie';
+import { checkLogin } from '../../../utils/cookie';
 
 
 export default class DailyHistory extends Component {
@@ -13,7 +13,7 @@ export default class DailyHistory extends Component {
     }
     
     template (): string {
-        if (getCookie('JWT') == undefined) {
+        if (!checkLogin(true)) {
             return  `
                 <div class="wrapper-img-login"> 
                     <img src="../../../src/assets/baedal.jpg" class="img-baedal" /> 
