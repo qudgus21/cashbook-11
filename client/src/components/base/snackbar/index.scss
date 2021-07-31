@@ -1,0 +1,45 @@
+// .snackbar {
+//     position: absolute;
+//     top: 70px;
+//     width: fit-content;
+//     transform: translate(-50%);
+//     left: 188px;
+//     opacity: 0;
+//     transition: 0.2s ease;
+//     color: white;
+//     background-color: #333;
+//     border-radius: 0.2rem;
+//     padding: 1rem;
+//     z-index: 300;
+//   }
+  
+//   .show-snackbar {
+//     opacity: 1;
+//     transition: 0.2s ease;
+//   }
+
+.snackbar{
+    position: absolute;
+    opacity: 0;
+    z-index: 300;
+}
+
+.snackbar-msg{
+    background-color: #333;
+    z-index: 300;
+    border-radius: 0.2rem;
+    padding: 1rem;
+    color: white;
+    width: fit-content;
+}
+
+  
+.show-snackbar {
+    top: 70px;
+    width: 100%;
+    transition: 0.1s ease;
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    transition: 0.1s ease;
+}
