@@ -33,7 +33,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|jpg)$/,
         use: {
           loader: 'file-loader',
         },
@@ -55,7 +55,14 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.js', '.json', '.scss'],
+    alias: {
+       '@assets' : path.resolve(__dirname, './src/assets'),
+       '@': path.resolve(__dirname, './src'),
+    },
   },
-  output: { path: path.join(__dirname, './dist'), filename: '[name].js' },
+  output: { 
+    path: path.join(__dirname, './dist'), 
+    filename: '[name].js',
+  },
   devtool: 'source-map',
 };
