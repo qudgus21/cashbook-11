@@ -1,6 +1,9 @@
 import Component from "../../../core/component";
 import { $ } from "../../../utils/select" 
 import './index.scss';
+import {addClassSelector ,removeClassSelector} from '../../../utils/selectHandler';
+
+
 export default class Snackbar extends Component {
 
     
@@ -11,11 +14,10 @@ export default class Snackbar extends Component {
     }
 
     mounted() {
-      const $snackbar = $('.snackbar').get()
       const $message = $('.snackbar-msg').get()
 
       setTimeout(() => {
-        $snackbar.classList.add('show-snackbar');
+        addClassSelector($('.snackbar').get(), 'show-snackbar');
       }, 0);
       
       if (this.props.backgroundColor) { 
@@ -23,11 +25,9 @@ export default class Snackbar extends Component {
       }
 
       setTimeout(() => {
-        $snackbar.classList.remove('show-snackbar');
+        removeClassSelector($('.snackbar').get(), 'show-snackbar');
         $message.style.backgroundColor = '#333';
       }, this.props.duration);
-
-
     }
 }
 

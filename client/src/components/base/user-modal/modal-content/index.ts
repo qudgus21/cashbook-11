@@ -39,10 +39,10 @@ export default class ModalContent extends Component {
             <form class="form signin-form">
                 <h1>로그인</h1>
                 <label for="id">아이디</label>
-                <input type="text" name="id" class="input-id signin-id" placeholder="아이디를 입력하세요"/>
+                <input type="text" name="id" class="input-id" id="input-signin-id" placeholder="아이디를 입력하세요"/>
                 <div class="input-alert">4자</div>
                 <label for="password">비밀번호</label>
-                <input type="password" name="password" class="input-password signin-password" placeholder="비밀번호를 입력하세요"/>
+                <input type="password" name="password" class="input-password" id="input-signin-password" placeholder="비밀번호를 입력하세요"/>
                 <div class="input-alert">4자</div>
             </form>
             <button class="button-signin">로그인</button>
@@ -56,10 +56,10 @@ export default class ModalContent extends Component {
             <form class="form signup-form">
                 <h1>회원가입</h1>
                 <label for="id">아이디</label>
-                <input type="text" name="id" class="input-id signup-id" placeholder="아이디를 입력하세요"/>
+                <input type="text" name="id" class="input-id" id="input-signup-id" placeholder="아이디를 입력하세요"/>
                 <div class="input-alert"></div>
                 <label for="password">비밀번호</label>
-                <input type="password" name="password" class="input-password signup-password" placeholder="비밀번호를 입력하세요"/>
+                <input type="password" name="password" class="input-password" id="input-signup-password" placeholder="비밀번호를 입력하세요"/>
                 <div class="input-alert"></div>
             </form>
             <button class="button-signup">회원가입</button>
@@ -122,15 +122,15 @@ export default class ModalContent extends Component {
             this.setState({ isSignInForm : true });
         });
 
-        this.addEvent('keyup', '.signin-id', (e) => { this.canSignin() })
-        this.addEvent('keyup', '.signin-password', (e) => { this.canSignin() })
-        this.addEvent('keyup', '.signup-id', (e) => { this.canSignup() })
-        this.addEvent('keyup', '.signup-password', (e) => { this.canSignup() })
+        this.addEvent('keyup', '#input-signin-in', (e) => { this.canSignin() })
+        this.addEvent('keyup', '#input-signin-password', (e) => { this.canSignin() })
+        this.addEvent('keyup', '#input-signup-id', (e) => { this.canSignup() })
+        this.addEvent('keyup', '#input-signup-password', (e) => { this.canSignup() })
     }
 
 
     signupIdValidation ():void {
-        const $idInput = $('.signup-id').get(); 
+        const $idInput = $('#input-signup-id').get(); 
         const idValue = $idInput.value;
         const $idAlert = $idInput.nextElementSibling;
         const idReg = /^[A-za-z0-9]{4,12}$/;
@@ -145,7 +145,7 @@ export default class ModalContent extends Component {
 
 
     signupPwdValidation():void {
-        const $passwordInput = $('.signup-password').get(); 
+        const $passwordInput = $('#input-signup-password').get(); 
         const passwordValue = $passwordInput.value;
         const $passwordAlert = $passwordInput.nextElementSibling;
         const passwordReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
@@ -174,7 +174,8 @@ export default class ModalContent extends Component {
 
 
     signinIdValidation ():void {
-        const $idInput = $('.signin-id').get(); 
+        const $idInput = $('#input-signin-id').get(); 
+    
         const idValue = $idInput.value;
         const $idAlert = $idInput.nextElementSibling;
         if (idValue) {
@@ -188,7 +189,7 @@ export default class ModalContent extends Component {
 
 
     signinPwdValidation():void {
-        const $passwordInput = $('.signin-password').get(); 
+        const $passwordInput = $('#input-signin-password').get(); 
         const passwordValue = $passwordInput.value;
         const $passwordAlert = $passwordInput.nextElementSibling;
         if (passwordValue) {
