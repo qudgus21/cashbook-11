@@ -1,0 +1,14 @@
+@import '../../../../../color.scss';
+   
+.container-unit-history-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .info {
+        width: 20%;
+        background-color: rgb(182, 180, 180);
+    }
+}
