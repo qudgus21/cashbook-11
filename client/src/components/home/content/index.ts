@@ -4,8 +4,8 @@ import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
 import DailyHistory from '../../base/month-history';
-import { isEmptyJWTToken } from '../../../utils/result-checker'; // TODO
 import Filter from '../filter';
+import { checkLogin } from '../../../utils/cookie';
 
 export default class Content extends Component {
 
@@ -22,7 +22,7 @@ export default class Content extends Component {
 
     mounted () {
         // TODO
-        if (isEmptyJWTToken()) { 
+        if (checkLogin(false)) { 
             addClassSelector($('.container-filter').get(), 'hidden');
             $('.wrapper-month-history').get().innerHTML = this.getLoginImgTemplate();
         } else {
