@@ -7,7 +7,7 @@ import { navigateTo } from '../../../../core/router';
 import { setCookie } from '../../../../utils/cookie';
 import Snackbar from "../../snackbar"
 import { removeModal } from '../../../../utils/modal';
-import { dateStore} from "../../../../models";
+
 
 export default class ModalContent extends Component {
     setup () {
@@ -76,7 +76,7 @@ export default class ModalContent extends Component {
 
         this.addEvent('click','.button-signin', async (e) => {
             e.preventDefault();
-            
+
             if (this.canSignin()) {
                 const { id, password } = this.getIdAndPasswordFromInput();
                 const response: any = await api('POST', '/user/signin', { id, password });
@@ -86,7 +86,6 @@ export default class ModalContent extends Component {
                     setCookie('JWT', response.JWT, 1);
                     new Snackbar($('.snackbar').get(), { msg: '로그인에 성공했습니다.', duration: 2000 });
                     removeModal();
-                    dateStore.setup()
                     navigateTo(window.location.pathname);
                 }
             } else { 
