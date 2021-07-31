@@ -56,14 +56,17 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User.hasMany(db.History);
-db.History.belongsTo(db.User);
+db.User.hasMany(db.UserPayTrend);
+db.UserPayTrend.belongsTo(db.User);
+
+db.Category.hasMany(db.UserPayTrend);
+db.UserPayTrend.belongsTo(db.Category);
 
 db.User.belongsToMany(db.PayType, { through: db.UserPayType });
 db.PayType.belongsToMany(db.User, { through: db.UserPayType });
 
-db.User.belongsToMany(db.Category, { through: db.UserPayTrend });
-db.Category.belongsToMany(db.User, { through: db.UserPayTrend });
+db.User.hasMany(db.History);
+db.History.belongsTo(db.User);
 
 db.PayType.hasMany(db.History);
 db.History.belongsTo(db.PayType);
