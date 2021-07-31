@@ -6,7 +6,7 @@ import Snackbar from "../components/base/snackbar";
 import { $ } from "../utils/select"
 
 export default class DateStore extends Observable {
-    state: { year: number; month: number; historys: any; };
+    state: { year: number; month: number; historys: any[]; };
 
     constructor(time) {
         super();
@@ -16,7 +16,7 @@ export default class DateStore extends Observable {
             historys: null,
         };
         
-        if (checkLogin(true)) { 
+        if (checkLogin(false)) { 
             this.setup();
         }
     }
@@ -30,14 +30,14 @@ export default class DateStore extends Observable {
 
     
 
-    setState(nextState: { year: number; month: number; historys: any;}) {   
+    setState(nextState: { year: number; month: number; historys: any[];}) {   
         this.state = nextState;
         this.notify(this.state);
     }
 
 
     async getAllHistory(year: number, month: number) {
-        if (!checkLogin(true)) { 
+        if (!checkLogin(false)) { 
             return;
         }
 
@@ -107,5 +107,9 @@ export default class DateStore extends Observable {
 
         let historys = await this.getAllHistory(year, month)
         this.setState({ year, month, historys });
+    }
+
+    getHistorys(): any[] {
+        return this.state.historys;
     }
 }
