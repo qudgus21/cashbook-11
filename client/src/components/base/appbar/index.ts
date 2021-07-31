@@ -31,15 +31,15 @@ export default class Appbar extends Component {
                     </div>
                 </div>
                 <div class="page-controll">
-                    <div class="button-home">
+                    <button class="button-home">
                         <img src="../../../src/assets/file-text.svg"/>
-                    </div>
-                    <div class="button-calendar">
+                    </button>
+                    <button class="button-calendar">
                         <img src="../../../src/assets/chart.svg"/>
-                    </div>
-                    <div class="button-statistics">
+                    </button>
+                    <button class="button-statistics">
                         <img src="../../../src/assets/calendar.svg"/>
-                    </div>
+                    </button>
                 </div>
                 <div></div>
             </div>
@@ -73,9 +73,10 @@ export default class Appbar extends Component {
 
 
     mounted() {
-        if (location.pathname !== '/home' && !checkLogin(true)) {
+        if (location.pathname !== '/home' && !checkLogin(false)) {
             const $imgs = $('.container-appbar .page-controll img').getAll();
             $imgs[0].classList.add('active');
+            
         } else { 
             this.currentPageImg();
         }
@@ -84,7 +85,7 @@ export default class Appbar extends Component {
 
     moveTo(url: string, mustUser: boolean) { 
         if (mustUser) {
-            if (checkLogin(true)) {
+            if (checkLogin(mustUser)) {
                 navigateTo(url);
                 this.currentPageImg()
             } else {
@@ -98,7 +99,8 @@ export default class Appbar extends Component {
 
     setEvent(){        
         this.addEvent('click', '.button-home', ({ target }) => {
-            this.moveTo('/home', false)
+            if (location.pathname !== '/home') 
+                this.moveTo('/home', false)
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
