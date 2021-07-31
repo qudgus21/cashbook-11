@@ -111,12 +111,10 @@ export default class Appbar extends Component {
 
         this.addEvent('click', '.button-prev', ({target})=>{
             dateStore.moveToPreviousMonth();
-            this.render();
         })
 
         this.addEvent('click', '.button-next', ({target})=>{
             dateStore.moveToNextMonth();
-            this.render();
         })
     }
 

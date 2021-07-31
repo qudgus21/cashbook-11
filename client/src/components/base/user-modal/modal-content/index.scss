@@ -78,5 +78,44 @@
         text-align: center;
         font-size: 0.9rem;
     }
+
+    .modal-logout{
+        text-align: center;
+
+        .buttons-logout{
+            position: relative;
+            text-align: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+            gap: 2rem;
+
+            button {
+                margin: 0;
+                width: 9rem;
+                align-self: flex-end;
+                
+                &:first-child{
+                    background-color: $PLACEHOLDER;
+
+                    &:hover{
+                        background-color: $ERROR;
+                    }
+                }
+
+                                
+                &:nth-child(2){
+                    background-color: $PLACEHOLDER;
+
+                    &:hover{
+                        background-color: $PRIMARY;
+                    }
+                }
+            }
+        }
+    }
+
+
 }
 
