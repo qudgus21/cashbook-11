@@ -50,7 +50,7 @@ export default class SearchBar extends Component {
                         ${this.getPriceLiteralTemplate()}
                     </li>
 
-                    <button class="button-search">V</button>
+                    <button class="button-search">조회</button>
                 </ul>
             </div>
         `;
