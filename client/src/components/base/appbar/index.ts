@@ -1,8 +1,11 @@
 import Component from "../../../core/component";
 import { navigateTo } from "../../../core/router";
 import { dateStore } from "../../../models";
+import Snackbar from "../snackbar";
 import { $ } from "../../../utils/select"
 import './index.scss';
+import { checkLogin } from "../../../utils/cookie";
+
 
 export default class Appbar extends Component {
     
@@ -70,26 +73,40 @@ export default class Appbar extends Component {
 
 
     mounted() {
-        this.currentPageImg()
+        if (location.pathname !== '/home' && !checkLogin(true)) {
+            const $imgs = $('.container-appbar .page-controll img').getAll();
+            $imgs[0].classList.add('active');
+        } else { 
+            this.currentPageImg();
+        }
+    }
+
+
+    moveTo(url: string, mustUser: boolean) { 
+        if (mustUser) {
+            if (checkLogin(true)) {
+                navigateTo(url);
+                this.currentPageImg()
+            } else {
+                return;
+            }
+        } else { 
+            navigateTo(url);
+            this.currentPageImg()
+        }
     }
 
     setEvent(){        
         this.addEvent('click', '.button-home', ({ target }) => {
-            dateStore.setup()
-            navigateTo('/home');
-            this.currentPageImg()
+            this.moveTo('/home', false)
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
-            dateStore.setup()
-            navigateTo('/calendar');
-            this.currentPageImg()
+            this.moveTo('/calendar', true)
         })
 
         this.addEvent('click', '.button-statistics', ({ target }) => {
-            dateStore.setup()
-            navigateTo('/statistics');
-            this.currentPageImg()
+            this.moveTo('/statistics', true)
         })
 
         this.addEvent('click', '.button-prev', ({target})=>{

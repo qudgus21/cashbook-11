@@ -3,10 +3,7 @@ import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
-// TODO
-import { getCookie } from '../../../utils/cookie';
-import { isEmptyJWTToken } from '../../../utils/result-checker';
-
+import { checkLogin } from '../../../utils/cookie';
 
 export default class DailyHistory extends Component {
 
@@ -15,8 +12,8 @@ export default class DailyHistory extends Component {
     }
     
     template (): string {
-        // TODO
-        if (isEmptyJWTToken()) {
+
+        if (!checkLogin(true)) {
             return  `
                 <div class="wrapper-img-login"> 
                     <img src="../../../src/assets/baedal.jpg" class="img-baedal" /> 
