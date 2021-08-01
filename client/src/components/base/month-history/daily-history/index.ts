@@ -12,7 +12,6 @@ export default class DailyHistory extends Component {
 
     setup () {
         this.state = this.props;
-        console.log(this.state);
     }
     
     template (): string {
@@ -34,8 +33,6 @@ export default class DailyHistory extends Component {
 
     mounted () {
         this.state.historys.forEach((history, idx) => {
-            console.log(`DailyHistory 의 UnitHistory를 추가해줍니다~~`);
-            console.log(`#unit-history-${history.month}-${history.day}-${idx} : `,`history: ${history}`);
             new UnitHistory(
                 $(`#unit-history-${history.month}-${history.day}-${idx}`).get(),
                 { history }

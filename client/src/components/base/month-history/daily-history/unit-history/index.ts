@@ -11,7 +11,6 @@ export default class UnitHistory extends Component {
 
     setup () {
         this.state = this.props;
-        console.log(`UnitHistory 의 state: `);
     }
     
     template (): string {

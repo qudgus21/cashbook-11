@@ -70,7 +70,6 @@ const logout = async (req, res, next) => {
 
 const updateUserInfo = async (req, res, next) => {
     console.log(req.user)
-    console.log('도착하니?')
     // res.status(200).json({ message: '아직 구현안됐어용~~' });
 }
 
