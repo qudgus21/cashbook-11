@@ -1,6 +1,8 @@
 import Component from "../../../core/component";
 import { dateStore } from "../../../models";
 import { getDates } from "../../../utils/date";
+import comma from "../../../utils/comma";
+
 import { $ } from "../../../utils/select";
 import './index.scss'   
 
@@ -39,11 +41,10 @@ export default class Content extends Component {
         let consume = dayHistory.consume;
         let income = dayHistory.income;
         let total = consume + income;
-
         return`
-            ${consume!==0 && income !==0 ?`<div class="day-total">${total}</div>`:`` }
-            ${consume!==0 ?`<div class="day-consume">${consume}</div>`:`` }
-            ${income !==0 ?`<div class="day-income">${income}</div>`:`` }
+            ${`<div class="day-total">${comma(total)}</div>`}
+            ${consume!==0 ?`<div class="day-consume">${comma(consume)}</div>`:`` }
+            ${income !==0 ?`<div class="day-income">${comma(income)}</div>`:`` }
         `
     }
 
@@ -57,9 +58,9 @@ export default class Content extends Component {
         })
         totalSum = totalConsume + totalIncome;
 
-        $('.total-income').get().textContent = `총 수입 ${totalIncome}`
-        $('.total-consume').get().textContent = `총 지출 ${totalConsume}`
-        $('.total-sum').get().textContent = `총계 ${totalSum}`
+        $('.total-income').get().textContent = `총 수입 ${comma(totalIncome)}`
+        $('.total-consume').get().textContent = `총 지출 ${comma(totalConsume)}`
+        $('.total-sum').get().textContent = `총계 ${comma(totalSum)}`
     }
 
 
@@ -92,8 +93,9 @@ export default class Content extends Component {
             }
 
             let dayHistory = findItem(date)
+
             dates[i] = `
-            <div class="date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
+            <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
                 ${!notCurrent ? 
                 `   <div class="day-history">
                     ${this.makeValueTemplate(dayHistory)}
@@ -109,12 +111,21 @@ export default class Content extends Component {
             if ($cells.length === 35) { 
                 $cells[28].style.borderBottomLeftRadius = "15px";
             }
+            this.addDateClickEvent();
+   
         }
         this.makeFooterData(historyData);
     }
 
     makeCalendar() {
         this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
+    }
+
+
+    addDateClickEvent(){ 
+        $('.date').getAll().forEach(node => { 
+            node.addEventListener('click', this.dateHistoryHandler)
+        })
     }
 
 
@@ -144,12 +155,23 @@ export default class Content extends Component {
     }
 
 
+
+    dateHistoryHandler(e) { 
+        const $date = e.currentTarget;
+        const year = dateStore.state.year
+        const month = dateStore.state.month
+        const day = $date.classList[0].split('-')[1];
+
+        console.log(day, month, year)
+        
+        // 진짜 데이터 가져와서 정렬
+    }
+
+
     mounted() {
         this.makeCalendar();
-    }
-
-    setEvent(){
 
     }
+
 
 }
