@@ -67,9 +67,7 @@
         background-color: $PLACEHOLDER;
     }
 
-    .button-github{
-        background-color: $CANCEL;
-    }
+
 
     
 
@@ -116,6 +114,9 @@
         }
     }
 
-
+    #button-github{
+        width: 100%;
+        background-color: $CANCEL;
+    }
 }
 
