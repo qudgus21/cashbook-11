@@ -110,6 +110,6 @@ export default class DateStore extends Observable {
     }
 
     getHistorys(): any[] {
-        return this.state.historys;
+        return this.state.historys.map(x=>Object.assign({}, x));
     }
 }

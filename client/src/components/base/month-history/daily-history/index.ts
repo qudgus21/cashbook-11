@@ -13,7 +13,6 @@ export default class DailyHistory extends Component {
     setup () {
         this.state = this.props;
         console.log(this.state);
-        
     }
     
     template (): string {

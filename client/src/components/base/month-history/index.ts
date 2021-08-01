@@ -12,7 +12,6 @@ export default class MonthHistory extends Component {
 
     setup () {
         this.state = this.props;
-        
         this.convertHistorysToHandyObject();
 
         this.state.dayArray = this.getDayArray();
@@ -40,33 +39,33 @@ export default class MonthHistory extends Component {
     }
 
     convertHistorysToHandyObject() {
-        this.state.historys = this.state.historys.map((h: any) => {
-            let date = new Date(h.time);
-            h.month = date.getMonth();
-            h.date = date.getDate();
-            h.time = `${date.getHours()}:${date.getMinutes()}`;
-            return h;
-        });
+        if (typeof this.state.historys !== 'undefined') {
+            this.state.historys = this.state.historys.map((h: any) => {
+                let date = new Date(h.time);
+                h.month = date.getMonth() + 1;
+                h.date = date.getDate();
+                h.time = `${date.getHours()}:${date.getMinutes()}`;
+                return h;
+            });
 
-        const historys = {};
+            const historys = {};
 
-        this.state.historys.forEach((h: any)=> {
-            if (isEmpty(historys[h.date])) {
-                historys[h.date] = [h];
-            } else {
-                historys[h.date].push(h);
-            }
-        });
+            this.state.historys.forEach((h: any)=> {
+                if (isEmpty(historys[h.date])) {
+                    historys[h.date] = [h];
+                } else {
+                    historys[h.date].push(h);
+                }
+            });
 
-        this.state.historys = historys;
+            this.state.historys = historys;
+        }
     }
 
     setDailyHistoryOrderedByDescendingDay() {
         this.state.dayArray.forEach((day, idx) => {
             
             let historys = this.state.historys[day];
-            console.log("MonthHistory 에서 DailyHistory를 추가해줍니다~~");
-            console.log(`#daily-history-${idx}`, `h: ${historys}`);
             new DailyHistory(
                 $(`#daily-history-${idx}`).get(), 
                 { 
@@ -79,7 +78,8 @@ export default class MonthHistory extends Component {
     }
 
     getDayArray() {
-        return Object.keys(this.state.historys).sort((a: any,b: any):any => b-a);
+        if (typeof this.state.historys === 'undefined') return [];
+        return  Object.keys(this.state.historys).sort((a: any,b: any):any => b-a);
     }
 }
 

@@ -10,20 +10,23 @@ import MonthHistory from '../../base/month-history';
 export default class Content extends Component {
 
     setup () {
-        this.state = {};
         
+        this.state = {};
         dateStore.subscribe(this.update.bind(this));
     }
 
     update() {
-        console.log('content 의 update 가 dateStore 에 의해 호출되었습니다.');
-        
         this.setState();
     }
+
+    render() {
+        super.render();
+    }
+
+
     
     setState(historys?:object) {
         this.state.historys = historys ?? dateStore.getHistorys();
-        console.log(this.state.historys, "너냐? ");
         this.render();
     }
 
