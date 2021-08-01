@@ -6,6 +6,23 @@
     width: 100%;
     padding: 2rem;
 
+    .daily-history-title-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .container-daily-history-total-price {
+            display: flex;
+            flex-direction: row;
+            
+            >* {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    
+
     .container-daily-history {
         width: 100%;
         height: 2rem;
