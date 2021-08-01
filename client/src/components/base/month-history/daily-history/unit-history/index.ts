@@ -4,6 +4,8 @@ import api from "../../../../../utils/api";
 import { $ } from '../../../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../../../utils/selectHandler';
 import { checkLogin } from '../../../../../utils/cookie';
+import { CATEGORY_TAG } from '../../../../../constants/category';
+import comma from '../../../../../utils/comma';
 
 const isEmpty = (x) => (typeof x === 'undefined' || x === null || x === '');
 
@@ -14,23 +16,28 @@ export default class UnitHistory extends Component {
     }
     
     template (): string {
+        const { CategoryPk, content, PayTypePk, PayType, status, value, pk } = this.state.history;
         return `
             <div class="container-unit-history-info"> 
-                <div class="info info-category">${this.state.history.CategoryPk}</div>
+                <div id="history-pk-${pk}"class="info info-category"><div>${CATEGORY_TAG[CategoryPk-1].title}</div></div>
                 <div 
                     class="info info-content" 
-                    title="${this.state.history.content}"
+                    title="${content}"
                 >
-                    ${this.state.history.content}
+                    ${content}
                 </div>
-                <div class="info info-paytype">${this.state.history.PayTypePk}</div>
-                <div class="info info-price">${this.state.history.status*this.state.history.value}원</div>
+                <div class="info info-paytype">${PayTypePk}</div>
+                <div class="info info-price">${comma(status*value)}원</div>
             </div>
         `;
     }
 
     mounted () {
+        const { CategoryPk, pk } = this.state.history;
+        console.log(CategoryPk, CATEGORY_TAG[CategoryPk-1]);
         
+        $(`#history-pk-${pk}`).get().style.backgroundColor = CATEGORY_TAG[CategoryPk-1].color;
+        console.log($(`#history-pk-${pk}`).get());
     }
     
     setEvent() {

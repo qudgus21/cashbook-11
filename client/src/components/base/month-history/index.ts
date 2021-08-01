@@ -5,6 +5,7 @@ import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
 import { checkLogin } from '../../../utils/cookie';
 import DailyHistory from './daily-history';
+import { dateStore, filterStore } from '../../../models';
 
 const isEmpty = (x) => (typeof x === 'undefined' || x === null || x === '');
 
@@ -13,14 +14,19 @@ export default class MonthHistory extends Component {
     setup () {
         this.state = this.props;
         this.convertHistorysToHandyObject();
-
         this.state.dayArray = this.getDayArray();
+        filterStore.subscribe(this.update.bind(this));
+    }
+
+
+    update () {
+        this.filteringHistory();
     }
     
     template (): string {
         
         return`
-            <div class="wrapper-month-history">
+            <div class="container-month-history">
                 ${this.state.dayArray
                     .map((_:any, idx: number):string => {
                         return `<div id="daily-history-${idx}" class="wrapper-daily-history"></div>`;
@@ -44,6 +50,7 @@ export default class MonthHistory extends Component {
                 let date = new Date(h.time);
                 h.month = date.getMonth() + 1;
                 h.date = date.getDate();
+                h.dayOfWeek = date.getDay();
                 h.time = `${date.getHours()}:${date.getMinutes()}`;
                 return h;
             });
@@ -63,14 +70,15 @@ export default class MonthHistory extends Component {
     }
 
     setDailyHistoryOrderedByDescendingDay() {
-        this.state.dayArray.forEach((day, idx) => {
+        this.state.dayArray.forEach((date, idx) => {
             
-            let historys = this.state.historys[day];
+            let historys = this.state.historys[date];
             new DailyHistory(
                 $(`#daily-history-${idx}`).get(), 
                 { 
                     historys,
-                    day, 
+                    date,
+                    dayOfWeek: historys[0].dayOfWeek,
                     month: historys[0].month,
                 },
             );
@@ -81,5 +89,22 @@ export default class MonthHistory extends Component {
         if (typeof this.state.historys === 'undefined') return [];
         return  Object.keys(this.state.historys).sort((a: any,b: any):any => b-a);
     }
-}
 
+    filteringHistory() {
+        this.state.historys = dateStore.getHistorys();
+        
+        this.state.historys = this.state.historys.filter(h => {
+            if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
+            else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
+
+            return true;
+        });
+        console.log('filter 한 데이터는 다음과 같습니다.');
+        console.log(this.state.historys);
+
+        this.convertHistorysToHandyObject();
+        this.state.dayArray = this.getDayArray();
+
+        this.render();
+    }
+}
