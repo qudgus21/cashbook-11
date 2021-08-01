@@ -5,6 +5,8 @@ import comma from "../../../utils/comma";
 
 import { $ } from "../../../utils/select";
 import './index.scss'   
+import api from "../../../utils/api";
+import Snackbar from "../../base/snackbar";
 
 export default class Content extends Component {
     
@@ -124,7 +126,8 @@ export default class Content extends Component {
 
     addDateClickEvent(){ 
         $('.date').getAll().forEach(node => { 
-            node.addEventListener('click', this.dateHistoryHandler)
+            node.addEventListener('click', this.dateHistoryHandler.bind(this))
+
         })
     }
 
@@ -132,39 +135,56 @@ export default class Content extends Component {
     sortHistory(historys: any): any {
         let sorted = [];
         let date, idx, target;
-        historys.forEach(history => {
-            date = new Date(history.time).getDate()
-            idx = sorted.findIndex(item => { 
-                return item.date === date;
-            })
-            if (idx === -1) {
-                sorted.push({
-                    date,
-                    income: history.status === 1 ? history.value * history.status : 0,
-                    consume: history.status === -1 ? history.value * history.status : 0
+        if (historys) {
+            historys.forEach(history => {
+                date = new Date(history.time).getDate()
+                idx = sorted.findIndex(item => {
+                    return item.date === date;
                 })
-            } else { 
-                target = sorted[idx];
-                history.status === 1 ? target.income += history.value * history.status : target.consume+=history.value * history.status
-            }
-        })
+                if (idx === -1) {
+                    sorted.push({
+                        date,
+                        income: history.status === 1 ? history.value * history.status : 0,
+                        consume: history.status === -1 ? history.value * history.status : 0
+                    })
+                } else {
+                    target = sorted[idx];
+                    history.status === 1 ? target.income += history.value * history.status : target.consume += history.value * history.status
+                }
+            })
+        }
         sorted.sort((a, b) => { 
             return a.date - b.date
         })
         return sorted;
     }
 
-
-
-    dateHistoryHandler(e) { 
+    async getDateHistory(e) { 
         const $date = e.currentTarget;
         const year = dateStore.state.year
         const month = dateStore.state.month
-        const day = $date.classList[0].split('-')[1];
+        const day = $date.classList[0].split('-')[1];        
+        const startDate = `${year}-${month}-${day}`
+        const endDate = `${year}-${month}-${day}`
+        const response = await api('GET', `/calendar/history/all?startDate=${startDate}&endDate=${endDate}`)
+        if (response.isFail) {
+            new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+            return;
+        } else {
+            return response.historys
+        }
+    }
 
-        console.log(day, month, year)
+
+    async dateHistoryHandler(e) { 
+        let historys = await this.getDateHistory(e)
         
-        // 진짜 데이터 가져와서 정렬
+        historys = historys.sort((a, b) => { 
+            return a.time - b.time
+        })
+
+        console.log(historys)
+
     }
 
 
