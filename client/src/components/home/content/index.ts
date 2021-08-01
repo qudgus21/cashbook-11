@@ -3,7 +3,7 @@ import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
-import Filter from '../filter';
+import Filter from './filter';
 import { checkLogin } from '../../../utils/cookie';
 import { dateStore } from '../../../models';
 import MonthHistory from '../../base/month-history';
@@ -32,7 +32,7 @@ export default class Content extends Component {
 
     template (): string { 
         return `
-            <div class="container-filter">안녕하세요 누구신가요? </div>
+            <div class="container-filter"></div>
             <div class="wrapper-month-history"></div>
         `;
     }
@@ -45,7 +45,11 @@ export default class Content extends Component {
         } else {
             new Filter(
                 $('.container-filter').get(), 
-                { historys : this.state.historys }
+                { 
+                    historys : this.state.historys,
+                    // func : this.filteringHistory.bind(this),
+                    // type : this.state.type,
+                }
             );
             new MonthHistory(
                 $('.wrapper-month-history').get(), 
@@ -71,5 +75,18 @@ export default class Content extends Component {
             removeClassSelector($('.modal').get(), 'hidden');
         });
     }
+
+    // filteringHistory(type) {
+    //     this.state.historys = dateStore.getHistorys();
+
+    //     this.state.type = type;
+    //     if (type) {
+    //         this.state.historys = this.state.historys.filter(h => h.status === type);
+    //         console.log('filter 한 데이터는 다음과 같습니다.');
+    //         console.log(this.state.historys);
+    //     }
+
+    //     this.render();
+    // }
 }
 
