@@ -4,6 +4,6 @@ const router = express.Router();
 
 
 
-router.get('/callback', githubCallback);
+router.post('/callback', githubCallback);
 
 module.exports = router;

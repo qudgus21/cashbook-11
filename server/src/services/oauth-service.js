@@ -3,15 +3,20 @@ const success = require('../constants/success');
 const error = require('../constants/error');
 const CustomError = require('../errors/custom-error');
 const axios = require('axios');
+const { createHash, verifyPassword } = require('../utils/bcrypt');
+const { createJWT } = require('../utils/jwt');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
-const client_id = 'ac4c75cd733116b5db3b'
-const client_secret = '586605b842f5d66df2914c497351ba58c9f0bb5c'
+const client_id = process.env.GIT_CLIENT_ID
+const client_secret = process.env.GIT_CLIENT_PASSWORD
 
 
 const githubCallback = async (req, res, next) => {
     try {
-        const reponseCode = req.query.code
+        const reponseCode = req.body.code
 
         const response = await axios.post(
             'https://github.com/login/oauth/access_token',
@@ -36,32 +41,23 @@ const githubCallback = async (req, res, next) => {
             },
         });
 
-
         const id = data.email;
         
-        console.log('data is...',data)
-
         const [user, isCreated] = await db.User.findOrCreate({
             where: { id },
             defaults: { password: createHash('github32!a~') }
         });
         
-        console.log('user is...', user);
-        console.log('isCreated is..', isCreated);
+        const JWT = createJWT(user);
+                
+        const { code, message } = success.LOGIN;
+        
+        user.password = '';
 
-        if (!isCreated) {
-        }
-
-        // const { code, message } = success.DEFAULT_CREATE;
-
-        // res.status(code).json({ message, user });
-
-
-
-
+        res.status(code).json({ message, user, JWT });
 
     } catch (e) {
-        // next(e); 
+        next(e); 
     }
 }
 
