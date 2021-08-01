@@ -111,6 +111,8 @@ export default class DateStore extends Observable {
     }
 
     getHistorys(): any[] {
+        console.log('date-store의 getHistorys() 호출! 아래 출력은 this.state.historys이다.');
+        console.log(this.state.historys);
         return this.state.historys.map(x=>Object.assign({}, x));
     }
 }
