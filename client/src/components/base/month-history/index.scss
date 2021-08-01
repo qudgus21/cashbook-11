@@ -1,15 +1,12 @@
 @import '../../../color.scss';
-   
-.wrapper-month-history {
+
+
+.container-month-history {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    background-color: goldenrod;
+    width: 100%;
 
-    
     .wrapper-daily-history {
         width: 100%;
-        background-color: indianred;
-        margin-bottom: 2rem;
     }
 }
