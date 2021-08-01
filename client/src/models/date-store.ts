@@ -23,8 +23,11 @@ export default class DateStore extends Observable {
 
     
     async setup() {
+
+        console.log('setup 실행')
         const { year, month} = this.state
         let historys = await this.getAllHistory(year, month)
+        console.log('받아온 히스토리', historys)
         this.setState({ year, month, historys });
     }
 
@@ -52,7 +55,7 @@ export default class DateStore extends Observable {
             if (notCurrent && date === 1) {
                 notCurrent = false;
             } else if(!notCurrent && date === 1){ 
-                endDate = dates[i-1]
+                endDate = dates[i-1]    
                 notCurrent = true;
             }
         })
