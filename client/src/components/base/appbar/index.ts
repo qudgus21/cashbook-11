@@ -35,10 +35,10 @@ export default class Appbar extends Component {
                         <img src="../../../src/assets/file-text.svg"/>
                     </div>
                     <div class="button-calendar">
-                        <img src="../../../src/assets/chart.svg"/>
+                        <img src="../../../src/assets/calendar.svg"/>
                     </div>
                     <div class="button-statistics">
-                        <img src="../../../src/assets/calendar.svg"/>
+                        <img src="../../../src/assets/chart.svg"/>
                     </div>
                 </div>
                 <div></div>
