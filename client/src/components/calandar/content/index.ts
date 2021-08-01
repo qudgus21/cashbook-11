@@ -127,6 +127,7 @@ export default class Content extends Component {
     addDateClickEvent(){ 
         $('.date').getAll().forEach(node => { 
             node.addEventListener('click', this.dateHistoryHandler.bind(this))
+
         })
     }
 
@@ -183,6 +184,7 @@ export default class Content extends Component {
         })
 
         console.log(historys)
+
     }
 
 
