@@ -16,10 +16,15 @@ export default class UnitHistory extends Component {
     template (): string {
         return `
             <div class="container-unit-history-info"> 
-                <div class="info">category: ${this.state.history.CategoryPk}</div>
-                <div class="info">content: ${this.state.history.content}</div>
-                <div class="info">결제수단:${this.state.history.PayTypePk}</div>
-                <div class="info">금액:${this.state.history.status*this.state.history.value}원</div>
+                <div class="info info-category">${this.state.history.CategoryPk}</div>
+                <div 
+                    class="info info-content" 
+                    title="${this.state.history.content}"
+                >
+                    ${this.state.history.content}
+                </div>
+                <div class="info info-paytype">${this.state.history.PayTypePk}</div>
+                <div class="info info-price">${this.state.history.status*this.state.history.value}원</div>
             </div>
         `;
     }
@@ -32,5 +37,6 @@ export default class UnitHistory extends Component {
 
     }
   
+
 }
 
