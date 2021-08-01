@@ -6,6 +6,7 @@ import { navigateTo } from "../core/router";
 import { setCookie } from "../utils/cookie";
 import Snackbar from "../components/base/snackbar";
 import { dateStore } from '../models';
+import Modal from '../components/base/user-modal';
 
 export default class Callback extends Component {
     
@@ -22,6 +23,7 @@ export default class Callback extends Component {
         `
     }
 
+
     async mounted() {
         const code = location.search.split('=')[1]
         const response = await api('POST', '/oauth/callback', {code})
@@ -30,6 +32,7 @@ export default class Callback extends Component {
             history.back();
         } else {
             setCookie('JWT', response.JWT, 1);
+            new Modal($('.modal-user').get());
             new Snackbar($('.snackbar').get(), { msg: '깃허브 로그인에 성공했습니다.', duration: 2000 });
             removeModal();
             dateStore.setup()
