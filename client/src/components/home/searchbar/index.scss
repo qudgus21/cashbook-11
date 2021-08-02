@@ -44,7 +44,23 @@
                 margin-right: 1rem;
                 font-size: 1rem;
                 border: none;
+                background-color: transparent;
+                border: 2px solid transparent;
             }
+
+            input:hover, select:hover {
+                border: 2px solid rgba(177, 227, 225, 0.94);
+                border-radius: 0.5rem;
+                outline: none;
+            }
+        
+            input:focus, 
+            select:focus {
+                outline: none;
+                border: 2px solid $PRIMARY;
+                border-radius: 0.5rem;
+            }
+
             &.li-date {
                 flex-grow: 8;
                 padding-right: 1rem;
