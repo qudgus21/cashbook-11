@@ -1,6 +1,5 @@
 import './index.scss';
 import Component from "../../../core/component";
-import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
 import Filter from './filter';
@@ -104,9 +103,12 @@ export default class Content extends Component {
         if (!isEmpty(this.state.historys)) {
             this.state.historys = this.state.historys.map((h: any) => {
                 let date = new Date(h.time);
+                console.log(date);
+                console.log(h.time);
+                h.year = date.getFullYear();
                 h.month = date.getMonth() + 1;
                 h.date = date.getDate();
-                h.dayOfWeek = date.getDay();
+                h.day = date.getDay();
                 h.time = `${date.getHours()}:${date.getMinutes()}`;
                 return h;
             });
@@ -114,10 +116,10 @@ export default class Content extends Component {
             const historysObj = {};
 
             this.state.historys.forEach((h: any)=> {
-                if (isEmpty(historysObj[h.date])) {
-                    historysObj[h.date] = [h];
+                if (isEmpty(historysObj[`${h.year}-${h.month}-${h.date}`])) {
+                    historysObj[`${h.year}-${h.month}-${h.date}`] = [h];
                 } else {
-                    historysObj[h.date].push(h);
+                    historysObj[`${h.year}-${h.month}-${h.date}`].push(h);
                 }
             });
 
@@ -127,7 +129,8 @@ export default class Content extends Component {
 
     getDayArray() {
         if (isEmpty(this.state.historys)) return [];
-        return Object.keys(this.state.historysObj).sort((a: any,b: any):any => b-a);
+        // 성능을 잡아먹는것 같다. 객체를 매번 생성하기 때문에... 시간의 역순으로 구현하였다.
+        return Object.keys(this.state.historysObj).sort((a: any,b: any):any => new Date(b).getTime()- new Date(a).getTime() );
     }
 
     filteringHistory() {
