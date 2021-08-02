@@ -120,7 +120,9 @@ export default class Content extends Component {
     }
 
     makeCalendar() {
-        this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
+        if (location.pathname === '/calendar') { 
+            this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
+        }
     }
 
 
