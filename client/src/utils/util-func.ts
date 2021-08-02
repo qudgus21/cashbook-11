@@ -1,0 +1,1 @@
+export const isEmpty = (x) => (typeof x === 'undefined' || x === null || x === '');
