@@ -23,7 +23,6 @@ export default class History extends Component {
         this.makeHistory();
     }
 
-
     makeHistoryTemplate(data): string { 
 
         return`
@@ -42,25 +41,16 @@ export default class History extends Component {
         `
     }
 
-
+    
     paintHistory(data) {
         $('.donut-history').get().innerHTML = this.makeHistoryTemplate(data);
     }
 
     async makeHistory() {
         if (location.pathname !== '/statistics') return;
-
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)
         if (response.isFail) return;
         const sortedData = sortTrendData(response.payTrends)
-
-        // let data = sortedData.trendData.reduce((acc, cur) => { 
-        //     return acc.concat({
-        //         fill: cur.ratio,
-        //         color : cur.color
-        //     })
-        // }, [])
-
         this.paintHistory(sortedData)
     }
 

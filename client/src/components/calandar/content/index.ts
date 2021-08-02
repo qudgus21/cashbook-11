@@ -185,7 +185,6 @@ export default class Content extends Component {
             return a.time - b.time
         })
 
-        console.log(historys)
 
     }
 
