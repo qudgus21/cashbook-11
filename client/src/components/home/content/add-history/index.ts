@@ -106,7 +106,6 @@ export default class AddHistory extends Component {
     }
 
     async requestCreatingHistory () {
-        console.log("create History requesting!!");
         const time = $('.input-date').get().value;
         const CategoryPk = $('.select-create-categorys').get().value;
         const status = this.state.whichRadioClicked;
