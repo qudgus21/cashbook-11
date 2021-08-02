@@ -6,8 +6,7 @@ import { addClassSelector, removeClassSelector } from '../../../../utils/selectH
 import { checkLogin } from '../../../../utils/cookie';
 import UnitHistory from './unit-history';
 import comma from '../../../../utils/comma';
-
-const isEmpty = (x) => (typeof x === 'undefined' || x === null || x === '');
+import { isEmpty } from '../../../../utils/util-func';
 
 const numToDay = '일 월 화 수 목 금 토'.split(' ');
 
@@ -20,10 +19,10 @@ export default class DailyHistory extends Component {
     
     template (): string {
         const {month, date} = this.state.historys[0];
-        return`
+        return `
             <div class="container-daily-history">
                 <div class="daily-history-title-bar">
-                    <div><span>${this.state.month}월 ${this.state.date}일</span></b> ${numToDay[this.state.dayOfWeek]}</div>
+                    <div><span>${this.state.month}월 ${this.state.date}일</span></b> ${numToDay[this.state.dayOfWeek]} (${this.state.historys.length}건)</div>
                     <div 
                         id="title-bar-${month}-${date}"
                         class="container-daily-history-total-price"

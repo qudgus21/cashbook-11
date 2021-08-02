@@ -5,22 +5,21 @@ import { $ } from '../../../../utils/select';
 import { removeClassSelector } from '../../../../utils/selectHandler';
 import comma from '../../../../utils/comma';
 import { filterStore } from '../../../../models';
-import FilterStore from '../../../../models/filter-store';
 
 export default class Filter extends Component {
 
     setup () {
         this.state = this.props;
+        this.state.length = this.state.historys.length;
         this.state.isIncomeBoxClicked = true;
         this.state.isConsumeBoxClicked = true;
         this.calculateTotalPrice();
     }
-
     
     template (): string { 
         return `
-            <div> 
-                전체 내역 ${this.state.historys.length}건
+            <div class="text-num-of-historys"> 
+                전체 내역 ${this.state.length}건
             </div>
             <div class="container-checkbox">
                 <div class="custom-checkbox">
@@ -56,6 +55,10 @@ export default class Filter extends Component {
         }
     }
 
+    changeNumberOfHistorys(length) {
+        this.state.length = length;
+        $('.text-num-of-historys').get().innerText = `전체 내역 ${this.state.length}건`;
+    }
 
     setEvent() {
         this.addEvent('click','.checkbox-income', async (e) => {
@@ -104,10 +107,9 @@ export default class Filter extends Component {
         filterStore.setState({ 
             isIncomeBoxClicked: this.state.isIncomeBoxClicked,
             isConsumeBoxClicked: this.state.isConsumeBoxClicked,
+            categorys: -1,
         });
     }
-
-    getFilterContainerTemplate() {}
 
     calculateTotalPrice() {
         let consume = 0;

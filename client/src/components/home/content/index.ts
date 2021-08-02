@@ -5,34 +5,53 @@ import { $ } from '../../../utils/select';
 import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
 import Filter from './filter';
 import { checkLogin } from '../../../utils/cookie';
-import { dateStore } from '../../../models';
+import { dateStore, filterStore } from '../../../models';
 import MonthHistory from '../../base/month-history';
+import AddHistory from './add-history';
+import { isEmpty } from '../../../utils/util-func';
+
+
 export default class Content extends Component {
+    $monthHistory: MonthHistory;
+    $filter: Filter;
 
     setup () {
-        
-        this.state = {};
+        this.state = { dayArray: null, historys: null };
+        this.filteringHistory();
         dateStore.subscribe(this.update.bind(this));
+        filterStore.subscribe(this.partialRender.bind(this));
     }
 
     update() {
         this.setState();
     }
 
-    render() {
-        super.render();
+    partialRender() {
+        this.filteringHistory();
+        this.$monthHistory.setState({ 
+            dayArray: this.state.dayArray,
+            historys: this.state.historysObj,
+        });
+
+        let num = 0;
+
+        this.state.dayArray.forEach(x=>{
+            num += this.state.historysObj[x].length;
+        })
+        this.$filter.changeNumberOfHistorys(num);
+
     }
 
-
-    
     setState(historys?:object) {
         this.state.historys = historys ?? dateStore.getHistorys();
+        this.filteringHistory();
         this.render();
     }
 
     template (): string { 
         return `
             <div class="container-filter"></div>
+            <div class="wrapper-add-history wrapper-add-history-hidden"></div>
             <div class="wrapper-month-history"></div>
         `;
     }
@@ -43,17 +62,17 @@ export default class Content extends Component {
             addClassSelector($('.container-filter').get(), 'hidden');
             $('.wrapper-month-history').get().innerHTML = this.getLoginImgTemplate();
         } else {
-            new Filter(
+            this.$filter = new Filter(
                 $('.container-filter').get(), 
-                { 
-                    historys : this.state.historys,
-                    // func : this.filteringHistory.bind(this),
-                    // type : this.state.type,
-                }
+                { historys : this.state.historys }
             );
-            new MonthHistory(
+            new AddHistory($('.wrapper-add-history').get());
+            this.$monthHistory = new MonthHistory(
                 $('.wrapper-month-history').get(), 
-                { historys: this.state.historys } 
+                { 
+                    dayArray: this.state.dayArray,
+                    historys: this.state.historysObj,
+                }
             );
         }
     }
@@ -67,7 +86,6 @@ export default class Content extends Component {
         `;
     }
 
-
     setEvent() {
         this.addEvent('click','.button-user', (e) => {
             e.preventDefault();
@@ -76,17 +94,52 @@ export default class Content extends Component {
         });
     }
 
-    // filteringHistory(type) {
-    //     this.state.historys = dateStore.getHistorys();
+    convertHistorysToHandyObject() {
+        if (!isEmpty(this.state.historys)) {
+            this.state.historys = this.state.historys.map((h: any) => {
+                let date = new Date(h.time);
+                h.month = date.getMonth() + 1;
+                h.date = date.getDate();
+                h.dayOfWeek = date.getDay();
+                h.time = `${date.getHours()}:${date.getMinutes()}`;
+                return h;
+            });
 
-    //     this.state.type = type;
-    //     if (type) {
-    //         this.state.historys = this.state.historys.filter(h => h.status === type);
-    //         console.log('filter 한 데이터는 다음과 같습니다.');
-    //         console.log(this.state.historys);
-    //     }
+            const historysObj = {};
 
-    //     this.render();
-    // }
+            this.state.historys.forEach((h: any)=> {
+                if (isEmpty(historysObj[h.date])) {
+                    historysObj[h.date] = [h];
+                } else {
+                    historysObj[h.date].push(h);
+                }
+            });
+
+            this.state.historysObj = historysObj;
+        }
+    }
+
+    getDayArray() {
+        if (isEmpty(this.state.historys)) return [];
+        return Object.keys(this.state.historysObj).sort((a: any,b: any):any => b-a);
+    }
+
+    filteringHistory() {
+        let historys = dateStore.getHistorys();
+        
+        this.state.historys = historys.filter(h => {
+            if (filterStore.state.categorys !== -1) {
+                return h.status === filterStore.state.categorys;
+            }
+
+            if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
+            else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
+
+            return true;
+        });
+
+        this.convertHistorysToHandyObject();
+        this.state.dayArray = this.getDayArray();
+    }
 }
 
