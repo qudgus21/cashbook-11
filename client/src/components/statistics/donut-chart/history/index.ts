@@ -48,6 +48,8 @@ export default class History extends Component {
     }
 
     async makeHistory() {
+        if (location.pathname !== '/statistics') return;
+
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)
         if (response.isFail) return;
         const sortedData = sortTrendData(response.payTrends)
