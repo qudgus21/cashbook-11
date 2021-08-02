@@ -1,8 +1,12 @@
 import Component from "../../../core/component";
 import { dateStore } from "../../../models";
 import { getDates } from "../../../utils/date";
+import comma from "../../../utils/comma";
+
 import { $ } from "../../../utils/select";
 import './index.scss'   
+import api from "../../../utils/api";
+import Snackbar from "../../base/snackbar";
 
 export default class Content extends Component {
     
@@ -39,11 +43,10 @@ export default class Content extends Component {
         let consume = dayHistory.consume;
         let income = dayHistory.income;
         let total = consume + income;
-
         return`
-            ${consume!==0 && income !==0 ?`<div class="day-total">${total}</div>`:`` }
-            ${consume!==0 ?`<div class="day-consume">${consume}</div>`:`` }
-            ${income !==0 ?`<div class="day-income">${income}</div>`:`` }
+            ${`<div class="day-total">${comma(total)}</div>`}
+            ${consume!==0 ?`<div class="day-consume">${comma(consume)}</div>`:`` }
+            ${income !==0 ?`<div class="day-income">${comma(income)}</div>`:`` }
         `
     }
 
@@ -57,9 +60,9 @@ export default class Content extends Component {
         })
         totalSum = totalConsume + totalIncome;
 
-        $('.total-income').get().textContent = `총 수입 ${totalIncome}`
-        $('.total-consume').get().textContent = `총 지출 ${totalConsume}`
-        $('.total-sum').get().textContent = `총계 ${totalSum}`
+        $('.total-income').get().textContent = `총 수입 ${comma(totalIncome)}`
+        $('.total-consume').get().textContent = `총 지출 ${comma(totalConsume)}`
+        $('.total-sum').get().textContent = `총계 ${comma(totalSum)}`
     }
 
 
@@ -92,8 +95,9 @@ export default class Content extends Component {
             }
 
             let dayHistory = findItem(date)
+
             dates[i] = `
-            <div class="date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
+            <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
                 ${!notCurrent ? 
                 `   <div class="day-history">
                     ${this.makeValueTemplate(dayHistory)}
@@ -109,6 +113,8 @@ export default class Content extends Component {
             if ($cells.length === 35) { 
                 $cells[28].style.borderBottomLeftRadius = "15px";
             }
+            this.addDateClickEvent();
+   
         }
         this.makeFooterData(historyData);
     }
@@ -120,38 +126,74 @@ export default class Content extends Component {
     }
 
 
+    addDateClickEvent(){ 
+        $('.date').getAll().forEach(node => { 
+            node.addEventListener('click', this.dateHistoryHandler.bind(this))
+
+        })
+    }
+
+
     sortHistory(historys: any): any {
         let sorted = [];
         let date, idx, target;
-        historys.forEach(history => {
-            date = new Date(history.time).getDate()
-            idx = sorted.findIndex(item => { 
-                return item.date === date;
-            })
-            if (idx === -1) {
-                sorted.push({
-                    date,
-                    income: history.status === 1 ? history.value * history.status : 0,
-                    consume: history.status === -1 ? history.value * history.status : 0
+        if (historys) {
+            historys.forEach(history => {
+                date = new Date(history.time).getDate()
+                idx = sorted.findIndex(item => {
+                    return item.date === date;
                 })
-            } else { 
-                target = sorted[idx];
-                history.status === 1 ? target.income += history.value * history.status : target.consume+=history.value * history.status
-            }
-        })
+                if (idx === -1) {
+                    sorted.push({
+                        date,
+                        income: history.status === 1 ? history.value * history.status : 0,
+                        consume: history.status === -1 ? history.value * history.status : 0
+                    })
+                } else {
+                    target = sorted[idx];
+                    history.status === 1 ? target.income += history.value * history.status : target.consume += history.value * history.status
+                }
+            })
+        }
         sorted.sort((a, b) => { 
             return a.date - b.date
         })
         return sorted;
     }
 
+    async getDateHistory(e) { 
+        const $date = e.currentTarget;
+        const year = dateStore.state.year
+        const month = dateStore.state.month
+        const day = $date.classList[0].split('-')[1];        
+        const startDate = `${year}-${month}-${day}`
+        const endDate = `${year}-${month}-${day}`
+        const response = await api('GET', `/calendar/history/all?startDate=${startDate}&endDate=${endDate}`)
+        if (response.isFail) {
+            new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+            return;
+        } else {
+            return response.historys
+        }
+    }
+
+
+    async dateHistoryHandler(e) { 
+        let historys = await this.getDateHistory(e)
+        
+        historys = historys.sort((a, b) => { 
+            return a.time - b.time
+        })
+
+        console.log(historys)
+
+    }
+
 
     mounted() {
         this.makeCalendar();
-    }
-
-    setEvent(){
 
     }
+
 
 }

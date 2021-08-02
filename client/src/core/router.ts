@@ -1,6 +1,8 @@
 import Calendar from '../pages/calendar';
 import Home from '../pages/home';
 import Statistics from '../pages/statistics';
+import Callback from '../pages/callback';
+
 import { checkLogin } from "../utils/cookie";
 
 
@@ -17,6 +19,7 @@ const router = () => {
 		{ path: '/home', view: Home },
 		{ path: '/calendar', view: Calendar },
 		{ path: '/statistics', view: Statistics },
+		{ path: '/callback', view: Callback},
 	];	
 
 	let match = routes.map((route) => {
@@ -42,7 +45,9 @@ const router = () => {
 		new match.route.view($content);
 	} else if (match.route.path === '/home') {
 		new Home($content);
-	} else {
+	} else if (match.route.path === '/callback') { 
+		new Callback($content);
+	}else{
 		history.pushState(null, null, '/home');
 		new Home($content);
 	}
