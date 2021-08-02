@@ -6,8 +6,11 @@ import Snackbar from "../components/base/snackbar";
 import { $ } from "../utils/select"
 import { isEmpty } from "../utils/util-func";
 
+export const MONTHLY_HISTORY = 0;
+export const SEARCH_HISTORY = 1;
+
 export default class DateStore extends Observable {
-    state: { year: number; month: number; historys: any[]; };
+    state: { year: number; month: number; historys: any[]; type: number;};
 
     constructor(time) {
         super();
@@ -15,6 +18,7 @@ export default class DateStore extends Observable {
             year: time.getFullYear(),
             month: time.getMonth() + 1,
             historys: null,
+            type: MONTHLY_HISTORY,
         };
         
         if (checkLogin(false)) { 
@@ -27,12 +31,12 @@ export default class DateStore extends Observable {
 
         const { year, month} = this.state
         let historys = await this.getAllHistory(year, month)
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     
 
-    setState(nextState: { year: number; month: number; historys: any[];}) {   
+    setState(nextState: { year: number; month: number; historys: any[]; type: number;}) {   
         this.state = nextState;
         this.notify(this.state);
     }
@@ -43,7 +47,7 @@ export default class DateStore extends Observable {
 
         let historys = await this.getAllHistory(year, month)
         
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     async getAllHistory(year: number, month: number) {
@@ -96,7 +100,7 @@ export default class DateStore extends Observable {
 
         let historys = await this.getAllHistory(year, month)
         
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     async moveToNextMonth() {
@@ -116,7 +120,7 @@ export default class DateStore extends Observable {
         }
 
         let historys = await this.getAllHistory(year, month)
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     getHistorys(): any[] {

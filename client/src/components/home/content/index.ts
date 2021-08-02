@@ -9,6 +9,7 @@ import { dateStore, filterStore } from '../../../models';
 import MonthHistory from '../../base/month-history';
 import AddHistory from './add-history';
 import { isEmpty } from '../../../utils/util-func';
+import { SEARCH_HISTORY } from '../../../models/date-store';
 
 
 export default class Content extends Component {
@@ -39,11 +40,16 @@ export default class Content extends Component {
             num += this.state.historysObj[x].length;
         })
         this.$filter.changeNumberOfHistorys(num);
-
+        if (dateStore.state.type === SEARCH_HISTORY) {
+            this.$filter.changeTotalValues(dateStore.state.historys);
+        }
     }
 
-    setState(historys?:object) {
-        this.state.historys = historys ?? dateStore.getHistorys();
+    setState() {
+        if (dateStore.state.type === SEARCH_HISTORY) {
+            this.partialRender();
+            return;
+        }
         this.filteringHistory();
         this.render();
     }

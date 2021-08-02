@@ -13,7 +13,7 @@ export default class Filter extends Component {
         this.state.length = this.state.historys.length;
         this.state.isIncomeBoxClicked = true;
         this.state.isConsumeBoxClicked = true;
-        this.calculateTotalPrice();
+        this.calculateTotalPrice(this.state.historys);
     }
     
     template (): string { 
@@ -28,7 +28,8 @@ export default class Filter extends Component {
                             <img src="src/assets/check-white.svg" class="img-income-checkbox" />
                         </div>
                     </label>
-                    <input type="checkbox" class="hidden"> 수입 ${comma(this.state.income)}</input>
+                    <input type="checkbox" class="hidden"></input>
+                    <div class="text-total-income">수입 ${comma(this.state.income)}</div>
                 </div>
                 <div class="div-space-layout"></div>
                 <div class="custom-checkbox">
@@ -37,7 +38,8 @@ export default class Filter extends Component {
                             <img src="src/assets/check-white.svg" class="img-consume-checkbox" />
                         </div>
                     </label>
-                    <input type="checkbox" class="hidden"> 지출 ${comma(this.state.consume)}</input>
+                    <input type="checkbox" class="hidden"> </input>
+                    <div class="text-total-consume">지출 ${comma(this.state.consume)}</div>
                 </div>
             </div>
         `;
@@ -111,11 +113,11 @@ export default class Filter extends Component {
         });
     }
 
-    calculateTotalPrice() {
+    calculateTotalPrice(historys) {
         let consume = 0;
         let income = 0;
         
-        this.state.historys.forEach(h => {
+        historys.forEach(h => {
             if (isConsumeHistory(h)) {
                 consume += h.value;
             } else {
@@ -125,6 +127,14 @@ export default class Filter extends Component {
     
         this.state.consume = consume;
         this.state.income = income;
+    }
+
+    changeTotalValues(historys) {
+        this.calculateTotalPrice(historys);
+        console.log("여기 안옴..?");
+        console.log(this.state.consume, this.state.income);
+        $('.text-total-income').get().innerHTML = ` 수입 ${comma(this.state.income)}`;
+        $('.text-total-consume').get().innerHTML = ` 지출 ${comma(this.state.consume)}`;
     }
 }
 
