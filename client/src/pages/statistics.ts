@@ -1,4 +1,9 @@
+import Donut from "../components/statistics/donut-chart";
+import History from "../components/statistics/history";
+import Line from "../components/statistics/line-chart";
 import Component from "../core/component";
+import { $ } from "../utils/select";
+import '../components/statistics/index.scss'
 
 export default class Statistics extends Component {
     
@@ -12,13 +17,17 @@ export default class Statistics extends Component {
     template (): string { 
         return ` 
             <div class="container-statistics">
-                통계
+                <div class="wrapper-donut"></div>
+                <div class="wrapper-line"></div>
+                <div class="wrapper-history"></div>
             </div>
         `
     }
 
-    mounted () {
-        
+    mounted() {
+        new Donut($('.container-statistics .wrapper-donut').get());
+        new Line($('.container-statistics .wrapper-line').get());
+        new History($('.container-statistics .wrapper-history').get());
     }
 
     setEvent(){

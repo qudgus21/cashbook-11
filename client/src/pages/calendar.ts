@@ -7,10 +7,6 @@ import { $ } from "../utils/select";
 
 export default class Calendar extends Component {
     
-    setup () {
-        this.state = {}
-    }
-    
     template (): string { 
         return ` 
             <div class="container-calendar">
@@ -26,8 +22,5 @@ export default class Calendar extends Component {
         new Content($('.container-calendar .wrapper-content').get())
     }
 
-    setEvent(){
-
-    }
 
 }

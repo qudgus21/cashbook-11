@@ -24,4 +24,4 @@ export const category = {
     SALARY: 8,
     POCKETMONEY: 9,
     ETC: 10,
-}
+};
