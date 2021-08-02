@@ -4,6 +4,7 @@ import { getDates } from "../utils/date";
 import { checkLogin } from "../utils/cookie";
 import Snackbar from "../components/base/snackbar";
 import { $ } from "../utils/select"
+import { isEmpty } from "../utils/util-func";
 
 export default class DateStore extends Observable {
     state: { year: number; month: number; historys: any[]; };
@@ -36,6 +37,14 @@ export default class DateStore extends Observable {
         this.notify(this.state);
     }
 
+    async refresh() {
+        console.log('dateStore refresh called!');
+        const { year, month } = this.state;
+
+        let historys = await this.getAllHistory(year, month)
+        
+        this.setState({ year, month, historys });
+    }
 
     async getAllHistory(year: number, month: number) {
         if (!checkLogin(false)) { 
@@ -111,8 +120,7 @@ export default class DateStore extends Observable {
     }
 
     getHistorys(): any[] {
-        console.log('date-store의 getHistorys() 호출! 아래 출력은 this.state.historys이다.');
-        console.log(this.state.historys);
+        if (isEmpty(this.state.historys)) return [];
         return this.state.historys.map(x=>Object.assign({}, x));
     }
 }
