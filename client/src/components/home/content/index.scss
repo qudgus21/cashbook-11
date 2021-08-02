@@ -11,6 +11,14 @@
     color: $PRIMARY;
 }
 
+.wrapper-add-history {
+    width: 80%;
+    height: 10rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .wrapper-month-history {
     display: flex;
@@ -46,3 +54,4 @@
         }
     }
 }
+

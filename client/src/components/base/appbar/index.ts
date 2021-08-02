@@ -1,6 +1,6 @@
 import Component from "../../../core/component";
 import { navigateTo } from "../../../core/router";
-import { dateStore } from "../../../models";
+import { dateStore, filterStore } from "../../../models";
 import Snackbar from "../snackbar";
 import { $ } from "../../../utils/select"
 import './index.scss';
@@ -105,18 +105,22 @@ export default class Appbar extends Component {
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
             this.moveTo('/calendar', true)
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-statistics', ({ target }) => {
             this.moveTo('/statistics', true)
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-prev', ({target})=>{
             dateStore.moveToPreviousMonth();
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-next', ({target})=>{
             dateStore.moveToNextMonth();
+            filterStore.reset();
         })
     }
 
