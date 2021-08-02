@@ -1,4 +1,10 @@
 module.exports = {
+	TEST_ERROR: {
+		code: 400,
+		errorMessage: '테스트 하는중입니다.',
+		serverMessage: 'Just for test',
+	},
+
 	SAMPLE_ERROR: {
 		code: 400,
 		errorMessage: '클라이언트에 전달한 메세지입니다.',
@@ -64,4 +70,10 @@ module.exports = {
 		errorMessage: '삭제에 실패 했습니다.',
 		serverMessage: 'Delete Fail',
 	},
+
+	WRONG_ACCESS_ERROR: {
+		code: 401,
+		errorMessage: '잘못된 접근입니다.',
+		serverMessage: 'Wrong access',
+	}
 };
