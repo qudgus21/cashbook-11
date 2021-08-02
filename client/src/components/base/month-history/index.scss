@@ -1,0 +1,12 @@
+@import '../../../color.scss';
+
+
+.container-month-history {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .wrapper-daily-history {
+        width: 100%;
+    }
+}

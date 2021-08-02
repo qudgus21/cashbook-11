@@ -184,9 +184,6 @@ export default class Content extends Component {
         historys = historys.sort((a, b) => { 
             return a.time - b.time
         })
-
-        console.log(historys)
-
     }
 
 

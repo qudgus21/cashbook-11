@@ -1,0 +1,39 @@
+@import '../../../../color.scss';
+   
+.container-daily-history {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid $BORDER;
+    margin-bottom: 2rem;
+
+    .daily-history-title-bar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        height: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+
+        span {
+            font-weight: bold;
+        }
+
+        .container-daily-history-total-price {
+            display: flex;
+            flex-direction: row;
+            color: $BODY;
+
+            >* {
+                margin-left: 1rem;
+            }
+
+            .hidden {
+                display: none;
+            }
+        }
+    }
+}
+

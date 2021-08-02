@@ -1,13 +1,12 @@
 const error = require('../constants/error');
 const CustomError = require('../errors/custom-error');
 const { verifyJWT } = require('../utils/jwt');
+const { isEmptyToken } = require('../utils/result-checker');
 
 module.exports = async (req, res, next) => {
-	console.log('decodeJWT Middleware called');
+	const token = req.headers.authorization.split(' ')[1];
 
-	const token = req.headers.authorization.split(' ')[1]
-
-	if (token != undefined) {
+	if (!isEmptyToken(token)) {
 		try {
 			const user = await verifyJWT(token);
 
@@ -19,6 +18,7 @@ module.exports = async (req, res, next) => {
 			next(err);
 		}
 	} else {
+		
 		next(new CustomError(error.JWT_TOKEN_INVALID_ERROR));
 	}
 };

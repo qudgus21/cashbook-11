@@ -43,6 +43,11 @@
     .page-controll{
         display: flex;
 
+        button {
+            all: unset;
+            margin: 0.7rem;
+        }
+
         img {
             filter: invert(93%) sepia(13%) saturate(828%) hue-rotate(124deg) brightness(95%) contrast(85%);
             &:hover{
@@ -52,10 +57,6 @@
 
         .active{
             filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
-        }
-
-        >*{
-            margin: 0.7rem;
         }
     }
 }

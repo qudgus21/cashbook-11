@@ -4,9 +4,13 @@ import { getDates } from "../utils/date";
 import { checkLogin } from "../utils/cookie";
 import Snackbar from "../components/base/snackbar";
 import { $ } from "../utils/select"
+import { isEmpty } from "../utils/util-func";
+
+export const MONTHLY_HISTORY = 0;
+export const SEARCH_HISTORY = 1;
 
 export default class DateStore extends Observable {
-    state: { year: number; month: number; historys: any; };
+    state: { year: number; month: number; historys: any[]; type: number;};
 
     constructor(time) {
         super();
@@ -14,9 +18,10 @@ export default class DateStore extends Observable {
             year: time.getFullYear(),
             month: time.getMonth() + 1,
             historys: null,
+            type: MONTHLY_HISTORY,
         };
         
-        if (checkLogin(true)) { 
+        if (checkLogin(false)) { 
             this.setup();
         }
     }
@@ -24,23 +29,29 @@ export default class DateStore extends Observable {
     
     async setup() {
 
-        console.log('setup 실행')
         const { year, month} = this.state
         let historys = await this.getAllHistory(year, month)
-        console.log('받아온 히스토리', historys)
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     
 
-    setState(nextState: { year: number; month: number; historys: any;}) {   
+    setState(nextState: { year: number; month: number; historys: any[]; type: number;}) {   
         this.state = nextState;
         this.notify(this.state);
     }
 
+    async refresh() {
+        console.log('dateStore refresh called!');
+        const { year, month } = this.state;
+
+        let historys = await this.getAllHistory(year, month)
+        
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
+    }
 
     async getAllHistory(year: number, month: number) {
-        if (!checkLogin(true)) { 
+        if (!checkLogin(false)) { 
             return;
         }
 
@@ -89,7 +100,7 @@ export default class DateStore extends Observable {
 
         let historys = await this.getAllHistory(year, month)
         
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     async moveToNextMonth() {
@@ -109,6 +120,11 @@ export default class DateStore extends Observable {
         }
 
         let historys = await this.getAllHistory(year, month)
-        this.setState({ year, month, historys });
+        this.setState({ year, month, historys, type: MONTHLY_HISTORY });
+    }
+
+    getHistorys(): any[] {
+        if (isEmpty(this.state.historys)) return [];
+        return this.state.historys.map(x=>Object.assign({}, x));
     }
 }

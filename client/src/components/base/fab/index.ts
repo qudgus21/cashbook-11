@@ -33,15 +33,9 @@ export default class Fab extends Component {
 
     async updateUser() { 
         const response: any = await api('GET', '/user/update/1');
-
     }
 
     setEvent() {
-        this.addEvent('click', '.button-test', (e) => { 
-            e.preventDefault();
-            this.updateUser();
-        })
-
         this.addEvent('click','.button-user', (e) => {
             e.preventDefault();
             addModal();
@@ -49,7 +43,9 @@ export default class Fab extends Component {
 
         this.addEvent('click','.button-write', (e) => {
             e.preventDefault();
-            alert("아직 미완성이에요!");
+            if (typeof $('.wrapper-add-history').get() !== 'undefined') {
+                removeClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');
+            }
         });
     }
 }
