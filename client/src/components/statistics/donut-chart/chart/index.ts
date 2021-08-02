@@ -74,6 +74,7 @@ export default class Chart extends Component {
 
 
     async makeChart() {
+        if (location.pathname !== '/statistics') return;
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)        
         if (response.isFail) return;
         const sortedData = sortTrendData(response.payTrends)
