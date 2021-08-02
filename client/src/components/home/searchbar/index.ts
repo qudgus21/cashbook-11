@@ -2,7 +2,10 @@ import './index.scss';
 import Component from "../../../core/component";
 import api from "../../../utils/api";
 import { $ } from '../../../utils/select';
-import { removeClassSelector } from '../../../utils/selectHandler';
+import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
+import Snackbar from '../../base/snackbar';
+import { dateStore } from '../../../models';
+import { SEARCH_HISTORY } from '../../../models/date-store';
 
 export default class SearchBar extends Component {
 
@@ -46,8 +49,8 @@ export default class SearchBar extends Component {
                         )}
                     </li>
 
-                    <li class="li-price">
-                        ${this.getPriceLiteralTemplate()}
+                    <li class="li-value">
+                        ${this.getValueLiteralTemplate()}
                     </li>
 
                     <button class="button-search">조회</button>
@@ -59,7 +62,7 @@ export default class SearchBar extends Component {
     getDateLiteralTemplate() {
         return `
             <label>일자</label>
-            <div class="container-price">
+            <div class="container-date">
                 <input type="date" class="input-start-date" />
                 <div> ~ </div>
                 <input type="date" class="input-end-date" />
@@ -74,7 +77,7 @@ export default class SearchBar extends Component {
         return `
             <label name="${label.name}">${label.text}</label>
             <select class="select-${label.name}" name="${label.name}">
-                <option selected disabled>선택하세요</option>
+                <option value="-1" selected disabled>선택하세요</option>
                 <option value="0">선택안함</option>
                 ${dataSet 
                     ? dataSet.map((data) => {
@@ -87,13 +90,13 @@ export default class SearchBar extends Component {
         `;
     }
 
-    getPriceLiteralTemplate() {
+    getValueLiteralTemplate() {
         return `
             <label>금액</label>
-            <div class="container-price">
-                <input placeholder="min" /> 
+            <div class="container-value">
+                <input class="input-search-value" placeholder="min" /> 
                 <div>-</div>
-                <input placeholder="max" />
+                <input class="input-search-value" placeholder="max" />
                 <div>원<div>
             </div>
         `;
@@ -102,7 +105,7 @@ export default class SearchBar extends Component {
     getContentLiteralTemplate() {
         return `
             <label>내용</label>
-            <input placeholder="입력하세요" />
+            <input class="input-search-content" placeholder="입력하세요" />
         `;
     }
 
@@ -111,12 +114,52 @@ export default class SearchBar extends Component {
         this.addEvent('click','.button-search', async (e) => {
             e.preventDefault();
 
+            const historys: any = await this.requestGetAllHistorys();
+            
+            if (historys) {
+                const nextState: { year: number; month: number; historys: any[]; type: number;} = {
+                    year: dateStore.state.year,
+                    month: dateStore.state.month,
+                    historys,
+                    type: SEARCH_HISTORY, 
+                }; 
 
-
-            await api('GET', '/home/history/all')
-
-
+                console.log(nextState);
+                dateStore.setState(nextState);
+            }
         });
+    }
+
+    async requestGetAllHistorys () {
+
+        const startDate = $('.input-start-date').get().value;
+        const endDate = $('.input-end-date').get().value;
+        let CategoryPk = $('.select-category').get().value;
+        const content = $('.input-search-content').get().value;
+        let PayTypePk = $('.select-payType').get().value;
+        
+        const minimumValue = $('.input-search-value').get().value;
+        const maximumValue = $('.input-search-value').get().value;
+        
+        if (CategoryPk <= 0) CategoryPk = '';
+        if (PayTypePk <= 0) PayTypePk = '';
+        
+        const url = `/home/history/all?startDate=${startDate}&endDate=${endDate}&CategoryPk=${CategoryPk}` + 
+            `&minimumValue=${minimumValue}&maximumValue=${maximumValue}`+ 
+            `&PayTypePk=${PayTypePk}&content=${content}&`;
+        console.log(url);
+        const response = await api('GET', url);
+        
+        console.log(response);
+
+        if (response.isFail) {
+            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
+            return false;
+        } else {
+            addClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');
+            new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+            return response.historys;
+        }
     }
 }
 
