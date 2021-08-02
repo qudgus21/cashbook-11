@@ -137,15 +137,15 @@ const makeWhereConditionWithQuery = (query) => {
         CategoryPk,     // '2'
         content,        // '씨유한양대'
         PayTypePk,      // '1'
-        minimumPrice,   // '10000'
-        maximumPrice    // '130000'
+        minimumValue,   // '10000'
+        maximumValue    // '130000'
     } = query;
 
     where = { ...where, ...makeWhereQueryWithDate(startDate, endDate) };
     where = { ...where, ...makeWhereQueryWithObj({CategoryPk}) };
     where = { ...where, ...makeWhereQueryWithObj({PayTypePk}) };
     where = { ...where, ...makeWhereQueryWithStringContain(content) };
-    where = { ...where, ...makeWhereQueryWithRange(minimumPrice, maximumPrice) };
+    where = { ...where, ...makeWhereQueryWithRange(minimumValue, maximumValue) };
 
     return where;
 }
