@@ -6,6 +6,7 @@ import { $ } from "../../../utils/select";
 import { addClassSelector, removeClassSelector } from "../../../utils/selectHandler";
 import './index.scss';
 import lineSvg from "./line-svg";
+import comma from '../../../utils/comma';
 
 export default class Line extends Component {
 
@@ -41,11 +42,11 @@ export default class Line extends Component {
   }
 
   
-    tootipOn(e) { 
+    tooltipOn(e) { 
       addClassSelector(e.currentTarget, 'inner');
       addClassSelector($('.svg-line-description').get(), 'active'); 
       e.currentTarget.addEventListener('mousemove', this.tooltipHandler)
-      $('.svg-line-description').get().innerHTML = `${e.currentTarget.classList[1]}원`
+      $('.svg-line-description').get().innerHTML = `${comma(e.currentTarget.classList[1])}원`
     }
 
 
@@ -59,7 +60,7 @@ export default class Line extends Component {
     addChartEvent() { 
       $('.container-line circle').getAll().forEach((circle) => { 
           circle.addEventListener('mouseover', (e) => {
-              this.tootipOn(e);
+              this.tooltipOn(e);
           })
           circle.addEventListener('mouseleave', (e) => {
               this.tooltipOff(e)

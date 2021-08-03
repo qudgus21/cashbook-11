@@ -6,6 +6,7 @@ import Line from "../../line-chart";
 import CategoryHistory from "../../category-history";
 import { $ } from "../../../../utils/select";
 import './index.scss';
+import comma from "../../../../utils/comma";
 
 export default class History extends Component {
 
@@ -27,15 +28,15 @@ export default class History extends Component {
     }
 
     makeHistoryTemplate(data): string {
-        return`
-        <h2>이번 달 지출 금액 ${data.sum}</h2>
+        return `
+        <h2>이번 달 지출 금액 ${comma(data.sum)}원</h2>
         <ul>
             ${data.trendData.reduce((acc, cur) => { 
                 return acc + `
                     <li class="${cur.name}" id="category-${cur.categoryPK}">
-                        <div class="category" style="background-color: ${cur.color}">${cur.name}</div>
+                        <div class="category" style="color: white; background-color: ${cur.color}">${cur.name}</div>
                         <div class="ratio">${Math.round(cur.ratio)}%</div>
-                        <div>${cur.amount}</div>
+                        <div>${comma(cur.amount)}원</div>
                     </li>
                 `
             }, ``)}
