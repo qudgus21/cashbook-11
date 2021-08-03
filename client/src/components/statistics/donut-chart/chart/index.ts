@@ -28,17 +28,19 @@ export default class Chart extends Component {
     }
 
 
+
     tooltipHandler(e) { 
+        console.log('무브!')
         $('.svg-description').get().style.left = `${e.pageX}px`
-        $('.svg-description').get().style.top = `${e.pageY - 180}px`
+        $('.svg-description').get().style.top = `${e.pageY - 200}px`
     }
 
-    
+
     tootipOn(e) { 
         addClassSelector(e.currentTarget, 'inner');
         addClassSelector($('.svg-description').get(), 'active');
-        $('.svg-description').get().innerHTML = e.currentTarget.id
         e.currentTarget.addEventListener('mousemove', this.tooltipHandler)
+        $('.svg-description').get().innerHTML = e.currentTarget.id;
     }
 
 
@@ -74,6 +76,7 @@ export default class Chart extends Component {
 
 
     async makeChart() {
+
         if (location.pathname !== '/statistics') return;
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)        
         if (response.isFail) return;

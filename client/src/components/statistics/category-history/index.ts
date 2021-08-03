@@ -1,7 +1,7 @@
 import Component from "../../../core/component";
 import './index.scss';
 
-export default class History extends Component {
+export default class CategoryHistory extends Component {
 
     setup () {
         this.state = {};
