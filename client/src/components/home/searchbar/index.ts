@@ -124,7 +124,6 @@ export default class SearchBar extends Component {
                     type: SEARCH_HISTORY, 
                 }; 
 
-                console.log(nextState);
                 dateStore.setState(nextState);
             }
         });
@@ -147,10 +146,8 @@ export default class SearchBar extends Component {
         const url = `/home/history/all?startDate=${startDate}&endDate=${endDate}&CategoryPk=${CategoryPk}` + 
             `&minimumValue=${minimumValue}&maximumValue=${maximumValue}`+ 
             `&PayTypePk=${PayTypePk}&content=${content}&`;
-        console.log(url);
         const response = await api('GET', url);
         
-        console.log(response);
 
         if (response.isFail) {
             new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });

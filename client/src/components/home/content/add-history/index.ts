@@ -91,7 +91,6 @@ export default class AddHistory extends Component {
 
             // api create 전송
             const isCreated = await this.requestCreatingHistory();
-            console.log(isCreated);
             if (isCreated) {
                 dateStore.refresh();
             }
@@ -113,7 +112,6 @@ export default class AddHistory extends Component {
         const content = $('.input-content').get().value;
         const value = $('.input-value').get().value;
         
-        console.log(time, CategoryPk, status, payType, content, value);
 
         const response = await api('POST', `/home/history`, {
             time, CategoryPk, status, payType, content, value

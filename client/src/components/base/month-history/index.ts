@@ -12,7 +12,6 @@ export default class MonthHistory extends Component {
 
     setup () {
         this.state = this.props;
-        console.log('MonthHistory 의 setup(),',this.state);
     }
 
     template (): string {
