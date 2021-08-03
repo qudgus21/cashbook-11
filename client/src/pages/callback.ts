@@ -7,6 +7,7 @@ import { setCookie } from "../utils/cookie";
 import Snackbar from "../components/base/snackbar";
 import { dateStore } from '../models';
 import Modal from '../components/base/user-modal';
+import { removeClassSelector } from '../utils/selectHandler';
 
 export default class Callback extends Component {
     
@@ -36,8 +37,10 @@ export default class Callback extends Component {
             new Snackbar($('.snackbar').get(), { msg: '깃허브 로그인에 성공했습니다.', duration: 2000 });
             removeModal();
             dateStore.setup()
-            $('.button-user img').get().src = "../../../src/assets/on-off-button.svg"
-            navigateTo('/home')
+            removeClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
+            removeClassSelector($('.fab-button-write').get(), 'invisible');
+            navigateTo('/home');
+            $('.fab-button-user img').get().src = "../../../src/assets/on-off-button.svg"
         }
     }
 }
