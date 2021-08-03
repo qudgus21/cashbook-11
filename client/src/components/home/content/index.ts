@@ -7,8 +7,9 @@ import { checkLogin } from '../../../utils/cookie';
 import { dateStore, filterStore } from '../../../models';
 import MonthHistory from '../../base/month-history';
 import AddHistory from './add-history';
-import { isEmpty } from '../../../utils/util-func';
+import { getDateInfo, isEmpty } from '../../../utils/util-func';
 import { SEARCH_HISTORY } from '../../../models/date-store';
+import { category } from '../../../constants/category';
 
 
 export default class Content extends Component {
@@ -102,13 +103,8 @@ export default class Content extends Component {
     convertHistorysToHandyObject() {
         if (!isEmpty(this.state.historys)) {
             this.state.historys = this.state.historys.map((h: any) => {
-                let date = new Date(h.time);
-                console.log(date);
-                console.log(h.time);
-                h.year = date.getFullYear();
-                h.month = date.getMonth() + 1;
-                h.date = date.getDate();
-                h.day = date.getDay();
+                const date = new Date(h.time);
+                h = { ...h, ...getDateInfo(h.time)};
                 h.time = `${date.getHours()}:${date.getMinutes()}`;
                 return h;
             });
@@ -137,13 +133,13 @@ export default class Content extends Component {
         let historys = dateStore.getHistorys();
         
         this.state.historys = historys.filter(h => {
-            if (filterStore.state.categorys !== -1) {
-                return h.status === filterStore.state.categorys;
+            if (filterStore.state.categorys !== category.ALL) {
+                return h.CategoryPk == filterStore.state.categorys;
             }
 
             if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
             else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
-
+  
             return true;
         });
 
