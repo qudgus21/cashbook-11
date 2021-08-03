@@ -33,6 +33,10 @@
                 border-radius: 0.5rem;
                 margin-right: 0.2rem;
         
+                &:hover {
+                    transition: 0.4s;
+                }
+
                 img {
                     width: 1.3rem;
                     height: 1.3rem;
