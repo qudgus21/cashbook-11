@@ -27,7 +27,14 @@ export default class Statistics extends Component {
     }
 
     setEvent(){
-
+        window.addEventListener('scroll', (e) => {
+            if ($('.container-statistics').get()) { 
+                if (window.pageYOffset > 1) {
+                    $('.container-statistics').get().style.zIndex = 0;
+                } else { 
+                    $('.container-statistics').get().style.zIndex = 1;
+                }
+            }
+        })
     }
-
 }
