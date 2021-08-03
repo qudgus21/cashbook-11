@@ -2,82 +2,122 @@
 
 
 .wrapper-line{
-    margin-top: 2rem;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
 
     .container-line{
-        >span{
-            margin-bottom: 2.5rem;
+        border-radius: 15px;
+        width: 65%;
+        height: 90%;
+        box-shadow: 0 2px 2px 2px rgb(0 0 0 / 15%);
+
+        h2{
+            width: 100%;
+            padding: 1.5rem 1rem 0 1.5rem;
+            font-size: 1.2rem;
+            background-color: $OFF_WHITE;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 0 0 0;
+
+        }
+
+        svg {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background-color: $OFF_WHITE;
+            transition: transform 0.5s ease 0s;
+            box-shadow:  0 6px 6px rgb(0 0 0 / 23%);
+
+
+            polyline {
+                animation:polyline 2s forwards;
+                }
+
+                @keyframes polyline{
+                to{ stroke-dashoffset:0;}
+                }
+
+            circle {
+                stroke-width: 59;
+                stroke-linecap: round;
+            }
+            circle:hover {
+                animation: hov 1s infinite ease-out;
+            }
+
+
+            @keyframes hov {
+                0% {
+                    stroke-width: 10;
+                }
+                50% {
+                    stroke-width: 18;
+                  }
+                to{
+                    stroke-width: 10;
+                }
+              }
+        }
+        
+
+        .inner:hover{
+            fill: #e7e7e7;
+          }
+        
+        .svg-line-description{
+            position: absolute; 
+            font-size: 1rem;
+            text-align: center;
+            background: rgb(46, 46, 46);
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 0 auto;
+            display: none;
+            border: none;
+            // border-radius: 15px;
+    
+            &.active{
+                display: block;
+            }
         }
 
 
-        border-radius: 15px;
-        background-color: $OFF_WHITE;
-            width: 65%;
-            height:500px;
-            border-radius:10px;
-            padding:30px;
-            background-color: #fff;
+        polyline,
+        .point_symbol {
+            fill: none;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+            stroke-linecap: square;
+        }
         
-            span {
-                display:block;
-                font-weight: bold;
-                font-size: 1.2rem;
-                height : 1rem;
-            }
+        .point_symbol {
+            fill: #efefef;
+        }
         
-            .expense-by-category__content{
-                
-                @mixin delimiter-font-set {
-                    height:fit-content;
-                    font-weight:normal;
-                    font-size:15px;
-                }
+        .asse,
+        .trattino {
+            stroke: #999;
+        }
         
-                display:grid;
-                grid-template-columns: 1fr 9fr;
-                grid-template-rows:6fr 1fr;
-                height:calc(100% - 60px);
+        .etichetta {
+            text-anchor: end;
+            font-family: Helvetica, Arial, sans-serif;
+            fill: #999;
+            line-height: 1;
+        }
         
-                .content__expense-delimiter{
-                    display:flex;
-                    flex-direction: column;
-                    justify-content: space-around;
-                    text-align:right;
-                    height: 325.7px;
-                    
-                    span{
-                        @include delimiter-font-set;
-                        margin-right:10px;
-                        line-height:2px;
-                    }
-                }
+        .etichetta.middle {
+            text-anchor: middle;
+        }
         
-                .content__curved-chart{
-                    
-                    width: 40rem;
-                    height:325.7px;
-
-                    path{
-                        width: 100%;
-                        height: 100%;
-
-                    }
-
-                    transform:rotateX(180deg);
-                }
-        
-                .content__day-delimiter{
-                    grid-column:2;
-                    grid-row:2;
-                    display:flex;
-                    justify-content: space-evenly;
-                    span {
-                        @include delimiter-font-set;
-                        margin-top:10px;
-                    }
-                }
-            }
-        } 
-
+        .divider {
+            stroke-width: 1px;
+            stroke: #999;
+            stroke-dasharray: 2, 6;
+        }
     }
+}
 
