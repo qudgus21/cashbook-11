@@ -75,5 +75,11 @@ module.exports = {
 		code: 401,
 		errorMessage: '잘못된 접근입니다.',
 		serverMessage: 'Wrong access',
+	},
+
+	IMPURE_DATA_ERROR: {
+		code:400,
+		errorMessage: '저장된 데이터에 오류가 있습니다!\n관리자에게 문의하세요.',
+		serverMessage: 'Critical Error. Insane, Impure Data!!!!',
 	}
 };
