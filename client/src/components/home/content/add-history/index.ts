@@ -112,6 +112,7 @@ export default class AddHistory extends Component {
         const content = $('.input-content').get().value;
         const value = $('.input-value').get().value;
         
+
         const response = await api('POST', `/home/history`, {
             time, CategoryPk, status, payType, content, value
          });

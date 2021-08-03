@@ -1,0 +1,123 @@
+@import '../../../color.scss';
+
+
+.wrapper-line{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+
+    .container-line{
+        border-radius: 15px;
+        width: 65%;
+        height: 90%;
+        box-shadow: 0 2px 2px 2px rgb(0 0 0 / 15%);
+
+        h2{
+            width: 100%;
+            padding: 1.5rem 1rem 0 1.5rem;
+            font-size: 1.2rem;
+            background-color: $OFF_WHITE;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 0 0 0;
+
+        }
+
+        svg {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background-color: $OFF_WHITE;
+            transition: transform 0.5s ease 0s;
+            box-shadow:  0 6px 6px rgb(0 0 0 / 23%);
+
+
+            polyline {
+                animation:polyline 2s forwards;
+                }
+
+                @keyframes polyline{
+                to{ stroke-dashoffset:0;}
+                }
+
+            circle {
+                stroke-width: 59;
+                stroke-linecap: round;
+            }
+            circle:hover {
+                animation: hov 1s infinite ease-out;
+            }
+
+
+            @keyframes hov {
+                0% {
+                    stroke-width: 10;
+                }
+                50% {
+                    stroke-width: 18;
+                  }
+                to{
+                    stroke-width: 10;
+                }
+              }
+        }
+        
+
+        .inner:hover{
+            fill: #e7e7e7;
+          }
+        
+        .svg-line-description{
+            position: absolute; 
+            font-size: 1rem;
+            text-align: center;
+            background: rgb(46, 46, 46);
+            color: white;
+            padding: 1rem 1.5rem;
+            margin: 0 auto;
+            display: none;
+            border: none;
+            // border-radius: 15px;
+    
+            &.active{
+                display: block;
+            }
+        }
+
+
+        polyline,
+        .point_symbol {
+            fill: none;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+            stroke-linecap: square;
+        }
+        
+        .point_symbol {
+            fill: #efefef;
+        }
+        
+        .asse,
+        .trattino {
+            stroke: #999;
+        }
+        
+        .etichetta {
+            text-anchor: end;
+            font-family: Helvetica, Arial, sans-serif;
+            fill: #999;
+            line-height: 1;
+        }
+        
+        .etichetta.middle {
+            text-anchor: middle;
+        }
+        
+        .divider {
+            stroke-width: 1px;
+            stroke: #999;
+            stroke-dasharray: 2, 6;
+        }
+    }
+}
+
