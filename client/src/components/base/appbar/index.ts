@@ -100,7 +100,8 @@ export default class Appbar extends Component {
     setEvent(){        
         this.addEvent('click', '.button-home', ({ target }) => {
             if (location.pathname !== '/home') 
-                this.moveTo('/home', false)
+                this.moveTo('/home', false);
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
