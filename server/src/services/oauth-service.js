@@ -41,8 +41,9 @@ const githubCallback = async (req, res, next) => {
             },
         });
 
-        const id = data.email;
+        const id = data.login;
         
+
         const [user, isCreated] = await db.User.findOrCreate({
             where: { id },
             defaults: { password: createHash('github32!a~') }

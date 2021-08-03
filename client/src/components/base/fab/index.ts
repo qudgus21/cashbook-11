@@ -15,14 +15,20 @@ export default class Fab extends Component {
     template (): string { 
         return`
             <div class="container-fab">
-                <button class="button button-user">
-                    ${checkLogin() ? 
-                    `<img src="../../../src/assets/on-off-button.svg"/>` :
-                    `<img src="../../../src/assets/account.svg"/>`}
+                ${!checkLogin() ? 
+                `<button class="button fab-button-user animated bounce">
+                    <img src="../../../src/assets/account.svg"/>
                 </button>
-                <button class="button button-write">
+                <button class="button fab-button-write disabled">
                     <img src="../../../src/assets/add_white.svg"/>
+                </button>` :
+                `<button class="button fab-button-user">
+                    <img src="../../../src/assets/on-off-button.svg"/>
                 </button>
+                <button class="button fab-button-write">
+                    <img src="../../../src/assets/add_white.svg"/>
+                </button>`
+                }
             </div>
         `;
     }
@@ -36,12 +42,12 @@ export default class Fab extends Component {
     }
 
     setEvent() {
-        this.addEvent('click','.button-user', (e) => {
+        this.addEvent('click','.fab-button-user', (e) => {
             e.preventDefault();
             addModal();
         });
 
-        this.addEvent('click','.button-write', (e) => {
+        this.addEvent('click','.fab-button-write', (e) => {
             e.preventDefault();
             if (typeof $('.wrapper-add-history').get() !== 'undefined') {
                 removeClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');
