@@ -68,7 +68,7 @@ const createHistory = async (req, res, next) => {
         }
 
         // 입력받은 value 가 0 이하이면 에러를 뱉는다.
-        if (value < 0) {
+        if (value <= 0) {
             throw new CustomError(error.INVALID_INPUT_ERROR);
         }
 
@@ -164,7 +164,7 @@ const deleteHistory = async (req, res, next) => {
         }
         
         // 삭제를 요청한다.
-        const [affectedRow] = await db.History.destroy({where: { pk } ,  transaction });
+        const affectedRow = await db.History.destroy({where: { pk } ,  transaction });
 
         // 삭제된 데이터가 없는경우
         if (!affectedRow) {
@@ -181,27 +181,28 @@ const deleteHistory = async (req, res, next) => {
 
         // 조회된 결과가 없다면, 큰 문제이다.
         if (isEmptyOneResultFromDB(userPayTrend)) {
-            throw new CustomError(error.IMPURE_DATA_ERROR);
+            throw new CustomError(error.IMPURE_DATA_ERROR)
         } else {
             // 기존에 존재한다면, 기존의 amount 에 value 를 뺀다.
             const amount = parseInt(userPayTrend.amount, 10) - parseInt(history.value, 10);
 
             // 히스토리의 값을 뺐을 때, 0 이라면, 해당 히스토리를 지워준다.
             if (amount === 0) {
-                    const [affectedRow] = await db.UserPayTrend.delete({
+                    const affectedRow = await db.UserPayTrend.destroy({
                         where: { pk : userPayTrend.pk }, transaction
                     });
-        
+                    console.log(affectedRow);
                     // 삭제가 되지 않았다면 에러를 뱉는다.
                     if (!affectedRow) {
-                        throw new CustomError(error.UPDATE_ERROR);
+                        throw new CustomError(error.DELETE_ERROR);
                     }
             } else if (amount > 0) {
                 // 일반적인 케이스
                 const [affectedRow] = await db.UserPayTrend.update({ amount }, {
-                    where: { pk : userPayTrendInDB.pk }, transaction
+                    where: { pk : userPayTrend.pk }, transaction
                 });
     
+                console.log(affectedRow);
                 // 업데이트가 되지 않았다면 에러를 뱉는다.
                 if (!affectedRow) {
                     throw new CustomError(error.UPDATE_ERROR);

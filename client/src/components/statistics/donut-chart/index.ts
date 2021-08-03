@@ -1,4 +1,6 @@
 import Component from "../../../core/component";
+import { dateStore } from "../../../models";
+import { checkLogin } from "../../../utils/cookie";
 import { $ } from "../../../utils/select";
 import Chart from "./chart";
 import History from "./history";
@@ -21,8 +23,17 @@ export default class Donut extends Component {
     }
 
     mounted() {
-        new Chart($('.wrapper-donut-chart').get())
-        new History($('.wrapper-donut-history').get())
+        if (dateStore.getHistorys().length !== 0) {
+            new Chart($('.wrapper-donut-chart').get());
+            new History($('.wrapper-donut-history').get());
+        } else {
+            $('.container-donut').get().innerHTML = `
+                <div class="wrapper-img-empty"> 
+                    <img src="../../../src/assets/baedal.jpg" class="img-empty-statistic" /> 
+                </div>
+            `;
+        }
+        
     }
 
     setEvent(){

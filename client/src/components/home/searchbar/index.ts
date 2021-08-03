@@ -6,12 +6,16 @@ import { addClassSelector, removeClassSelector } from '../../../utils/selectHand
 import Snackbar from '../../base/snackbar';
 import { dateStore } from '../../../models';
 import { SEARCH_HISTORY } from '../../../models/date-store';
+import { checkLogin } from '../../../utils/cookie';
 
 export default class SearchBar extends Component {
 
     setup () {
         this.state = {};
-        this.getData();
+        if (checkLogin(false)) {
+            this.getData();
+        }
+        console.log("Home 의 SearchBar 가 dateStore를 subscribe 시작합니다.");
         dateStore.subscribe(this.updateUserPayType.bind(this));
     }
 
@@ -164,7 +168,7 @@ export default class SearchBar extends Component {
         const response = await api('GET', url);  
 
         if (response.isFail) {
-            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
+            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: '#f45552', duration: 2000 });
             return false;
         } else {
             addClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');

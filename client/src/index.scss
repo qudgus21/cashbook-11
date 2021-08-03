@@ -17,4 +17,14 @@ body{
     .opacity{
         opacity: 0.5;
     }
+
+    .container-notfound{
+        width: 100vw;
+        position: relative;
+        height: 83vh;
+        background-color: $BACKGROUND;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

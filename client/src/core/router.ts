@@ -2,9 +2,8 @@ import Calendar from '../pages/calendar';
 import Home from '../pages/home';
 import Statistics from '../pages/statistics';
 import Callback from '../pages/callback';
-
+import NotFound from '../pages/notfound';
 import { checkLogin } from "../utils/cookie";
-
 
 const pathToRegex = (path) =>
 	new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
@@ -20,6 +19,7 @@ const router = () => {
 		{ path: '/calendar', view: Calendar },
 		{ path: '/statistics', view: Statistics },
 		{ path: '/callback', view: Callback},
+		{ path: '/notfound', view: NotFound},
 	];	
 
 	let match = routes.map((route) => {
@@ -31,7 +31,7 @@ const router = () => {
 
 	if (!match) {
 		match = {
-			route: routes[0],
+			route: routes[4],
 			result: [location.pathname],
 		};
 	}
@@ -48,8 +48,10 @@ const router = () => {
 	} else if (match.route.path === '/callback') { 
 		new Callback($content);
 	}else{
-		history.pushState(null, null, '/home');
-		new Home($content);
+		history.pushState(null, null, '/notfound');
+		new NotFound($content);
+		// history.pushState(null, null, '/home');
+		// new Home($content);
 	}
 };
 

@@ -28,7 +28,7 @@ export const getCookie = (key: string): string => {
 export const checkLogin = (isSnackShown?:Boolean): Boolean => { 
     if (!getCookie('JWT')) {
         if (isSnackShown) { 
-            new Snackbar($('.snackbar').get(), { msg: '로그인 해주세요.', duration: 2000, backgroundColor: 'red' });
+            new Snackbar($('.snackbar').get(), { msg: '로그인 해주세요.', duration: 2000, backgroundColor: '#f45552' });
         }
         return false;
     }

@@ -15,18 +15,24 @@ export default class Fab extends Component {
     template (): string { 
         return`
             <div class="container-fab">
-                ${!checkLogin() ? 
-                `<button class="button fab-button-user animated bounce">
+                ${!checkLogin() || location.pathname !== '/home' ? 
+                `<button class="button fab-button-write invisible">
+                    <img src="../../../src/assets/add_white.svg"/>
+                </button>
+                ` :
+                `<button class="button fab-button-write">
+                    <img src="../../../src/assets/add_white.svg"/>
+                </button>
+                `
+                }
+                ${!checkLogin()? 
+                `
+                <button class="button fab-button-user animated bounce">
                     <img src="../../../src/assets/account.svg"/>
-                </button>
-                <button class="button fab-button-write disabled">
-                    <img src="../../../src/assets/add_white.svg"/>
                 </button>` :
-                `<button class="button fab-button-user">
+                `
+                <button class="button fab-button-user">
                     <img src="../../../src/assets/on-off-button.svg"/>
-                </button>
-                <button class="button fab-button-write">
-                    <img src="../../../src/assets/add_white.svg"/>
                 </button>`
                 }
             </div>
