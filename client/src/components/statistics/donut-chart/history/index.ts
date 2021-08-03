@@ -23,6 +23,7 @@ export default class History extends Component {
 
     mounted() {
         this.makeHistory();
+
     }
 
     makeHistoryTemplate(data): string {
@@ -31,7 +32,7 @@ export default class History extends Component {
         <ul>
             ${data.trendData.reduce((acc, cur) => { 
                 return acc + `
-                    <li class="${cur.name}">
+                    <li class="${cur.name}" id="category-${cur.categoryPK}">
                         <div class="category" style="background-color: ${cur.color}">${cur.name}</div>
                         <div class="ratio">${Math.round(cur.ratio)}%</div>
                         <div>${cur.amount}</div>
@@ -45,8 +46,9 @@ export default class History extends Component {
 
     lineChartAndHistoryOpener(e) {
         const category = e.currentTarget.className;
-        new Line($('.container-statistics .wrapper-line').get(), {category});
-        new CategoryHistory($('.container-statistics .wrapper-history').get(), {category});
+        const categoryPK = e.currentTarget.id.split('-').pop();
+        new Line($('.container-statistics .wrapper-line').get(), {category, categoryPK});
+        new CategoryHistory($('.container-statistics .wrapper-history').get(), {category, categoryPK});
     }
 
 
@@ -60,6 +62,10 @@ export default class History extends Component {
 
     async makeHistory() {
         if (location.pathname !== '/statistics') return;
+        
+        $('.container-statistics .wrapper-line').get().innerHTML = ``;
+        $('.container-statistics .wrapper-history').get().innerHTML = ``;
+
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)
         if (response.isFail) return;
         const sortedData = sortTrendData(response.payTrends)
