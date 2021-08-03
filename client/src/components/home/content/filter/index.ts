@@ -131,8 +131,6 @@ export default class Filter extends Component {
 
     changeTotalValues(historys) {
         this.calculateTotalPrice(historys);
-        console.log("여기 안옴..?");
-        console.log(this.state.consume, this.state.income);
         $('.text-total-income').get().innerHTML = ` 수입 ${comma(this.state.income)}`;
         $('.text-total-consume').get().innerHTML = ` 지출 ${comma(this.state.consume)}`;
     }

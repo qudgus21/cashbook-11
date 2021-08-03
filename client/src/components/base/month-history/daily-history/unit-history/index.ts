@@ -36,16 +36,13 @@ export default class UnitHistory extends Component {
 
     mounted () {
         const { CategoryPk, pk } = this.state.history;
-        console.log(CategoryPk, CATEGORY_TAG[CategoryPk]);
         
         $(`#history-pk-${pk}`).get().style.backgroundColor = CATEGORY_TAG[CategoryPk].color;
-        console.log($(`#history-pk-${pk}`).get());
     }
 
     setEvent() {
         this.addEvent('click','.wrapper-month-history .container-unit-history-info', (e) => {
             e.preventDefault();
-            console.log('나 눌림? 뀨?');
             this.historyClickEventForDelete();
             // api create 전송
         });
