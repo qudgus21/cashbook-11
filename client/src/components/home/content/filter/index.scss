@@ -1,0 +1,48 @@
+@import '../../../../color.scss';
+
+
+.container-filter {
+    display: flex;
+    flex-direction: row;
+
+    .container-checkbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-width: 15rem;
+
+        .div-space-layout {
+            width: 1rem;
+        }
+
+        .custom-checkbox {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+            
+            .checkbox {
+                border: 2px solid $PRIMARY;
+                width: 1.7rem;
+                height: 1.7rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $PRIMARY;
+                border-radius: 0.5rem;
+                margin-right: 0.2rem;
+        
+                img {
+                    width: 1.3rem;
+                    height: 1.3rem;
+                }
+            }
+        }
+    }
+}
+
+
+.hidden {
+    display: none;
+}

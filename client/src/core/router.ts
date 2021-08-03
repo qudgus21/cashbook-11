@@ -41,7 +41,7 @@ const router = () => {
 
 
 
-	if (checkLogin(true)) {
+	if (checkLogin(false)) {
 		new match.route.view($content);
 	} else if (match.route.path === '/home') {
 		new Home($content);

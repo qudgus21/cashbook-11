@@ -29,6 +29,12 @@
             width: 1.5rem;
             height: 1.5rem;
         }
+
+        &:hover {
+            transform: translateY(-0.5rem);
+            transition: transform 0.5s;
+            background-color: #309e9a;
+        }
     }
 }
     

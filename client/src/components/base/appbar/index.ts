@@ -1,6 +1,6 @@
 import Component from "../../../core/component";
 import { navigateTo } from "../../../core/router";
-import { dateStore } from "../../../models";
+import { dateStore, filterStore } from "../../../models";
 import Snackbar from "../snackbar";
 import { $ } from "../../../utils/select"
 import './index.scss';
@@ -31,15 +31,15 @@ export default class Appbar extends Component {
                     </div>
                 </div>
                 <div class="page-controll">
-                    <div class="button-home">
+                    <button class="button-home">
                         <img src="../../../src/assets/file-text.svg"/>
-                    </div>
-                    <div class="button-calendar">
-                        <img src="../../../src/assets/calendar.svg"/>
-                    </div>
-                    <div class="button-statistics">
+                    </button>
+                    <button class="button-calendar">
                         <img src="../../../src/assets/chart.svg"/>
-                    </div>
+                    </button>
+                    <button class="button-statistics">
+                        <img src="../../../src/assets/calendar.svg"/>
+                    </button>
                 </div>
                 <div></div>
             </div>
@@ -73,9 +73,10 @@ export default class Appbar extends Component {
 
 
     mounted() {
-        if (location.pathname !== '/home' && !checkLogin(true)) {
+        if (location.pathname !== '/home' && !checkLogin(false)) {
             const $imgs = $('.container-appbar .page-controll img').getAll();
             $imgs[0].classList.add('active');
+            
         } else { 
             this.currentPageImg();
         }
@@ -84,7 +85,7 @@ export default class Appbar extends Component {
 
     moveTo(url: string, mustUser: boolean) { 
         if (mustUser) {
-            if (checkLogin(true)) {
+            if (checkLogin(mustUser)) {
                 navigateTo(url);
                 this.currentPageImg()
             } else {
@@ -98,23 +99,28 @@ export default class Appbar extends Component {
 
     setEvent(){        
         this.addEvent('click', '.button-home', ({ target }) => {
-            this.moveTo('/home', false)
+            if (location.pathname !== '/home') 
+                this.moveTo('/home', false)
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
             this.moveTo('/calendar', true)
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-statistics', ({ target }) => {
             this.moveTo('/statistics', true)
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-prev', ({target})=>{
             dateStore.moveToPreviousMonth();
+            filterStore.reset();
         })
 
         this.addEvent('click', '.button-next', ({target})=>{
             dateStore.moveToNextMonth();
+            filterStore.reset();
         })
     }
 
