@@ -118,7 +118,7 @@ export default class AddHistory extends Component {
          });
         
         if (response.isFail) {
-            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
+            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: '#f45552', duration: 2000 });
             return false;
         } else {
             addClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');

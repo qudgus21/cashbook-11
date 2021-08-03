@@ -65,7 +65,7 @@ export default class UnitHistory extends Component {
         const response = await api('DELETE', `/home/history/${this.state.history.pk}`);
 
         if (response.isFail) {
-            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
+            new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: '#f45552', duration: 2000 });
             return false;
         } else {
             new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });

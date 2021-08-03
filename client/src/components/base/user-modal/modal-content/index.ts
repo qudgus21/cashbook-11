@@ -122,7 +122,7 @@ export default class ModalContent extends Component {
                 this.setState({ isSignInForm: true , isSignupId: false, isSignupPassword : false});
             }
         } else {
-            new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: 'red'});
+            new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: '#f45552'});
         }
     }
 
@@ -133,7 +133,7 @@ export default class ModalContent extends Component {
             const { id, password } = this.getIdAndPasswordFromInput();
             const response: any = await api('POST', '/user/signin', { id, password });
             if (response.isFail) {
-                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 , backgroundColor: 'red'});
+                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 , backgroundColor: '#f45552'});
             } else {
                 setCookie('JWT', response.JWT, 1);
                 new Snackbar($('.snackbar').get(), { msg: '로그인에 성공했습니다.', duration: 2000 });
@@ -143,7 +143,7 @@ export default class ModalContent extends Component {
                 navigateTo(window.location.pathname);
             }
         } else { 
-            new Snackbar($('.snackbar').get(), { msg: '아이디와 비밀번호를 입력해주세요', duration: 2000, backgroundColor: 'red'});
+            new Snackbar($('.snackbar').get(), { msg: '아이디와 비밀번호를 입력해주세요', duration: 2000, backgroundColor: '#f45552'});
         }
     }
 
@@ -153,7 +153,7 @@ export default class ModalContent extends Component {
         $('.fab-button-user img').get().src = "../../../src/assets/account.svg";
         addClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
 
-        addClassSelector($('.fab-button-write').get(), 'disabled');
+        addClassSelector($('.fab-button-write').get(), 'invisible');
 
         removeModal();
         navigateTo('/home');
@@ -171,7 +171,7 @@ export default class ModalContent extends Component {
         $('.fab-button-user img').get().src = "../../../src/assets/on-off-button.svg";
         removeClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
 
-        removeClassSelector($('.fab-button-write').get(), 'disabled');
+        removeClassSelector($('.fab-button-write').get(), 'invisible');
 
         this.setState({
             isSignInForm: true
