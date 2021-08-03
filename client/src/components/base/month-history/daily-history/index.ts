@@ -4,6 +4,7 @@ import { $ } from '../../../../utils/select';
 import { removeClassSelector } from '../../../../utils/selectHandler';
 import UnitHistory from './unit-history';
 import comma from '../../../../utils/comma';
+import { getDateInfo } from '../../../../utils/util-func';
 
 const numToDay = '일 월 화 수 목 금 토'.split(' ');
 
@@ -15,7 +16,7 @@ export default class DailyHistory extends Component {
     }
     
     template (): string {
-        const { month, date, day } = this.getMonthAndDayAndDayOfWeek(this.props.time);
+        const { month, date, day } = getDateInfo(this.props.time);
         return `
             <div class="container-daily-history">
                 <div class="daily-history-title-bar">
@@ -45,13 +46,7 @@ export default class DailyHistory extends Component {
         this.makeUnitHistory();
     }
 
-    getMonthAndDayAndDayOfWeek(time) {
-        time = new Date(time);
-        const month = time.getMonth() + 1;
-        const date = time.getDate();
-        const day = time.getDay();
-        return { month, date, day };
-    }
+    
 
     calculateTotalPrice() {
         let consume = 0;
