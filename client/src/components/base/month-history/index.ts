@@ -7,15 +7,14 @@ export default class MonthHistory extends Component {
 
     setup () {
         this.state = this.props;
-        console.log('MonthHistory 의 setup(),',this.state);
     }
 
     template (): string {
         return`
             <div class="container-month-history">
                 ${this.state.dayArray
-                    .map((_:any, idx: number): string => {
-                        return `<div id="daily-history-${idx}" class="wrapper-daily-history"></div>`;
+                    .map((time:any, idx: number): string => {
+                        return `<div id="daily-history-${time}" class="wrapper-daily-history"></div>`;
                     }).join('\n')
                 }
             </div>
@@ -31,7 +30,7 @@ export default class MonthHistory extends Component {
             
             let historys = this.state.historys[time];
             new DailyHistory(
-                $(`#daily-history-${idx}`).get(), 
+                $(`#daily-history-${time}`).get(), 
                 { 
                     historys,
                     time
