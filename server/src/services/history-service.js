@@ -3,7 +3,8 @@ const success = require('../constants/success');
 const error = require('../constants/error');
 const CustomError = require('../errors/custom-error');
 const { makeWhereQueryWithDate, makeWhereQueryWithObj, makeWhereQueryWithStringContain, makeWhereQueryWithRange } = require('../utils/make-query');
-const { isEmptyToken } = require('../utils/result-checker');
+const { isEmptyToken, isEmptyOneResultFromDB } = require('../utils/result-checker');
+const { getDateInfo } = require('../utils/util-func');
 
 const Op = db.Sequelize.Op;
 
@@ -11,8 +12,7 @@ const getAllHistoryByFilter = async (req, res, next) => {
     try {
         const user = req.user;
 
-        const where = { ...makeWhereConditionWithQuery(req.query) };
-        where.UserPk = user.pk;
+        const where = { ...makeWhereConditionWithQuery(req.query) , UserPk: user.pk };
 
         const historys = await db.History.findAll({ 
             where,
@@ -41,29 +41,78 @@ const createHistory = async (req, res, next) => {
         transaction = await db.sequelize.transaction();
 0
         const user = req.user;
+        const UserPk = user.pk;
         const { time, CategoryPk, status, payType, content, value } = req.body;
-        /* 만들때, 필요한거
-            시간을 time + ' 00:00:00' 을 해주거나
-            payType 으로 입력받은 것을 조회해서 없으면 만들고 있으면 pk 값을 가져와서 PayTypePk 로 둔다.
-            value 가 0 혹은 양수인지 체크
-        */
+        
+        const payTypeInDB = await db.PayType.findOne({where: { name: payType }});
+        
+        let PayTypePk;
+        if (!isEmptyOneResultFromDB(payTypeInDB)) {
+            PayTypePk = payTypeInDB.pk;
+        } else {
+            const newPayType = await db.PayType.create({ name: payType }, { transaction });
+
+            if (isEmptyOneResultFromDB(newPayType)) {
+                throw new CustomError(error.CREATE_ERROR);
+            }
+
+            PayTypePk = newPayType.pk;
+        }
+
         if (value < 0) {
             throw new CustomError(error.INVALID_INPUT_ERROR);
         }
-        const [{ pk }, _] = await db.PayType.findOrCreate({
-            where: { name: payType }
+
+        /*
+            userPayType 에 있는지 확인하고 추가해야 합니다.
+            userPayTrend 를 추가 혹은 업데이트 해야 합니다.
+        */
+
+        const userPayType = await db.UserPayType.findOne({
+            where: { PayTypePk }, 
         });
 
-        if (isEmptyToken(pk)) {
-            throw new CustomError(error.NO_DATA);
+        if (isEmptyOneResultFromDB(userPayType)) {
+            const newUserPayType = await db.UserPayType.create({ PayTypePk , UserPk }, { transaction });
+
+            if (isEmptyOneResultFromDB(newUserPayType)) {
+                throw new CustomError(error.CREATE_ERROR);
+            }
         }
 
-        const PayTypePk = pk;
+        const history = await db.History.create(
+            { content, time, PayTypePk, status, value, UserPk, CategoryPk },
+            { transaction },
+        );
         
-        const history = await db.History.create({ content, time, PayTypePk, status, value, UserPk: user.pk, CategoryPk });
         if(!history) {
             throw new CustomError(error.CREATE_ERROR);
         }
+
+        const { year, month } = getDateInfo(time);
+
+        const userPayTrendInDB = await db.UserPayTrend.findOne({
+            where: { year, month, UserPk, CategoryPk }
+        });
+
+        if (isEmptyOneResultFromDB(userPayTrendInDB)) {
+            //create
+            const newUserPayTrend = await db.UserPayTrend.create(
+                { year, month, UserPk, CategoryPk, amount : value },
+                { transaction },
+            );
+        } else {
+            //update
+            const amount = parseInt(userPayTrendInDB.amount, 10) + parseInt(value, 10);
+            const [affectedRow] = await db.UserPayTrend.update({ amount }, {
+                where: { pk : userPayTrendInDB.pk }, transaction
+            });
+
+            if (!affectedRow) {
+                throw new CustomError(error.UPDATE_ERROR);
+            }
+        }
+        
         await transaction.commit();
         const { code, message } = success.DEFAULT_CREATE;
 
@@ -83,7 +132,7 @@ const deleteHistory = async (req, res, next) => {
         
         const user = req.user;
         const pk = req.params.pk;
-        console.log(pk);
+
         const history = await db.History.findOne({ where: { pk } })
 
         if (!history) {
@@ -142,8 +191,7 @@ const makeWhereConditionWithQuery = (query) => {
     } = query;
 
     where = { ...where, ...makeWhereQueryWithDate(startDate, endDate) };
-    where = { ...where, ...makeWhereQueryWithObj({CategoryPk}) };
-    where = { ...where, ...makeWhereQueryWithObj({PayTypePk}) };
+    where = { ...where, ...makeWhereQueryWithObj({CategoryPk, PayTypePk}) };
     where = { ...where, ...makeWhereQueryWithStringContain(content) };
     where = { ...where, ...makeWhereQueryWithRange(minimumValue, maximumValue) };
 
