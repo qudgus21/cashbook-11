@@ -1,10 +1,9 @@
 import './index.scss';
-import Component from "../../../../core/component";
-import api from "../../../../utils/api";
-import { $ } from '../../../../utils/select';
-import { removeClassSelector } from '../../../../utils/selectHandler';
-import comma from '../../../../utils/comma';
-import { filterStore } from '../../../../models';
+import Component from "@core/component";
+import { $ } from '@utils/select';
+import comma from '@utils/comma';
+import { filterStore } from '@src/models';
+import { img } from '@constants/img-path';
 
 export default class Filter extends Component {
 
@@ -25,7 +24,7 @@ export default class Filter extends Component {
                 <div class="custom-checkbox">
                     <label>
                         <div class="checkbox checkbox-income">
-                            <img src="src/assets/check-white.svg" class="img-income-checkbox" />
+                            <img src="${img.CHECK_WHITE}" class="img-income-checkbox" />
                         </div>
                     </label>
                     <input type="checkbox" class="hidden"></input>
@@ -35,7 +34,7 @@ export default class Filter extends Component {
                 <div class="custom-checkbox">
                     <label>
                         <div class="checkbox checkbox-consume">
-                            <img src="src/assets/check-white.svg" class="img-consume-checkbox" />
+                            <img src="${img.CHECK_WHITE}" class="img-consume-checkbox" />
                         </div>
                     </label>
                     <input type="checkbox" class="hidden"> </input>

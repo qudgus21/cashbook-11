@@ -1,16 +1,9 @@
 import Donut from "../components/statistics/donut-chart";
 import Component from "../core/component";
 import { $ } from "../utils/select";
-import '../components/statistics/index.scss'
+import '@components/statistics/index.scss'
 
 export default class Statistics extends Component {
-    
-    setup () {
-        this.state = {
-            year: 2021,
-            month: 7,
-        }
-    }
     
     template (): string { 
         return ` 

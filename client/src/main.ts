@@ -1,10 +1,10 @@
 import './reset.scss';
 import './index.scss';
-import Appbar from "./components/base/appbar";
-import Fab from "./components/base/fab";
-import { router } from './core/router';
-import { $ } from './utils/select';
-import Modal from './components/base/user-modal';
+import Appbar from "@components/base/appbar";
+import Fab from "@components/base/fab";
+import { router } from '@core/router';
+import { $ } from '@utils/select';
+import Modal from '@components/base/user-modal';
 
 window.addEventListener('load', router);
 

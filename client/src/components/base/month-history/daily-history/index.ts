@@ -1,10 +1,10 @@
 import './index.scss';
-import Component from "../../../../core/component";
-import { $ } from '../../../../utils/select';
-import { removeClassSelector } from '../../../../utils/selectHandler';
+import Component from "@core/component";
+import { $ } from '@utils/select';
+import { removeClassSelector } from '@utils/selectHandler';
 import UnitHistory from './unit-history';
-import comma from '../../../../utils/comma';
-import { getDateInfo } from '../../../../utils/util-func';
+import comma from '@utils/comma';
+import { getDateInfo } from '@utils/util-func';
 
 const numToDay = '일 월 화 수 목 금 토'.split(' ');
 

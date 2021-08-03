@@ -1,17 +1,15 @@
-import { category } from './../../../constants/category';
-import { checkLogin } from './../../../utils/cookie';
-import { isEmpty } from './../../../utils/util-func';
-import Component from "../../../core/component";
+import { category } from '@constants/category';
+import { checkLogin } from '@utils/cookie';
+import { isEmpty } from '@utils/util-func';
+import Component from "@core/component";
 import './index.scss';
-import { dateStore, filterStore } from '../../../models';
-import { addClassSelector } from '../../../utils/selectHandler';
-import { $ } from '../../../utils/select';
-import Filter from '../../home/content/filter';
-import AddHistory from '../../home/content/add-history';
-import MonthHistory from '../../base/month-history';
+import { dateStore, filterStore } from '@src/models';
+import { $ } from '@utils/select';
+import Filter from '@components/home/content/filter';
+import MonthHistory from '@components/base/month-history';
 
 export default class CategoryHistory extends Component {
-    $monthHistory:MonthHistory
+    $monthHistory:MonthHistory;
     $filter: Filter;
 
 

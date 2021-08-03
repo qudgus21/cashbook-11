@@ -1,8 +1,7 @@
-import Component from "../core/component";
-import Content from "../components/home/content";
-import SearchBar from "../components/home/searchbar";
-import { dateStore } from '../models';
-import { $ } from "../utils/select";
+import Component from "@core/component";
+import Content from "@components/home/content";
+import SearchBar from "@components/home/searchbar";
+import { $ } from "@utils/select";
 
 export default class Home extends Component {
     

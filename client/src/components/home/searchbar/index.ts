@@ -1,12 +1,12 @@
 import './index.scss';
-import Component from "../../../core/component";
-import api from "../../../utils/api";
-import { $ } from '../../../utils/select';
-import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
-import Snackbar from '../../base/snackbar';
-import { dateStore } from '../../../models';
-import { SEARCH_HISTORY } from '../../../models/date-store';
-import { checkLogin } from '../../../utils/cookie';
+import Component from "@core/component";
+import api from "@utils/api";
+import { $ } from '@utils/select';
+import { addClassSelector } from '@utils/selectHandler';
+import Snackbar from '@components/base/snackbar';
+import { dateStore } from '@src/models';
+import { SEARCH_HISTORY } from '@models/date-store';
+import { checkLogin } from '@utils/cookie';
 
 export default class SearchBar extends Component {
 

@@ -1,4 +1,4 @@
-import Observable from "../core/observable";
+import Observable from "@core/observable";
 
 export default class FilterStore extends Observable {
     state: { isIncomeBoxClicked: boolean; isConsumeBoxClicked: boolean; categorys: number; };

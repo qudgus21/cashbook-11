@@ -1,19 +1,16 @@
-import Component from "../../../core/component";
-import { dateStore } from "../../../models";
-import { getDates } from "../../../utils/date";
-import comma from "../../../utils/comma";
-
-import { $ } from "../../../utils/select";
+import Component from "@core/component";
+import { dateStore } from "@src/models";
+import { getDates } from "@utils/date";
+import comma from "@utils/comma";
+import { $ } from "@utils/select";
 import './index.scss'   
-import api from "../../../utils/api";
-import Snackbar from "../../base/snackbar";
+import api from "@utils/api";
+import Snackbar from "@components/base/snackbar";
 
 export default class Content extends Component {
     
     setup () {
-        this.state = {
-
-        }
+        this.state = {};
         dateStore.subscribe(this.makeCalendar.bind(this));
     }
     
@@ -33,12 +30,12 @@ export default class Content extends Component {
                     </div>
                 </div>
             </div>
-        `
+        `;
     }
 
 
     makeValueTemplate (dayHistory){
-        if (dayHistory === undefined) return ``
+        if (dayHistory === undefined) return ``;
 
         let consume = dayHistory.consume;
         let income = dayHistory.income;
@@ -55,14 +52,14 @@ export default class Content extends Component {
         let totalIncome = 0;
         let totalSum = 0;
         historyData.forEach((history) => {
-            totalConsume += history.consume
-            totalIncome += history.income
+            totalConsume += history.consume;
+            totalIncome += history.income;
         })
         totalSum = totalConsume + totalIncome;
 
-        $('.total-income').get().textContent = `총 수입 ${comma(totalIncome)}`
-        $('.total-consume').get().textContent = `총 지출 ${comma(totalConsume)}`
-        $('.total-sum').get().textContent = `총계 ${comma(totalSum)}`
+        $('.total-income').get().textContent = `총 수입 ${comma(totalIncome)}`;
+        $('.total-consume').get().textContent = `총 지출 ${comma(totalConsume)}`;
+        $('.total-sum').get().textContent = `총계 ${comma(totalSum)}`;
     }
 
 
@@ -84,7 +81,7 @@ export default class Content extends Component {
             let idx =  historyData.findIndex(item => { 
                 return item.date === date;
             })
-            return historyData[idx]
+            return historyData[idx];
         }
 
         dates.forEach((date, i) => {
@@ -94,7 +91,7 @@ export default class Content extends Component {
                 notCurrent = true;
             }
 
-            let dayHistory = findItem(date)
+            let dayHistory = findItem(date);
 
             dates[i] = `
             <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
@@ -106,7 +103,7 @@ export default class Content extends Component {
                 <div class="dateNum">${date}</div>  
             </div>`;
         })
-        const $dates = $('.dates').get()
+        const $dates = $('.dates').get();
         if ($dates) { 
             $('.dates').get().innerHTML = dates.join('');
             const $cells = $('.dates .date').getAll();
@@ -121,15 +118,14 @@ export default class Content extends Component {
 
     makeCalendar() {
         if (location.pathname === '/calendar') { 
-            this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month))
+            this.paintCalendar(getDates(dateStore.state.year, dateStore.state.month));
         }
     }
 
 
     addDateClickEvent(){ 
         $('.date').getAll().forEach(node => { 
-            node.addEventListener('click', this.dateHistoryHandler.bind(this))
-
+            node.addEventListener('click', this.dateHistoryHandler.bind(this));
         })
     }
 
@@ -139,7 +135,7 @@ export default class Content extends Component {
         let date, idx, target;
         if (historys) {
             historys.forEach(history => {
-                date = new Date(history.time).getDate()
+                date = new Date(history.time).getDate();
                 idx = sorted.findIndex(item => {
                     return item.date === date;
                 })
@@ -148,50 +144,46 @@ export default class Content extends Component {
                         date,
                         income: history.status === 1 ? history.value * history.status : 0,
                         consume: history.status === -1 ? history.value * history.status : 0
-                    })
+                    });
                 } else {
                     target = sorted[idx];
-                    history.status === 1 ? target.income += history.value * history.status : target.consume += history.value * history.status
+                    history.status === 1 ? target.income += history.value * history.status : target.consume += history.value * history.status;
                 }
             })
         }
         sorted.sort((a, b) => { 
-            return a.date - b.date
+            return a.date - b.date;
         })
         return sorted;
     }
 
     async getDateHistory(e) { 
         const $date = e.currentTarget;
-        const year = dateStore.state.year
-        const month = dateStore.state.month
+        const year = dateStore.state.year;
+        const month = dateStore.state.month;
         const day = $date.classList[0].split('-')[1];        
-        const startDate = `${year}-${month}-${day}`
-        const endDate = `${year}-${month}-${day}`
-        const response = await api('GET', `/calendar/history/all?startDate=${startDate}&endDate=${endDate}`)
+        const startDate = `${year}-${month}-${day}`;
+        const endDate = `${year}-${month}-${day}`;
+        const response = await api('GET', `/calendar/history/all?startDate=${startDate}&endDate=${endDate}`);
         if (response.isFail) {
             new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
             return;
         } else {
-            return response.historys
+            return response.historys;
         }
     }
 
 
     async dateHistoryHandler(e) { 
-        let historys = await this.getDateHistory(e)
+        let historys = await this.getDateHistory(e);
         
         historys = historys.sort((a, b) => { 
-            return a.time - b.time
+            return a.time - b.time;
         })
 
     }
 
-
     mounted() {
         this.makeCalendar();
-
     }
-
-
 }

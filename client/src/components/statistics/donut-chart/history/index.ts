@@ -1,12 +1,12 @@
-import Component from "../../../../core/component";
-import { dateStore } from "../../../../models";
-import api from "../../../../utils/api";
-import { sortTrendData } from "../../../../utils/chartData";
-import Line from "../../line-chart";
-import CategoryHistory from "../../category-history";
-import { $ } from "../../../../utils/select";
+import Component from "@core/component";
+import { dateStore } from "@src/models";
+import api from "@utils/api";
+import { sortTrendData } from "@utils/chartData";
+import Line from "@components/statistics/line-chart";
+import CategoryHistory from "@components/statistics/category-history";
+import { $ } from "@utils/select";
 import './index.scss';
-import comma from "../../../../utils/comma";
+import comma from "@utils/comma";
 
 export default class History extends Component {
 

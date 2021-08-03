@@ -1,9 +1,9 @@
-import Calendar from '../pages/calendar';
-import Home from '../pages/home';
-import Statistics from '../pages/statistics';
-import Callback from '../pages/callback';
-import NotFound from '../pages/notfound';
-import { checkLogin } from "../utils/cookie";
+import Calendar from '@pages/calendar';
+import Home from '@pages/home';
+import Statistics from '@pages/statistics';
+import Callback from '@pages/callback';
+import NotFound from '@pages/notfound';
+import { checkLogin } from "@utils/cookie";
 
 const pathToRegex = (path) =>
 	new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');

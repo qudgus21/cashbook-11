@@ -1,13 +1,13 @@
 import './index.scss';
-import Component from "../../../../core/component";
-import api from "../../../../utils/api";
-import { $ } from '../../../../utils/select';
-import { addClassSelector ,removeClassSelector} from '../../../../utils/selectHandler';
+import Component from "@core/component";
+import api from "@utils/api";
+import { $ } from '@utils/select';
+import { addClassSelector ,removeClassSelector} from '@utils/selectHandler';
 import { navigateTo } from '../../../../core/router';
-import { setCookie, checkLogin } from '../../../../utils/cookie';
-import Snackbar from "../../snackbar"
-import { removeModal } from '../../../../utils/modal';
-import { dateStore} from "../../../../models";
+import { setCookie, checkLogin } from '@utils/cookie';
+import Snackbar from "@components/base/snackbar"
+import { removeModal } from '@utils/modal';
+import { dateStore} from "@src/models";
 
 export default class ModalContent extends Component {
     setup () {

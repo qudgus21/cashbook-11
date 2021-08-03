@@ -1,7 +1,7 @@
-import Component from "../../../core/component";
-import { $ } from "../../../utils/select" 
+import Component from "@core/component";
+import { $ } from "@utils/select" 
 import './index.scss';
-import {addClassSelector ,removeClassSelector} from '../../../utils/selectHandler';
+import {addClassSelector ,removeClassSelector} from '@utils/selectHandler';
 
 
 export default class Snackbar extends Component {
