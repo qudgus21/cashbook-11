@@ -5,19 +5,20 @@ import Snackbar from "../snackbar";
 import { $ } from "../../../utils/select"
 import './index.scss';
 import { checkLogin } from "../../../utils/cookie";
+import { addClassSelector, removeClassSelector } from "../../../utils/selectHandler";
 
 
 export default class Appbar extends Component {
     
     setup() {
-        dateStore.subscribe(this.setTitle.bind(this));
+        dateStore.fixedSubscribe(this.setTitle.bind(this));
     }
 
     template (): any { 
         return ` 
             <div class="container-appbar">
                 <div></div>
-                <h1 class="title">우아한 가계부</h1>
+                <h1 class="title"><a href="/home" style="color: white; text-decoration: none; cursor: pointer;">우아한 가계부</a></h1>
                 <div class="date-controll">
                     <div class="button-prev">
                         <img src="../../../src/assets/chevron-left.svg"/>
@@ -99,19 +100,25 @@ export default class Appbar extends Component {
 
     setEvent(){        
         this.addEvent('click', '.button-home', ({ target }) => {
-            if (location.pathname !== '/home') 
-                this.moveTo('/home', false);
+            this.unsubscribeAllStore();
             filterStore.reset();
+            removeClassSelector($('.fab-button-write').get(), 'invisible');
+            this.moveTo('/home', false);
+            
         })
 
         this.addEvent('click', '.button-calendar', ({ target }) => {
-            this.moveTo('/calendar', true)
+            this.unsubscribeAllStore();
             filterStore.reset();
+            addClassSelector ($('.fab-button-write').get(), 'invisible');
+            this.moveTo('/calendar', true);
         })
 
         this.addEvent('click', '.button-statistics', ({ target }) => {
-            this.moveTo('/statistics', true)
+            this.unsubscribeAllStore();
             filterStore.reset();
+            addClassSelector ($('.fab-button-write').get(), 'invisible');
+            this.moveTo('/statistics', true);
         })
 
         this.addEvent('click', '.button-prev', ({target})=>{
@@ -125,4 +132,8 @@ export default class Appbar extends Component {
         })
     }
 
+    unsubscribeAllStore() {
+        dateStore.unsubscribeAll();
+        filterStore.unsubscribeAll();
+    }
 }
