@@ -1,15 +1,11 @@
 import './index.scss';
-import Component from "../../../../core/component";
-import api from "../../../../utils/api";
-import { $ } from '../../../../utils/select';
-import { addClassSelector, removeClassSelector } from '../../../../utils/selectHandler';
-import { checkLogin } from '../../../../utils/cookie';
-import { CATEGORY_TAG } from '../../../../constants/category';
-import comma from '../../../../utils/comma';
-import Snackbar from '../../../base/snackbar';
-import { dateStore } from '../../../../models';
-
-const isEmpty = (x) => (typeof x === 'undefined' || x === null || x === '');
+import Component from "@core/component";
+import api from "@utils/api";
+import { $ } from '@utils/select';
+import { addClassSelector } from '@utils/selectHandler';
+import { CATEGORY_TAG } from '@constants/category';
+import Snackbar from '@components/base/snackbar';
+import { dateStore } from '@src/models';
 
 export default class AddHistory extends Component {
     state: { whichRadioClicked: number; }

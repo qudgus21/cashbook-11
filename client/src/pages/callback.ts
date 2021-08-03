@@ -5,9 +5,9 @@ import { $ } from "../utils/select";
 import { navigateTo } from "../core/router";
 import { setCookie } from "../utils/cookie";
 import Snackbar from "../components/base/snackbar";
-import { dateStore } from '../models';
-import Modal from '../components/base/user-modal';
-import { removeClassSelector } from '../utils/selectHandler';
+import { dateStore } from '@src/models';
+import Modal from '@components/base/user-modal';
+import { removeClassSelector } from '@utils/selectHandler';
 
 export default class Callback extends Component {
     

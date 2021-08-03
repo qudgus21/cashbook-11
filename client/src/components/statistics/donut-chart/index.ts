@@ -1,7 +1,7 @@
-import Component from "../../../core/component";
-import { dateStore } from "../../../models";
-import { checkLogin } from "../../../utils/cookie";
-import { $ } from "../../../utils/select";
+import { img } from "@constants/img-path";
+import Component from "@core/component";
+import { dateStore } from "@src/models";
+import { $ } from "@utils/select";
 import Chart from "./chart";
 import History from "./history";
 
@@ -29,7 +29,7 @@ export default class Donut extends Component {
         } else {
             $('.container-donut').get().innerHTML = `
                 <div class="wrapper-img-empty"> 
-                    <img src="../../../src/assets/baedal.jpg" class="img-empty-statistic" /> 
+                    <img src="${img.BAEDAL}" class="img-empty-statistic" /> 
                 </div>
             `;
         }

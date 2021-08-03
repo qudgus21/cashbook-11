@@ -1,6 +1,6 @@
 import './index.scss';
-import Component from "../../../core/component";
-import { $ } from '../../../utils/select';
+import Component from "@core/component";
+import { $ } from '@utils/select';
 import DailyHistory from './daily-history';
 
 export default class MonthHistory extends Component {

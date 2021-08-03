@@ -1,12 +1,12 @@
-import { category, CATEGORY_TAG } from './../../../constants/category';
-import Component from "../../../core/component";
-import { dateStore } from "../../../models";
-import api from "../../../utils/api";
-import { $ } from "../../../utils/select";
-import { addClassSelector, removeClassSelector } from "../../../utils/selectHandler";
+import { CATEGORY_TAG } from '@constants/category';
+import Component from "@core/component";
+import { dateStore } from "@src/models";
+import api from "@utils/api";
+import { $ } from "@utils/select";
+import { addClassSelector, removeClassSelector } from "@utils/selectHandler";
 import './index.scss';
 import lineSvg from "./line-svg";
-import comma from '../../../utils/comma';
+import comma from '@utils/comma';
 
 export default class Line extends Component {
 

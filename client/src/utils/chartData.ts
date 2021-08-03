@@ -1,4 +1,4 @@
-import { CATEGORY_TAG } from './../constants/category';
+import { CATEGORY_TAG } from '@constants/category';
 
 export const sortTrendData = (payTrends) => { 
     let sum = 0;

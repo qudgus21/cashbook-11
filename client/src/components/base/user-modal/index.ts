@@ -1,11 +1,8 @@
 
 import './index.scss';
-import Component from "../../../core/component";
-import api from "../../../utils/api";
-import { $ } from '../../../utils/select';
-import { removeModal } from '../../../utils/modal';
-
-import { addClassSelector,removeClassSelector } from '../../../utils/selectHandler';
+import Component from "@core/component";
+import { $ } from '@utils/select';
+import { removeModal } from '@utils/modal';
 import ModalContent from './modal-content';
 
 export default class Modal extends Component {

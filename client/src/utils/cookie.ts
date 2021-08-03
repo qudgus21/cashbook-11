@@ -1,5 +1,5 @@
-import Snackbar from "../components/base/snackbar";
-import { $ } from "../utils/select";
+import Snackbar from "@components/base/snackbar";
+import { $ } from "@utils/select";
 
 export const setCookie = (key: string, value: string, days: number) => {
     let expireDate: Date = new Date();

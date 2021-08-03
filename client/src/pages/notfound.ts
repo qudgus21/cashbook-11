@@ -1,17 +1,7 @@
-import Component from "../core/component";
-import Content from "../components/home/content";
-import SearchBar from "../components/home/searchbar";
-import { dateStore } from '../models';
-import { $ } from "../utils/select";
+import Component from "@core/component";
+import { $ } from "@utils/select";
 
 export default class NotFound extends Component {
-    
-    setup () {
-        this.state = {
-            history
-        }
-    }
-
     
     template (): string { 
         return ` 
@@ -26,9 +16,6 @@ export default class NotFound extends Component {
             </div>
         `;
     }
-
-    setEvent(){
-
-    }
+    setEvent() {}
 
 }

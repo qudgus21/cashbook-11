@@ -1,9 +1,8 @@
-import Component from "../core/component";
-import Daybar from "../components/calandar/daybar";
-import Content from "../components/calandar/content";
-import "../components/calandar/index.scss";
-
-import { $ } from "../utils/select";
+import Component from "@core/component";
+import Daybar from "@components/calendar/daybar";
+import Content from "@components/calendar/content";
+import "@components/calendar/index.scss";
+import { $ } from "@utils/select";
 
 export default class Calendar extends Component {
     

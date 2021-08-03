@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "removeComments": true,
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "baseUrl": ".",
+      "outDir": "./dist",
+      "paths": {
+        "@assets/*": ["src/assets/*"],
+        "@pages/*": ["src/pages/*"],
+        "@components/*": ["src/components/*"],
+        "@constants/*": ["src/constants/*"],
+        "@core/*": ["src/core/*"],
+        "@models/*": ["src/models/*"],
+        "@utils/*": ["src/utils/*"],
+        "@src/*": ["src/*"],
+      }
+      //"outFile": "./build/build.js",
+      //"sourceRoot": "./src/",
+      //"rootDir": "./src/",
+    },
+    "compileOnSave": true,
+    "buildOnSave": true
+}

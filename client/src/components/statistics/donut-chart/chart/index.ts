@@ -1,11 +1,10 @@
-import { CATEGORY_TAG } from './../../../../constants/category';
-import Component from "../../../../core/component";
-import { dateStore } from "../../../../models";
-import api from "../../../../utils/api";
-import { $ } from "../../../../utils/select";
-import { sortTrendData } from '../../../../utils/chartData';
+import Component from "@core/component";
+import { dateStore } from "@src/models";
+import api from "@utils/api";
+import { $ } from "@utils/select";
+import { sortTrendData } from '@utils/chartData';
 import './index.scss';
-import { addClassSelector, removeClassSelector } from '../../../../utils/selectHandler';
+import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 
 
 export default class Chart extends Component {

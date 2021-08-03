@@ -1,10 +1,8 @@
-import Observable from "../core/observable";
-import api from "../utils/api";
-import { getDates } from "../utils/date";
-import { checkLogin } from "../utils/cookie";
-import Snackbar from "../components/base/snackbar";
-import { $ } from "../utils/select"
-import { isEmpty } from "../utils/util-func";
+import Observable from "@core/observable";
+import api from "@utils/api";
+import { getDates } from "@utils/date";
+import { checkLogin } from "@utils/cookie";
+import { isEmpty } from "@utils/util-func";
 
 export const MONTHLY_HISTORY = 0;
 export const SEARCH_HISTORY = 1;

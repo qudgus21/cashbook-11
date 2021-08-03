@@ -1,15 +1,16 @@
 import './index.scss';
-import Component from "../../../core/component";
-import { $ } from '../../../utils/select';
-import { addClassSelector, removeClassSelector } from '../../../utils/selectHandler';
+import Component from "@core/component";
+import { $ } from '@utils/select';
+import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 import Filter from './filter';
-import { checkLogin } from '../../../utils/cookie';
-import { dateStore, filterStore } from '../../../models';
-import MonthHistory from '../../base/month-history';
+import { checkLogin } from '@utils/cookie';
+import { dateStore, filterStore } from '@src/models';
+import MonthHistory from '@components/base/month-history';
 import AddHistory from './add-history';
-import { getDateInfo, isEmpty } from '../../../utils/util-func';
-import { SEARCH_HISTORY } from '../../../models/date-store';
-import { category } from '../../../constants/category';
+import { getDateInfo, isEmpty } from '@utils/util-func';
+import { SEARCH_HISTORY } from '@models/date-store';
+import { category } from '@constants/category';
+import { img } from '@constants/img-path';
 
 
 export default class Content extends Component {
@@ -88,7 +89,7 @@ export default class Content extends Component {
     getLoginImgTemplate() {
         return `
         <div class="wrapper-img-login"> 
-            <img src="../../../src/assets/baedal.jpg" class="img-baedal" /> 
+            <img src="${img.BAEDAL}" class="img-baedal" /> 
             <div class= "footer"> 로그인을 먼저 하겠어! </div>
         </div>
         `;

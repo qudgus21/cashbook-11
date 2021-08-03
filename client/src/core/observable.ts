@@ -1,4 +1,3 @@
-
 export default class Observable {
     observers: Function[];
     fixedObservers: Function[];

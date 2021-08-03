@@ -1,14 +1,7 @@
-
-import Component from "../../../core/component";
+import Component from "@core/component";
 import './index.scss'
 
 export default class Daybar extends Component {
-    
-    setup () {
-        this.state = {
-
-        }
-    }
     
     template (): string { 
         return ` 
@@ -25,12 +18,4 @@ export default class Daybar extends Component {
             </div>
         `
     }
-
-    mounted () {
-    }
-
-    setEvent(){
-
-    }
-
 }

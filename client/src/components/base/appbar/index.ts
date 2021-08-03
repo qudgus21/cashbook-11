@@ -1,11 +1,11 @@
-import Component from "../../../core/component";
-import { navigateTo } from "../../../core/router";
-import { dateStore, filterStore } from "../../../models";
-import Snackbar from "../snackbar";
-import { $ } from "../../../utils/select"
+import Component from "@src/core/component";
+import { navigateTo } from "@core/router";
+import { dateStore, filterStore } from "@src/models";
+import { $ } from "@utils/select"
 import './index.scss';
-import { checkLogin } from "../../../utils/cookie";
-import { addClassSelector, removeClassSelector } from "../../../utils/selectHandler";
+import { checkLogin } from "@utils/cookie";
+import { addClassSelector, removeClassSelector } from "@utils/selectHandler";
+import { img } from "@constants/img-path";
 
 
 export default class Appbar extends Component {
@@ -21,25 +21,25 @@ export default class Appbar extends Component {
                 <h1 class="title"><a href="/home" style="color: white; text-decoration: none; cursor: pointer;">우아한 가계부</a></h1>
                 <div class="date-controll">
                     <div class="button-prev">
-                        <img src="../../../src/assets/chevron-left.svg"/>
+                        <img src="${img.CHEVRON_LEFT}"/>
                     </div>
                     <div class="date">
                         <div class="title-month">${dateStore.state.month}월</div>
                         <div class="title-year">${dateStore.state.year}</div>                   
                     </div>
                     <div class="button-next">
-                        <img src="../../../src/assets/chevron-right.svg"/>
+                        <img src="${img.CHEVRON_RIGHT}"/>
                     </div>
                 </div>
                 <div class="page-controll">
                     <button class="button-home">
-                        <img src="../../../src/assets/file-text.svg"/>
+                        <img src="${img.FILE_TEXT}"/>
                     </button>
                     <button class="button-calendar">
-                        <img src="../../../src/assets/chart.svg"/>
+                        <img src="${img.CHART}"/>
                     </button>
                     <button class="button-statistics">
-                        <img src="../../../src/assets/calendar.svg"/>
+                        <img src="${img.CALENDAR}"/>
                     </button>
                 </div>
                 <div></div>
