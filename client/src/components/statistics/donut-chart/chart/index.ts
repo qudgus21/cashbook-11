@@ -35,7 +35,7 @@ export default class Chart extends Component {
     }
 
 
-    tootipOn(e) { 
+    tooltipOn(e) { 
         addClassSelector(e.currentTarget, 'inner');
         addClassSelector($('.svg-description').get(), 'active');
         e.currentTarget.addEventListener('mousemove', this.tooltipHandler)
@@ -53,7 +53,7 @@ export default class Chart extends Component {
     addChartEvent() { 
         $('.wrapper-doughnut-svg path').getAll().forEach((path) => { 
             path.addEventListener('mouseover', (e) => {
-                this.tootipOn(e);
+                this.tooltipOn(e);
             })
             path.addEventListener('mouseleave', (e) => {
                 this.tooltipOff(e)

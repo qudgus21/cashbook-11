@@ -19,6 +19,8 @@ export default class Content extends Component {
     setup () {
         this.state = { dayArray: null, historys: null };
         this.filteringHistory();
+        console.log("Home 의 Content 가 dateStore를 subscribe 시작합니다.");
+        console.log("Home 의 Content 가 filterStore를 subscribe 시작합니다.");
         dateStore.subscribe(this.update.bind(this));
         filterStore.subscribe(this.partialRender.bind(this));
     }
@@ -93,7 +95,7 @@ export default class Content extends Component {
     }
 
     setEvent() {
-        this.addEvent('click','.button-user', (e) => {
+        this.addEvent('click','.fab-button-user', (e) => {
             e.preventDefault();
 
             removeClassSelector($('.modal').get(), 'hidden');

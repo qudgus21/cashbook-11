@@ -23,7 +23,7 @@ export const sortTrendData = (payTrends) => {
 
     trendData.forEach((item) => { 
         let idx = CATEGORY_TAG.findIndex(category => { return category.title === item.name });
-        item.ratio = Number(((item.amount / sum) * 100).toFixed(2))
+        item.ratio = sum == 0 ? 0 : Number(((item.amount / sum) * 100).toFixed(2));
         item.color = CATEGORY_TAG[idx].color
     })
 

@@ -1,4 +1,7 @@
+import { isEmpty } from "./util-func";
+
 const handlingClassSelector = (fn, $target, selectors) => {
+	if (isEmpty($target)) return;
 	selectors.forEach((selector) => {
 		$target.classList[fn](selector);
 	});
