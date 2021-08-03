@@ -1,5 +1,5 @@
 const db = require('../models');
-const { isEmptyToken } = require('./result-checker');
+const { isEmptyToken, isEmptyObj } = require('./result-checker');
 const Op = db.Sequelize.Op;
 
 const makeWhereQueryWithDate = (startDate, endDate) => {
@@ -28,7 +28,15 @@ const makeWhereQueryWithDate = (startDate, endDate) => {
 }
 
 const makeWhereQueryWithObj = (obj) => {
-    return isEmptyToken(obj)? {...obj}: {};
+    if (isEmptyObj(obj)) {
+        return {};
+    } 
+
+    Object.keys(obj).forEach(key => {
+        if (isEmptyToken(obj[key])) delete obj[key];
+    });
+
+    return obj;
 }
 
 const makeWhereQueryWithStringContain = (str) => {
