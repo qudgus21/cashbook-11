@@ -12,6 +12,7 @@ export const sortTrendData = (payTrends) => {
             let obj = {
                 name: candidate.Category.name,
                 amount: candidate.amount,
+                categoryPK : candidate.CategoryPk
             }
             trendData.push(obj)
         } else { 

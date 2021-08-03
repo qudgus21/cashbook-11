@@ -160,9 +160,9 @@ export default class SearchBar extends Component {
         const url = `/home/history/all?startDate=${startDate}&endDate=${endDate}&CategoryPk=${CategoryPk}` + 
             `&minimumValue=${minimumValue}&maximumValue=${maximumValue}`+ 
             `&PayTypePk=${PayTypePk}&content=${content}&`;
+      
+        const response = await api('GET', url);  
 
-        const response = await api('GET', url);
-        
         if (response.isFail) {
             new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
             return false;

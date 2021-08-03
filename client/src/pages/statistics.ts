@@ -1,6 +1,4 @@
 import Donut from "../components/statistics/donut-chart";
-import History from "../components/statistics/history";
-import Line from "../components/statistics/line-chart";
 import Component from "../core/component";
 import { $ } from "../utils/select";
 import '../components/statistics/index.scss'
@@ -26,12 +24,17 @@ export default class Statistics extends Component {
 
     mounted() {
         new Donut($('.container-statistics .wrapper-donut').get());
-        new Line($('.container-statistics .wrapper-line').get());
-        new History($('.container-statistics .wrapper-history').get());
     }
 
     setEvent(){
-
+        window.addEventListener('scroll', (e) => {
+            if ($('.container-statistics').get()) { 
+                if (window.pageYOffset > 1) {
+                    $('.container-statistics').get().style.zIndex = 0;
+                } else { 
+                    $('.container-statistics').get().style.zIndex = 1;
+                }
+            }
+        })
     }
-
 }
