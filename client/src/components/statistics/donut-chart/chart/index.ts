@@ -30,7 +30,6 @@ export default class Chart extends Component {
 
 
     tooltipHandler(e) { 
-        console.log('무브!')
         $('.svg-description').get().style.left = `${e.pageX}px`
         $('.svg-description').get().style.top = `${e.pageY - 200}px`
     }
@@ -52,7 +51,7 @@ export default class Chart extends Component {
 
 
     addChartEvent() { 
-        $('path').getAll().forEach((path) => { 
+        $('.wrapper-doughnut-svg path').getAll().forEach((path) => { 
             path.addEventListener('mouseover', (e) => {
                 this.tootipOn(e);
             })
