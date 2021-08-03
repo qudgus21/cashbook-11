@@ -43,7 +43,7 @@ export default class DateStore extends Observable {
     async refresh() {
         const { year, month } = this.state;
 
-        let historys = await this.getAllHistory(year, month)
+        let historys = await this.getAllHistory(year, month);
         
         this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }

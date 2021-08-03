@@ -149,7 +149,12 @@ export default class ModalContent extends Component {
 
     logout(): void {
         setCookie('JWT', 'none', 0);
-        $('.button-user img').get().src = "../../../src/assets/account.svg"
+
+        $('.fab-button-user img').get().src = "../../../src/assets/account.svg";
+        addClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
+
+        addClassSelector($('.fab-button-write').get(), 'disabled');
+
         removeModal();
         navigateTo('/home');
 
@@ -163,7 +168,11 @@ export default class ModalContent extends Component {
     }
 
     afterLogin(): void {
-        $('.button-user img').get().src = "../../../src/assets/on-off-button.svg"
+        $('.fab-button-user img').get().src = "../../../src/assets/on-off-button.svg";
+        removeClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
+
+        removeClassSelector($('.fab-button-write').get(), 'disabled');
+
         this.setState({
             isSignInForm: true
         })

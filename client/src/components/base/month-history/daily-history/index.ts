@@ -1,12 +1,10 @@
 import './index.scss';
 import Component from "../../../../core/component";
-import api from "../../../../utils/api";
 import { $ } from '../../../../utils/select';
-import { addClassSelector, removeClassSelector } from '../../../../utils/selectHandler';
-import { checkLogin } from '../../../../utils/cookie';
+import { removeClassSelector } from '../../../../utils/selectHandler';
 import UnitHistory from './unit-history';
 import comma from '../../../../utils/comma';
-import { isEmpty } from '../../../../utils/util-func';
+import { getDateInfo } from '../../../../utils/util-func';
 
 const numToDay = '일 월 화 수 목 금 토'.split(' ');
 
@@ -18,11 +16,11 @@ export default class DailyHistory extends Component {
     }
     
     template (): string {
-        const {month, date} = this.state.historys[0];
+        const { month, date, day } = getDateInfo(this.props.time);
         return `
             <div class="container-daily-history">
                 <div class="daily-history-title-bar">
-                    <div><span>${this.state.month}월 ${this.state.date}일</span></b> ${numToDay[this.state.dayOfWeek]} (${this.state.historys.length}건)</div>
+                    <div><span>${month}월 ${date}일</span></b> ${numToDay[day]} (${this.state.historys.length}건)</div>
                     <div 
                         id="title-bar-${month}-${date}"
                         class="container-daily-history-total-price"
@@ -47,10 +45,8 @@ export default class DailyHistory extends Component {
         this.hideTotalPriceIfZero();
         this.makeUnitHistory();
     }
-    
-    setEvent() {
 
-    }
+    
 
     calculateTotalPrice() {
         let consume = 0;

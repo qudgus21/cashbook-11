@@ -12,6 +12,21 @@ export default class SearchBar extends Component {
     setup () {
         this.state = {};
         this.getData();
+        dateStore.subscribe(this.updateUserPayType.bind(this));
+    }
+
+    async updateUserPayType() {
+        const response = await api('GET', '/home/user-pay-type');
+
+        if (response.isFail) {
+            return;
+        }
+        this.state.userPayTypes = response.userPayTypes;
+
+        $('.li-paytype').get().innerHTML = this.getSelectLiteralTemplate(
+            this.state.userPayTypes,
+            {name:'payType', text:'결제수단'}
+        )
     }
 
     async getData() {
@@ -78,14 +93,13 @@ export default class SearchBar extends Component {
             <label name="${label.name}">${label.text}</label>
             <select class="select-${label.name}" name="${label.name}">
                 <option value="-1" selected disabled>선택하세요</option>
-                <option value="0">선택안함</option>
+                <option value="-1">선택안함</option>
                 ${dataSet 
                     ? dataSet.map((data) => {
                         return `<option value="${data.pk}">${data.name}</option>`;
                     }).join('\n')
                     : 
                     ''}
-                ${(label.text === '결제수단') ? `<option value="-1">추가</option>`: ''}
             </select>
         `;
     }
@@ -146,8 +160,8 @@ export default class SearchBar extends Component {
         const url = `/home/history/all?startDate=${startDate}&endDate=${endDate}&CategoryPk=${CategoryPk}` + 
             `&minimumValue=${minimumValue}&maximumValue=${maximumValue}`+ 
             `&PayTypePk=${PayTypePk}&content=${content}&`;
-        const response = await api('GET', url);
-        
+      
+        const response = await api('GET', url);  
 
         if (response.isFail) {
             new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: 'red', duration: 2000 });
