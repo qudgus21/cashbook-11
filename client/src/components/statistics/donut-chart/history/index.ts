@@ -56,6 +56,16 @@ export default class History extends Component {
     paintHistory(data) {
         $('.donut-history').get().innerHTML = this.makeHistoryTemplate(data);
         
+
+        const defaultTarget = $('.donut-history li').get()
+
+        if (defaultTarget) { 
+            const category = defaultTarget.className;
+            const categoryPK = defaultTarget.id.split('-').pop();
+            new Line($('.container-statistics .wrapper-line').get(), {category, categoryPK});
+            new CategoryHistory($('.container-statistics .wrapper-history').get(), {category, categoryPK});
+        }
+
         $('.donut-history li').getAll().forEach((item) => { 
             item.addEventListener('click', this.lineChartAndHistoryOpener)
         })

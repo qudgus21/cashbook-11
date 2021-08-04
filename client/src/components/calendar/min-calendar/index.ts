@@ -89,7 +89,10 @@ export default class MinCalendar extends Component {
 
             dates[i] =
                 `${!notCurrent ? `
-            <li class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
+            <li
+                class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``} fadein"
+                style="animation-delay: ${0.05*i}s;"    
+            >
                 <div class="dateNum">${dateStore.state.month} / ${date}</div>  
                 <div class="day-history">
                 ${this.makeValueTemplate(dayHistory)}
@@ -98,7 +101,6 @@ export default class MinCalendar extends Component {
             ` : ``}`;
         })
 
-        console.log(dates[0])
 
         let header = `
              <li class="date-0 date">

@@ -1,6 +1,9 @@
 @import "@src/color.scss";
 
+
 .wrapper-donut-history{
+    overflow-y: auto;
+    width: 100%;
     padding : 1.5rem;
 
     h2{

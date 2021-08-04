@@ -1,7 +1,9 @@
 .wrapper-donut{
+    width: 100%;
+
     svg {
-      width:25rem; 
-      height:25rem;
+      width:20rem; 
+      height:20rem;
       transform:rotate(-90deg);
       //일정이하로 줄어들면 퍼센트로
       path{
@@ -36,17 +38,6 @@
       }
   }
 
-  @keyframes jump {
-      0% { 
-        transform: translateY(3px)
-      }
-      50% { 
-        transform: translateY(-15px)
-      }
-      100% { 
-        transform: translateY(3px)
-      }
-    }
 
 }
 

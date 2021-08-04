@@ -21,7 +21,8 @@ export default class MonthHistory extends Component {
         `;
     }
 
-    mounted () {
+    mounted() {
+
         this.setDailyHistoryOrderedByDescendingDay();
     }
 

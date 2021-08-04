@@ -40,6 +40,30 @@
             display: flex;
             flex-flow: row wrap;
             .date {
+
+
+                &.fadein {
+
+                    opacity: 0;
+                    animation-name: fadein;
+                    animation-duration: 1.3s;
+                    -moz-animation-duration: 1.3s;
+                    -o-animation-duration: 1.3s;
+                    -webkit-animation-duration: 1.3s;
+                    animation-fill-mode: forwards;
+                    // background-color: $BORDER;
+                }
+        
+                &.fadeout {
+                    animation-name: fadeout;
+                    animation-duration: 1.3s;
+                    -moz-animation-duration: 1.3s;
+                    -o-animation-duration: 1.3s;
+                    -webkit-animation-duration: 1.3s;
+                    animation-fill-mode: forwards;
+                }
+        
+
                 background-color: $OFF_WHITE;
                 position: relative;
                 width: calc(100% / 7);

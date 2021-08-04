@@ -94,7 +94,7 @@ export default class Content extends Component {
             let dayHistory = findItem(date);
 
             dates[i] = `
-            <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
+            <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``} fadein" style="animation-delay: ${0.05*i}s;">
                 ${!notCurrent ? 
                 `   <div class="day-history">
                     ${this.makeValueTemplate(dayHistory)}

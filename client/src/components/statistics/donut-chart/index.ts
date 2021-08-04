@@ -11,28 +11,37 @@ export default class Donut extends Component {
 
     setup () {
         this.state = {};
+        
+        dateStore.subscribe(this.mounted.bind(this));
     }
     
     template (): string { 
         return` 
             <div class="container-donut">
-                <div class="wrapper-donut-chart"></div>
-                <div class="wrapper-donut-history"></div>
             </div>
         `
     }
 
     mounted() {
-        if (dateStore.getHistorys().length !== 0) {
-            new Chart($('.wrapper-donut-chart').get());
-            new History($('.wrapper-donut-history').get());
-        } else {
-            $('.container-donut').get().innerHTML = `
-                <div class="wrapper-img-empty"> 
-                    <img src="${img.BAEDAL}" class="img-empty-statistic" /> 
-                </div>
-            `;
-        }
+
+
+        $('.container-donut').get().innerHTML =
+        `
+            <div class="wrapper-donut-chart"></div>
+            <div class="wrapper-donut-history"></div>
+        `
+        new Chart($('.wrapper-donut-chart').get());
+        new History($('.wrapper-donut-history').get());
+
+        // if (dateStore.getHistorys().length !== 0) {
+
+        // } else {
+        //     $('.container-donut').get().innerHTML = `
+        //         <div class="wrapper-img-empty"> 
+        //             <img src="${img.BAEDAL}" class="img-empty-statistic" /> 
+        //         </div>
+        //     `;
+        // }
         
     }
 

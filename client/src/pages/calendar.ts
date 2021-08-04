@@ -19,7 +19,7 @@ export default class Calendar extends Component {
     }
 
 
-        
+
     calendarResize(e) { 
         if (location.pathname !== '/calendar') return;
         if (matchMedia("screen and (min-width: 900px)").matches) {
