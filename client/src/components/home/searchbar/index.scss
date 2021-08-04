@@ -1,10 +1,9 @@
 @import '@src/color.scss';
 
 .content {
-    background-color: darkmagenta;
     overflow: hidden;
+
     .wrapper-searchbar{
-        background-color:darkorange ;
         z-index: 1;
         width: 40vw;
         height: 90vh;
@@ -13,6 +12,10 @@
         justify-content: center;
         align-items: center;
     
+        &.hidden {
+            display: none;
+        }
+
         ul {
             display: flex;
             flex-direction: column;
@@ -35,7 +38,6 @@
                 display: flex;
                 flex-direction: column;
                 padding-left: 1rem;
-                border-right: 1px solid gray;
     
                 label {
                     font-size: 0.8rem;
@@ -49,7 +51,8 @@
                     font-size: 1rem;
                     border: none;
                     background-color: transparent;
-                    border: 2px solid transparent;
+                    border: 2px solid $BORDER;
+                    border-radius: 0.5rem;
                 }
     
                 input:hover, select:hover {
@@ -67,7 +70,6 @@
     
                 &.li-date {
                     flex-grow: 8;
-                    padding-right: 1rem;
                 }
     
                 &.li-content {
@@ -77,37 +79,61 @@
     
                 &.li-value {
                     flex-grow: 2;
-                    padding-right: 1rem;
                     border: none;
                 }
     
-                .container-value,
+                
                 .container-date {
                     width: 100%;
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
                     justify-content: center;
-    
+                    align-items: center;
     
                     input {
-                        width: 0;
                         flex-grow: 1;
                         text-align: center;
+                    }
+
+                }
+
+                .container-value {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .container-value-minimum,
+                    .container-value-maximum {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        // margin-right: 4rem;
+                        input {
+                            width: 50%;
+                            text-align: center;
+                        }
                     }
                 }
             }
     
             button {
-                width: 3rem;
+                width: 90%;
                 height: 2.5rem;
-                margin-right: 1rem;
                 font-size: 1rem;
                 font-weight: bold;
                 color: $PRIMARY;
                 border: 2px solid $PRIMARY;
                 border-radius: 0.2rem;
                 background-color: white;
-                margin-left: 0.5rem;
+
+                &:hover {
+                    background-color: $BORDER;
+                    transform: scale(1.05);
+                    transition: transform 0.5s;
+                }
             }
         }
     }

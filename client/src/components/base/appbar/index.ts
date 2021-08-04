@@ -116,7 +116,9 @@ export default class Appbar extends Component {
 
         this.addEvent('click', '.button-container-write', () => {
             const $element = $('.wrapper-add-history').get();
+            console.log("일단 눌림 ...");
             if (!isEmpty($element)) {
+                console.log("?");
                 removeClassSelector($element, 'wrapper-add-history-hidden');
             } else {
                 console.log('...?');

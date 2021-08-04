@@ -110,10 +110,18 @@ export default class SearchBar extends Component {
         return `
             <label>금액</label>
             <div class="container-value">
-                <input class="input-search-value" placeholder="min" /> 
-                <div>-</div>
-                <input class="input-search-value" placeholder="max" />
-                <div>원<div>
+                
+                <div class="container-value-minimum">
+                    <input class="input-search-value" placeholder="min" /> 
+                    <div>원</div>
+                </div>
+                
+                <div>~</div>
+                
+                <div class="container-value-maximum">
+                    <input class="input-search-value" placeholder="max" />
+                    <div>원</div>
+                </div>
             </div>
         `;
     }
