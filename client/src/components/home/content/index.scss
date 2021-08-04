@@ -6,6 +6,7 @@
     width: 60vw;
     flex-direction: row;
     min-width: 20rem;
+    overflow-y: hidden;
 
     .container-filter {
         display: flex;
@@ -40,13 +41,20 @@
         padding-left: 5vw;
         padding-right: 5vw;
         height: 80vh;
-        overflow-y: scroll;
+        overflow-y: hidden;
+        
+        .container-month-history {
+            overflow-y: scroll;
+            padding-right: 1rem;
+        }
     
         .wrapper-img-login {
             margin-top: 2rem;
             width: 100%;
             border-radius: 1.5rem;
     
+            
+
             .footer {
                 display: block;
                 width: 100%;
