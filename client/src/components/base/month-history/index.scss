@@ -1,5 +1,5 @@
 @import '@src/color.scss';
-
+@import '@src/animation.scss';
 
 .container-month-history {
     display: flex;
@@ -9,4 +9,26 @@
     .wrapper-daily-history {
         width: 100%;
     }
+
+    &.fadein,
+    .fadein {
+        opacity: 0;
+        animation: fadein 1.3s;
+        -moz-animation: fadein 1.3s; /* Firefox */
+        -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+        -o-animation: fadein 1.3s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
+    &.fadeout,
+    .fadeout {
+        opacity: 1;
+        animation: fadeout 3s;
+        -moz-animation: fadeout 3s; /* Firefox */
+        -webkit-animation: fadeout 3s; /* Safari and Chrome */
+        -o-animation: fadeout 3s; /* Opera */
+        animation-fill-mode: forwards;
+    }
 }
+
+

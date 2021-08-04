@@ -8,9 +8,10 @@
     .container-checkbox {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: right;
         align-items: center;
         min-width: 15rem;
+        margin-right: 1rem;
 
         .div-space-layout {
             width: 1rem;

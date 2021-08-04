@@ -11,6 +11,8 @@ const imgPath = {
     CHEVRON_DOWN: path('chevron-down.svg'),
     CHEVRON_LEFT: path('chevron-left.svg'),
     CHEVRON_RIGHT: path('chevron-right.svg'),
+    CHEVRON_LEFT_WHITE: path('chevron-left-white.svg'),
+    CHEVRON_RIGHT_WHITE: path('chevron-right-white.svg'),
     CLOSE: path('close.svg'),
     FILE_TEXT: path('file-text.svg'),
     ON_OFF_BUTTON: path('on-off-button.svg'),

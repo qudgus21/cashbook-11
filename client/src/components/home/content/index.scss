@@ -1,32 +1,42 @@
 @import '@src/color.scss';
-
+@import '@src/animation.scss';
 
 .content {
     display: flex;
-    width: 60vw;
     flex-direction: row;
-    min-width: 20rem;
+    // min-width: 20rem;
     overflow-y: hidden;
 
+
+    .container-filter,
+    .wrapper-add-history,
+    .wrapper-month-history {
+        width: 100%;
+        padding-left: 1%;
+        padding-right: 3%;
+    }
     .container-filter {
         display: flex;
         flex-direction: row;
-        width: 100%;
-        padding-left: 5vw;
-        padding-right: 5vw;
         height: 3rem;
         margin-bottom: 2rem;
         align-items: center;
         justify-content: space-between;
         font-size: 1.3rem;
         color: $PRIMARY;
+
+        &.fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
+        }
     }
     
     .wrapper-add-history {
-        width: 60vw;
         height: 10rem;
-        padding-left: 5vw;
-        padding-right: 5vw;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -34,17 +44,26 @@
     }
     
     .wrapper-month-history {
+        
         display: flex;
         flex-direction: column;
-        align-items: center;
-        width: 60vw;
-        padding-left: 5vw;
-        padding-right: 5vw;
+        align-items: right;
+
         height: 80vh;
-        overflow-y: hidden;
+        overflow-y: auto;
+
+        &.fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
+        }
+
         
         .container-month-history {
-            overflow-y: scroll;
+            // overflow-y:;
             padding-right: 1rem;
         }
     
@@ -74,6 +93,8 @@
             }
         }
     }
+
+
 }
 
 

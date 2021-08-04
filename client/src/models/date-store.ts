@@ -27,15 +27,19 @@ export default class DateStore extends Observable {
     
     async setup() {
         const { year, month} = this.state
-        let historys = await this.getAllHistory(year, month)
+        console.log('서버에 데이터 요청')
+        let historys = await this.getAllHistory(year, month);
+        console.log('데이터가 넘어왔다. notify 실행');
         this.setState({ year, month, historys, type: MONTHLY_HISTORY });
     }
 
     
 
-    setState(nextState: { year: number; month: number; historys: any[]; type: number;}) {   
-        this.state = nextState;
+    setState(nextState: { year: number; month: number; historys: any[]; type: number;}) {  
+        console.log('기존의 state 를 업데이트하며, 구독되어 있는 옵저버들의 함수를 실행한다.'); 
+        this.state = { ...this.state, ...nextState };
         this.notify(this.state);
+        console.log('모든 옵저버에게 알람을 날렸다.');
     }
 
     async refresh() {
