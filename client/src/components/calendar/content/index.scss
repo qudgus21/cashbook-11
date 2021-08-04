@@ -1,12 +1,11 @@
 @import "@src/color.scss";
 
 
-.wrapper-content{
-    margin-top: 5rem;
+.wrapper-content-calendar{
     display: flex;
     justify-content: center;
 
-    &, .container-content {
+    &, .container-content-calendar{
         width: 100%;
         display: flex;
         justify-content: center;
@@ -14,11 +13,24 @@
         flex-direction: column;
     }
 
-    .container-content{
-        display: flex;
-        justify-content: center;
-        width: 65%;
+    .container-content-calendar{
+        width: 85%;
+
     }
+
+    // &, .container-content {
+    //     width: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     flex-direction: column;
+    // }
+
+    // .container-content{
+    //     display: flex;
+    //     justify-content: center;
+    //     width: 65%;
+    // }
 
     .calendar {
         width: 100%;
@@ -31,7 +43,6 @@
                 background-color: $OFF_WHITE;
                 position: relative;
                 width: calc(100% / 7);
-                height: auto;
                 text-align: right;
                 border-right: 1px solid $BORDER;
                 border-bottom: 1px solid  $BORDER;
@@ -114,7 +125,7 @@
 
     .footer{
         width: 100%;
-        margin-top: 2rem;
+        margin: 2rem 0;
         display: flex;
         justify-content: space-between;
         font-size:0.9rem;
@@ -131,3 +142,4 @@
         }
     }
 }
+

@@ -7,7 +7,7 @@ import './index.scss'
 import api from "@utils/api";
 import Snackbar from "@components/base/snackbar";
 
-export default class Content extends Component {
+export default class MinCalendar extends Component {
     
     setup () {
         this.state = {};
@@ -16,34 +16,26 @@ export default class Content extends Component {
     
     template (): string { 
         return ` 
-            <div class="container-content-calendar">
-                <div class="calendar">
-                    <div class="dates"></div>
-                </div>
-                <div class="footer">
-                    <div>
-                        <span class="total-income">총 수입 &nbsp;${123123}</span>&nbsp;&nbsp;&nbsp;
-                        <span class="total-consume">총 지출 &nbsp;${123123}</span>
-                    </div>
-                    <div class="total-sum">
-                        총계 &nbsp;${123213}
-                    </div>
-                </div>
-            </div>
+            <div class="wrapper-mini-calendar">
+                <ul class="container-mini-calendar"></ul>
+            </ul>
+            
         `;
     }
 
+    makeValueTemplate(dayHistory) {
+        let consume, income
+        if (dayHistory === undefined) {
+            income = '+₩0';
+            consume = '-₩0';
+        } else { 
+            consume = `-₩${comma(-dayHistory.consume)}`;
+            income = `+₩${comma(dayHistory.income)}`;
+        }
 
-    makeValueTemplate (dayHistory){
-        if (dayHistory === undefined) return ``;
-
-        let consume = dayHistory.consume;
-        let income = dayHistory.income;
-        let total = consume + income;
         return`
-            ${`<div class="day-total">${comma(total)}</div>`}
-            ${consume!==0 ?`<div class="day-consume">${comma(consume)}</div>`:`` }
-            ${income !==0 ?`<div class="day-income">${comma(income)}</div>`:`` }
+            ${`<div class="day-consume">${consume}</div>` }
+            ${`<div class="day-income">${income}</div>`}
         `
     }
 
@@ -84,6 +76,7 @@ export default class Content extends Component {
             return historyData[idx];
         }
 
+
         dates.forEach((date, i) => {
             if (notCurrent && date === 1) {
                 notCurrent = false;
@@ -93,28 +86,35 @@ export default class Content extends Component {
 
             let dayHistory = findItem(date);
 
-            dates[i] = `
-            <div class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
-                ${!notCurrent ? 
-                `   <div class="day-history">
-                    ${this.makeValueTemplate(dayHistory)}
-                    </div>
-                `: ``}
-                <div class="dateNum">${date}</div>  
-            </div>`;
+
+            dates[i] =
+                `${!notCurrent ? `
+            <li class="date-${date} date${notCurrent ? ` notCurrent` : ``}${!notCurrent && isNow && date === currentDate ? ` today` : ``}">
+                <div class="dateNum">${dateStore.state.month} / ${date}</div>  
+                <div class="day-history">
+                ${this.makeValueTemplate(dayHistory)}
+                </div>
+            </li>
+            ` : ``}`;
         })
-        const $dates = $('.dates').get();
-        if ($dates) { 
-            $('.dates').get().innerHTML = dates.join('');
-            const $cells = $('.dates .date').getAll();
-            if ($cells.length === 35) { 
-                $cells[28].style.borderBottomLeftRadius = "15px";
-            }
-            this.addDateClickEvent();
-   
-        }
-        this.makeFooterData(historyData);
+
+        console.log(dates[0])
+
+        let header = `
+             <li class="date-0 date">
+             <div class="dateNum">날짜</div>  
+             <div class="day-history">    
+             <div class="day-consume">지출</div>
+             <div class="day-income">수입</div>
+             </div>
+             </li>       
+        `
+
+        $('.container-mini-calendar').get().innerHTML = header + dates.join('');
+        
+
     }
+
 
     makeCalendar() {
         if (location.pathname === '/calendar') { 

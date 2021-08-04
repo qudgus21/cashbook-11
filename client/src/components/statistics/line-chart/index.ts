@@ -36,7 +36,7 @@ export default class Line extends Component {
         })
     }
 
-    tooltipHandler(e) { 
+  tooltipHandler(e) { 
       $('.svg-line-description').get().style.left = `${e.pageX}px`
       $('.svg-line-description').get().style.top = `${e.pageY - 200}px`
   }
@@ -59,7 +59,7 @@ export default class Line extends Component {
 
     addChartEvent() { 
       $('.container-line circle').getAll().forEach((circle) => { 
-          circle.addEventListener('mouseover', (e) => {
+        circle.addEventListener('mouseover', (e) => {
               this.tooltipOn(e);
           })
           circle.addEventListener('mouseleave', (e) => {

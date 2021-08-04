@@ -1,0 +1,48 @@
+@import "../../../color.scss";
+
+
+.wrapper-mini-calendar{
+    padding: 2rem;
+}
+
+
+.container-mini-calendar {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+
+    
+
+
+
+    li{
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #C1C5C5;
+        .day-history {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+                gap: 3rem;
+        }
+        align-items: center;
+
+
+        .day-consume{
+            color: $ERROR;
+        }
+
+        .day-income{
+            color: blue;
+
+            
+        }
+    }
+}
