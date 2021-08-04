@@ -4,7 +4,7 @@ import { $ } from './select';
 export const addModal = (): void => {
     let candidate = [
         $('.container-daybar').get(),
-        $('.container-searchbar').get(),
+        $('.wrapper-searchbar').get(),
         $('.appbar').get(),
         $('.container-statistics').get(),
     ];

@@ -2,6 +2,7 @@ import Component from "@core/component";
 import Content from "@components/home/content";
 import SearchBar from "@components/home/searchbar";
 import { $ } from "@utils/select";
+import { checkLogin } from "@utils/cookie";
 
 export default class Home extends Component {
     
@@ -14,7 +15,7 @@ export default class Home extends Component {
     
     template (): string { 
         return ` 
-            <div class="wrapper-searchbar"></div>
+            <div class="wrapper-searchbar ${checkLogin(false) ? '': 'hidden'}"></div>
             <div class="wrapper-content"></div>
         `
     }
