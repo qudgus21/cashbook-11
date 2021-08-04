@@ -150,15 +150,15 @@ export default class ModalContent extends Component {
     logout(): void {
         setCookie('JWT', 'none', 0);
 
-        $('.fab-button-user img').get().src = "../../../src/assets/account.svg";
-        addClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
+        $('.button-container-user img').get().src = "../../../src/assets/account.svg";
+        addClassSelector($('.button-container-user').get(), 'animated', 'bounce');
 
-        addClassSelector($('.fab-button-write').get(), 'invisible');
-
+        addClassSelector($('.button-container-write').get(), 'invisible');
+        $('.text.user-text').get().innerHTML = !checkLogin()? 'LOGIN': 'LOGOUT';
         removeModal();
         navigateTo('/home');
 
-        const $imgs = $('.container-appbar .page-controll img').getAll();
+        const $imgs = $('.appbar .container-nav img').getAll();
         $imgs.forEach(img => { img.classList.remove('active') });
         $imgs[0].classList.add('active');
 
@@ -168,10 +168,10 @@ export default class ModalContent extends Component {
     }
 
     afterLogin(): void {
-        $('.fab-button-user img').get().src = "../../../src/assets/on-off-button.svg";
-        removeClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
+        $('.button-container-user img').get().src = "../../../src/assets/on-off-button.svg";
+        removeClassSelector($('.button-container-user').get(), 'animated', 'bounce');
 
-        removeClassSelector($('.fab-button-write').get(), 'invisible');
+        removeClassSelector($('.button-container-write').get(), 'invisible');
 
         this.setState({
             isSignInForm: true

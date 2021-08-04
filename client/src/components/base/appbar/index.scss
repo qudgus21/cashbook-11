@@ -1,62 +1,120 @@
 @import '@src/color.scss';
 
-.appbar{
-    padding-bottom: 17vh;
-}
 
-.container-appbar{
+.appbar{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 17vh;
+    height: 100vh;
     background-color: $PRIMARY;
-    color: $OFF_WHITE;
-    position: fixed;
-    width: 100%;
-    img {
-        cursor: pointer;
-        filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
-    }
-
-    h1 {
-        font-size: 1.3rem;
-    }
-
-    .date-controll{
+    width: 15vw;
+    min-width: 10rem;
+    
+    .container-nav,
+    .container-fab-button {
+        width: 100%;
         display: flex;
-        font-size: 1.3rem;
-        
-        .date{
-            width: 5rem;
-            margin: 0 3.5rem;
-            text-align: center;
+        flex-direction: column;
 
-            >:first-child{
-                position: relative;
-                bottom: 0.8rem;
-                font-size: 2rem;
-                font-weight: bold;
+        .button-container,
+        .nav-button-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 5%;
+            height: 4vh;
+            width: 95%;
+
+            button {
+                flex-grow: 0;
             }
-        }
-    }
 
-    .page-controll{
-        display: flex;
+            .text {
+                flex-grow: 1;
+                text-align: center;
+            }
 
-        button {
-            all: unset;
-            margin: 0.7rem;
-        }
-
-        img {
-            filter: invert(93%) sepia(13%) saturate(828%) hue-rotate(124deg) brightness(95%) contrast(85%);
-            &:hover{
+            img, & {
+                cursor: pointer;
                 filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
             }
+        
+            img, & {
+                filter: invert(93%) sepia(13%) saturate(828%) hue-rotate(124deg) brightness(95%) contrast(85%);
+                &:hover{
+                    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+                }
+            }
+
+            &.active{
+                filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+            }
+            
+            &.invisible {
+                visibility: hidden;
+            }
         }
 
-        .active{
-            filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+        .button-container {
+
+            &:hover {
+                transform: translateY(-0.5rem);
+                transition: transform 0.5s;
+                background-color: #309e9a;
+            }
+
+            &.animated {
+                animation-duration: 1.7s;
+                animation-fill-mode: both;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            } 
+              
+            @keyframes bounce { 
+                0%, 100% {
+                    transform: translateY(0px) scale(1);
+                    box-shadow: 0px 0px 0px 0px #757575;
+                }
+                10%, 90% {
+                    transform: translateY(-2px) scale(1.03);
+                    box-shadow: 0px 0px 1px 1px #858585;
+                }
+                20%, 80% {
+                    transform: translateY(-4px) scale(1.06);
+                    box-shadow: 0px 0px 3px 3px #959595;
+                }
+                30%, 70% {
+                    transform: translateY(-7px) scale(1.1);
+                    box-shadow: 0px 0px 3px 4px #a5a5a5;
+                }
+                40%, 60%  {
+                    transform: translateY(-10px) scale(1.14);
+                    box-shadow: 0px 0px 5px 5px #b5b5b5;
+                }
+                50% {
+                    transform: translateY(-12px) scale(1.17);
+                    box-shadow: 0px 0px 7px 7px #c5c5c5;
+                }
+            }
+            
+            &.bounce { 
+                animation-name: bounce;
+            }
+        }
+
+        .title {
+            width: 20vw;
+            min-width: 20rem;
+            height: 5vh;
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+        }
+        .title a {
+            font-size: 3rem;
+            text-decoration: none;
+            color: white;
+            
         }
     }
 }

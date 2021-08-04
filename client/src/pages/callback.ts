@@ -37,10 +37,10 @@ export default class Callback extends Component {
             new Snackbar($('.snackbar').get(), { msg: '깃허브 로그인에 성공했습니다.', duration: 2000 });
             removeModal();
             dateStore.setup()
-            removeClassSelector($('.fab-button-user').get(), 'animated', 'bounce');
-            removeClassSelector($('.fab-button-write').get(), 'invisible');
+            removeClassSelector($('.button-container-user').get(), 'animated', 'bounce');
+            removeClassSelector($('.button-container-write').get(), 'invisible');
             navigateTo('/home');
-            $('.fab-button-user img').get().src = "../../../src/assets/on-off-button.svg"
+            $('.button-container-user img').get().src = "../../../src/assets/on-off-button.svg"
         }
     }
 }

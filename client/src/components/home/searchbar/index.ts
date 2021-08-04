@@ -44,37 +44,35 @@ export default class SearchBar extends Component {
     
     template (): string { 
         return `
-            <div class="container-searchbar">
-                <ul>
-                    <li class="li-date">
-                        ${this.getDateLiteralTemplate()}
-                    </li>
+            <ul>
+                <li class="li-date">
+                    ${this.getDateLiteralTemplate()}
+                </li>
 
-                    <li class="li-category">
-                        ${this.getSelectLiteralTemplate(
-                            this.state.categorys,
-                            {name:'category', text:'분류'}
-                        )}
-                    </li>
+                <li class="li-category">
+                    ${this.getSelectLiteralTemplate(
+                        this.state.categorys,
+                        {name:'category', text:'분류'}
+                    )}
+                </li>
 
-                    <li class="li-content">
-                        ${this.getContentLiteralTemplate()}
-                    </li>
+                <li class="li-content">
+                    ${this.getContentLiteralTemplate()}
+                </li>
 
-                    <li class="li-paytype">
-                        ${this.getSelectLiteralTemplate(
-                            this.state.userPayTypes,
-                            {name:'payType', text:'결제수단'}
-                        )}
-                    </li>
+                <li class="li-paytype">
+                    ${this.getSelectLiteralTemplate(
+                        this.state.userPayTypes,
+                        {name:'payType', text:'결제수단'}
+                    )}
+                </li>
 
-                    <li class="li-value">
-                        ${this.getValueLiteralTemplate()}
-                    </li>
+                <li class="li-value">
+                    ${this.getValueLiteralTemplate()}
+                </li>
 
-                    <button class="button-search">조회</button>
-                </ul>
-            </div>
+                <button class="button-search">조회</button>
+            </ul>
         `;
     }
 

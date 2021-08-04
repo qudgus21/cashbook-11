@@ -14,16 +14,14 @@ export default class Home extends Component {
     
     template (): string { 
         return ` 
-            <div class="container-home">
-                <div class="wrapper-searchbar"></div>
-                <div class="wrapper-content"></div>
-            </div>
+            <div class="wrapper-searchbar"></div>
+            <div class="wrapper-content"></div>
         `
     }
 
     mounted () {
-        new SearchBar($('.container-home .wrapper-searchbar').get());
-        new Content($('.container-home .wrapper-content').get());
+        new SearchBar($('.wrapper-searchbar').get());
+        new Content($('.wrapper-content').get());
     }
 
     setEvent(){
