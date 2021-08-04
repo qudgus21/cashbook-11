@@ -22,10 +22,7 @@ export default class Observable {
     }
 
     unsubscribeAll() {
-        console.log(this.observers);
         this.observers = [];
-        console.log("전부 구독 해제 시킵니다.!");
-        console.log(this.fixedObservers);
     }
 
     notify(state) {

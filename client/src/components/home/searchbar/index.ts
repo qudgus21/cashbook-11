@@ -15,7 +15,6 @@ export default class SearchBar extends Component {
         if (checkLogin(false)) {
             this.getData();
         }
-        console.log("Home 의 SearchBar 가 dateStore를 subscribe 시작합니다.");
         dateStore.subscribe(this.updateUserPayType.bind(this));
     }
 

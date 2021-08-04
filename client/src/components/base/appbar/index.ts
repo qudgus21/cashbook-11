@@ -25,26 +25,33 @@ export default class Appbar extends Component {
     template (): any { 
         return ` 
             <nav class="container-nav">
-                <h1 class="button-container title">
-                    <a href="/home">우아한 가계부</a>
-                </h1>    
-                <div class="nav-button-container nav-button-home">
-                    <button class="button-home">
-                        <img src="${img.FILE_TEXT}"/>
-                    </button>
-                    <div class="text">HOME</div>
-                </div>
-                <div class="nav-button-container nav-button-calendar">
-                    <button class="button-calendar">
-                        <img src="${img.CHART}"/>
-                    </button>
-                    <div class="text">CALENDAR</div>
-                </div>
-                <div class="nav-button-container nav-button-statistics">
-                    <button class="button-statistics">
-                        <img src="${img.CALENDAR}"/>
-                    </button>
-                    <div class="text">STATISTICS</div>
+                <h1 class="button-container title title-main">
+                    <span>우</span>
+                    <span>아</span>
+                    <span>한</span>
+                    <span>가</span>
+                    <span>계</span>
+                    <span>부</span>
+                </h1>
+                <div>
+                    <div class="nav-button-container nav-button-home">
+                        <button class="button-home">
+                            <img src="${img.FILE_TEXT}"/>
+                        </button>
+                        <div class="text">HOME</div>
+                    </div>
+                    <div class="nav-button-container nav-button-calendar">
+                        <button class="button-calendar">
+                            <img src="${img.CHART}"/>
+                        </button>
+                        <div class="text">CALENDAR</div>
+                    </div>
+                    <div class="nav-button-container nav-button-statistics">
+                        <button class="button-statistics">
+                            <img src="${img.CALENDAR}"/>
+                        </button>
+                        <div class="text">STATISTICS</div>
+                    </div>
                 </div>
             </nav>
 
@@ -94,6 +101,12 @@ export default class Appbar extends Component {
             this.routingEventHandler('/home', false);
         });
 
+
+        this.addEvent('click', '.title-main', () => {
+            this.routingEventHandler('/home', false);
+        });
+
+
         this.addEvent('click', '.nav-button-calendar', () => {
             this.routingEventHandler('/calendar', true);
         });
@@ -118,17 +131,15 @@ export default class Appbar extends Component {
             const $element = $('.wrapper-add-history').get();
             if (!isEmpty($element)) {
                 removeClassSelector($element, 'wrapper-add-history-hidden');
-            } else {
-                console.log('...?');
-            }
+            } 
         })
     }
 
 
-    currentPageImg(history?: any) {
+    currentPageImg(history?: any, url?: string) {
         const $navContainers = $('.appbar .container-nav .nav-button-container').getAll();
         $navContainers.forEach($navContainer => { $navContainer.classList.remove('active') });
-        const currentPage = location.pathname.split('/').pop();
+        const currentPage = url;
         switch (history || currentPage) {
             case 'home':
                 $navContainers[0].classList.add('active');
@@ -148,8 +159,10 @@ export default class Appbar extends Component {
             if (checkLogin(mustUser)) {
                 this.unsubscribeAllStore();
                 filterStore.reset();
-                navigateTo(url);
-                this.currentPageImg()
+                setTimeout(()=> {
+                    navigateTo(url);
+                }, 1000);
+                this.currentPageImg(undefined, url.substring(1,url.length))
                 return true;
             } else {
                 return false;
@@ -157,8 +170,10 @@ export default class Appbar extends Component {
         } else { 
             this.unsubscribeAllStore();
             filterStore.reset();
-            navigateTo(url);
-            this.currentPageImg()
+            setTimeout(()=> {
+                navigateTo(url);
+            }, 1000);
+            this.currentPageImg(undefined, url.substring(1,url.length))
             return true;
         }
     }
@@ -180,7 +195,6 @@ export default class Appbar extends Component {
         $target.classList.add('move-down');
         
         setTimeout(() => {
-            console.log('1초후');
             
             if (nextUrl === '/home' && !doPageNeedToLogin) {
                 removeClassSelector($('.button-container-write').get(), 'invisible');
@@ -188,7 +202,6 @@ export default class Appbar extends Component {
                 addClassSelector ($('.button-container-write').get(), 'invisible');
             }
 
-            // this.moveTo(nextUrl, doPageNeedToLogin);
             $target.classList.add('move-up');
             setTimeout(()=> {
                 $target.classList.remove('move-down', 'move-up');
