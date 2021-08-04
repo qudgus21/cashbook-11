@@ -26,16 +26,6 @@ export default class Fab extends Component {
                 </button>
                 `
                 }
-                ${!checkLogin()? 
-                `
-                <button class="button fab-button-user animated bounce">
-                    <img src="${img.ACCOUNT}"/>
-                </button>` :
-                `
-                <button class="button fab-button-user">
-                    <img src="${img.ON_OFF_BUTTON}"/>
-                </button>`
-                }
             </div>
         `;
     }

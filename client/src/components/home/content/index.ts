@@ -16,9 +16,10 @@ import { img } from '@constants/img-path';
 export default class Content extends Component {
     $monthHistory: MonthHistory;
     $filter: Filter;
+    state: { dayArray: any; historys: any; historysObj: any; };
 
     setup () {
-        this.state = { dayArray: null, historys: null };
+        this.state = { dayArray: null, historys: null, historysObj: null, };
         this.filteringHistory();
         dateStore.subscribe(this.update.bind(this));
         filterStore.subscribe(this.partialRender.bind(this));
@@ -29,10 +30,11 @@ export default class Content extends Component {
     }
 
     partialRender() {
+
         this.filteringHistory();
         this.$monthHistory.setState({ 
-            dayArray: this.state.dayArray,
-            historys: this.state.historysObj,
+            dayArray: [...this.state.dayArray],
+            historys: {...this.state.historysObj},
         });
 
         let num = 0;
@@ -57,9 +59,12 @@ export default class Content extends Component {
 
     template (): string { 
         return `
-            <div class="container-filter"></div>
+            <div 
+                class="container-filter fadein"></div>
             <div class="wrapper-add-history wrapper-add-history-hidden"></div>
-            <div class="wrapper-month-history"></div>
+            <div
+                class="wrapper-month-history fadein"
+                style="animation-delay:${0.6}s;"></div>
         `;
     }
 
@@ -74,6 +79,9 @@ export default class Content extends Component {
                 { historys : this.state.historys }
             );
             new AddHistory($('.wrapper-add-history').get());
+            console.log("로그인 이후, this.state의 dayArray 와 historyObj 를 보자!");
+            console.log(this.state.dayArray,);
+            console.log(this.state.historysObj);
             this.$monthHistory = new MonthHistory(
                 $('.wrapper-month-history').get(), 
                 { 
@@ -132,19 +140,22 @@ export default class Content extends Component {
 
     filteringHistory() {
         let historys = dateStore.getHistorys();
-        
+        console.log(historys);
         this.state.historys = historys.filter(h => {
+            console.log(h);
+            
             if (filterStore.state.categorys !== category.ALL) {
                 return h.CategoryPk == filterStore.state.categorys;
             }
 
             if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
             else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
-  
+            console.log('패스!');
             return true;
         });
 
         this.convertHistorysToHandyObject();
+        console.log(this.state.historysObj)
         this.state.dayArray = this.getDayArray();
     }
 }

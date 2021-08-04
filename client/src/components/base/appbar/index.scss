@@ -11,8 +11,10 @@
     width: 12vw;
     min-width: 12rem;
     padding: 0 0.7rem;
+
     .container-nav,
-    .container-fab-button {
+    .container-fab-button,
+    .container-date-control {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -167,7 +169,72 @@
                     }
                 }
             }
+        }
+    }
+    
+    .container-date-control {
+        align-items: center;
+        color: white;
 
+        .button-prev-month img {
+            transform: rotate(90deg);
+            width: 3rem;
+            cursor: pointer;
+        }
+
+        .button-next-month img {
+            transform: rotate(90deg);
+            width: 3rem;
+            cursor: pointer;
+        }
+
+
+        .flip {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+            height: 5rem;
+            overflow-y: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+            // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border: 3px solid snow;
+            // border-bottom: 3px solid black;
+            border-radius: 10px;
+
+            .flip-front, .flip-back {
+                position: absolute;
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 5rem;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;    
+            }
+
+            .flip-front {
+                .text-now-month {
+                    font-size: 5rem;
+                    font-weight: 100;
+                    flex-grow: 1;
+                }
+
+                .text-now-year {
+                    font-size:x-large;
+                    margin-right: 5px;
+                    margin-top: 5px;
+                }
+            }
+
+            &.flipup {
+                transform: rotateX(90deg) rotateY(10deg);
+            }
+
+            &.flipdown {
+                transform: rotateX(-90deg) rotateY(10deg);
+            }
         }
     }
 }

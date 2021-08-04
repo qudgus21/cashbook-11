@@ -1,7 +1,7 @@
 import Observable from "@core/observable";
 
 export default class FilterStore extends Observable {
-    state: { isIncomeBoxClicked: boolean; isConsumeBoxClicked: boolean; categorys: number; };
+    state: { isIncomeBoxClicked: boolean; isConsumeBoxClicked: boolean; categorys: number; delay: number;};
 
     constructor() {
         super();
@@ -9,6 +9,7 @@ export default class FilterStore extends Observable {
             isIncomeBoxClicked: true,
             isConsumeBoxClicked: true,
             categorys: -1,
+            delay: 0.6,
         };
     }
 
@@ -16,8 +17,9 @@ export default class FilterStore extends Observable {
         isIncomeBoxClicked: boolean; 
         isConsumeBoxClicked: boolean; 
         categorys: number;
+        delay: number;
     }) {   
-        this.state = nextState;
+        this.state = { ...this.state, ...nextState };
         this.notify(this.state);
     }
 
@@ -26,6 +28,7 @@ export default class FilterStore extends Observable {
             isIncomeBoxClicked: true,
             isConsumeBoxClicked: true,
             categorys: -1,
+            delay: 0.6,
         };
     }
 }

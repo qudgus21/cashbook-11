@@ -2,7 +2,7 @@ import './index.scss';
 import Component from "@core/component";
 import { $ } from '@utils/select';
 import comma from '@utils/comma';
-import { filterStore } from '@src/models';
+import { dateStore, filterStore } from '@src/models';
 import { img } from '@constants/img-path';
 
 export default class Filter extends Component {
@@ -62,7 +62,7 @@ export default class Filter extends Component {
     }
 
     setEvent() {
-        this.addEvent('click','.checkbox-income', async (e) => {
+        this.addEvent('click','.checkbox-income', (e) => {
             e.preventDefault();
 
             this.customCheckboxClickEventHandler(
@@ -72,14 +72,21 @@ export default class Filter extends Component {
             );
         });
 
-        this.addEvent('click','.checkbox-consume', async (e) => {
+        this.addEvent('click','.checkbox-consume', (e) => {
             e.preventDefault();
+            console.log("지출 필터 체크박스 체크함.");
+            
+            console.log(`현재 filterStore 상태: ${filterStore.state}`);
 
+            console.log(`현재 dateStore 상태: ${dateStore.state}`);
+
+            
             this.customCheckboxClickEventHandler(
                 $('.checkbox-consume').get(),
                 $('.img-consume-checkbox').get(),
                 false
             );
+            console.log(filterStore.state.isConsumeBoxClicked ? '눌림':'해제');
         });
     }
 
@@ -109,6 +116,7 @@ export default class Filter extends Component {
             isIncomeBoxClicked: this.state.isIncomeBoxClicked,
             isConsumeBoxClicked: this.state.isConsumeBoxClicked,
             categorys: -1,
+            delay: 0,
         });
     }
 

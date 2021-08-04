@@ -21,11 +21,11 @@ export default class ModalContent extends Component {
     }
     
     template(): string { 
-        return checkLogin() ? this.logoutTemplate() : this.state.isSignInForm ? this.signInTemplate() : this.signUpTemplate();
+        return checkLogin(false) ? this.logoutTemplate() : this.state.isSignInForm ? this.signInTemplate() : this.signUpTemplate();
     }
 
     mounted() {
-        if (!checkLogin()) { 
+        if (!checkLogin(false)) { 
             this.state.isSignInForm ? this.canSignin() : this.canSignup();
         }
     }

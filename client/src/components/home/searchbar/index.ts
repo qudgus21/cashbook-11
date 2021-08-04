@@ -43,7 +43,7 @@ export default class SearchBar extends Component {
     
     template (): string { 
         return `
-            <ul>
+            <ul class="fadein">
                 <li class="li-date">
                     ${this.getDateLiteralTemplate()}
                 </li>

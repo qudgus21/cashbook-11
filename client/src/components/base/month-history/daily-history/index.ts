@@ -33,7 +33,7 @@ export default class DailyHistory extends Component {
                     return `
                         <div 
                             id="unit-history-${x.month}-${x.date}-${idx}"
-                            class="wrapper-unit-history"
+                            class="wrapper-unit-history fadein"
                         ></div>
                     `;
                 }).join('\n')}</div>

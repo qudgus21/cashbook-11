@@ -8,7 +8,7 @@ body{
         flex-direction: row;
         background-color: #0051CB;
 
-        min-width: 60rem;
+        // min-width: 60rem;
         overflow-x: hidden;
         overflow-y: hidden;
 
@@ -26,7 +26,7 @@ body{
             margin-top: 7vh;
             display: flex;
             flex-direction: column;
-            min-width: 30rem;
+            // min-width: 30rem;
             overflow-x: hidden;
             border-top-left-radius: 2rem;
             box-shadow: -3px -3px 15px 3px $LABEL;

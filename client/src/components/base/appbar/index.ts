@@ -17,7 +17,7 @@ export default class Appbar extends Component {
     }
 
     setTitle() {
-        $('.container-date-control .text-now-month').get().textContent = `${dateStore.state.month}월`
+        $('.container-date-control .text-now-month').get().textContent = `${this.makeMonthWithZero(dateStore.state.month)}`
         $('.container-date-control .text-now-year').get().textContent = `${dateStore.state.year}`
         $('.text.user-text').get().innerHTML = !checkLogin()? 'LOGIN': 'LOGOUT';
     }
@@ -57,24 +57,26 @@ export default class Appbar extends Component {
 
             <div class="container-date-control">
                 <div class="button-prev-month">
-                    <img src="${img.CHEVRON_LEFT}"/>
+                    <img src="${img.CHEVRON_LEFT_WHITE}"/>
                 </div>
-                <div class="date">
-                    <div class="text-now-month">${dateStore.state.month}월</div>
-                    <div class="text-now-year">${dateStore.state.year}</div>                   
+                <div class="flip">
+                    <div class="flip-front">
+                        <div class="text-now-month">${this.makeMonthWithZero(dateStore.state.month)}</div>
+                        <div class="text-now-year">${dateStore.state.year}</div>
+                    </div>
                 </div>
                 <div class="button-next-month">
-                    <img src="${img.CHEVRON_RIGHT}"/>
+                    <img src="${img.CHEVRON_RIGHT_WHITE}"/>
                 </div>
             </div>
 
             <div class="container-fab-button">
-                <div class="button-container button-container-write">
+                <!--<div class="button-container button-container-write">
                     <button class="button button-write${!checkLogin() || location.pathname !== '/home' ? 'invisible': ''}">
                         <img src="${img.ADD_WHITE}"/>
                     </button>
                     <div class="text">ADD HISTORY</div>
-                </div>
+                </div>-->
                 <div class="button-container button-container-user ${!checkLogin() ? "animated bounce": ""}">
                     <button class="button button-user">
                         <img src="${!checkLogin()? img.ACCOUNT : img.ON_OFF_BUTTON}"/>
@@ -116,25 +118,35 @@ export default class Appbar extends Component {
         });
 
         this.addEvent('click', '.button-prev-month', () => {
-            dateStore.moveToPreviousMonth();
-            filterStore.reset();
+            addClassSelector($('.container-date-control .flip').get(), 'flipdown');
+            setTimeout(()=> {
+                dateStore.moveToPreviousMonth();
+                filterStore.reset();                
+                setTimeout(()=> {
+                    removeClassSelector($('.container-date-control .flip').get(), 'flipdown');
+                },150);
+            },150);
         });
 
         this.addEvent('click', '.button-next-month', () => {
-            dateStore.moveToNextMonth();
-            filterStore.reset();
+            addClassSelector($('.container-date-control .flip').get(), 'flipup');
+            setTimeout(()=> {
+                dateStore.moveToNextMonth();
+                filterStore.reset();     
+                setTimeout(()=> {
+                    removeClassSelector($('.container-date-control .flip').get(), 'flipup');
+                },150);
+            },150);
         });
 
         this.addEvent('click', '.button-container-user', addModal);
 
         this.addEvent('click', '.button-container-write', () => {
             const $element = $('.wrapper-add-history').get();
-            console.log("일단 눌림 ...");
             if (!isEmpty($element)) {
-                console.log("?");
                 removeClassSelector($element, 'wrapper-add-history-hidden');
             } 
-        })
+        });
     }
 
 
@@ -209,5 +221,9 @@ export default class Appbar extends Component {
                 $target.classList.remove('move-down', 'move-up');
             }, 1000);
         }, 1000)
+    }
+
+    makeMonthWithZero(m) {
+        return m < 10 ? `0${m}` : `${m}`;
     }
 }
