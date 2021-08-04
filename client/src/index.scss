@@ -2,20 +2,49 @@
 
 body{
     background-color: $BACKGROUND;
-    
-    .appbar{
-        .container-appbar{
-            z-index: 1;
+
+    .app {
+        display: flex;
+        flex-direction: row;
+        background-color: $PRIMARY;
+
+        min-width: 60rem;
+        overflow-x: hidden;
+        overflow-y: hidden;
+
+        .appbar {
+            .appbar {
+                z-index: 0;
+            }
         }
-    }
 
-    .content{
-        position: relative;
-        bottom: 1.5rem;
-    }
+        .container-content {
+            // z-index: 1;
+            background-color:$BACKGROUND;
+            width: 90vw;
+            height: 93vh;
+            margin-top: 7vh;
+            display: flex;
+            flex-direction: column;
+            min-width: 30rem;
+            overflow-x: hidden;
+            border-top-left-radius: 2rem;
+            box-shadow: -3px -3px 15px 3px $LABEL;
 
-    .opacity{
-        opacity: 0.5;
+            .content {
+                width:100%;
+            }
+
+            &.move-down {
+                transform: translateX(80vw) translateY(70vh);
+                transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+            }
+            
+            &.move-up {
+                transform: translateX(0rem) translateY(0rem);
+                transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+            }
+        }
     }
 
     .container-notfound{

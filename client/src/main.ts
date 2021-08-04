@@ -14,5 +14,5 @@ window.addEventListener('popstate', () => {
 });
 
 const appbar = new Appbar($('.appbar').get());
-new Fab($('.fab').get());
+// new Fab($('.fab').get());
 new Modal($('.modal-user').get());
