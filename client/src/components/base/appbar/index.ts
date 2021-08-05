@@ -33,7 +33,7 @@ export default class Appbar extends Component {
                     <span>계</span>
                     <span>부</span>
                 </h1>
-                <div>
+                <div class="nav-page-move">
                     <div class="nav-button-container nav-button-home">
                         <button class="button-home">
                             <img src="${img.FILE_TEXT}"/>

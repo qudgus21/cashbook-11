@@ -31,7 +31,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-                gap: 3rem;
         }
         align-items: center;
 
@@ -54,15 +53,21 @@
             animation-fill-mode: forwards;
         }
 
+        .dateNum{
+            width: 3rem;
+        }
+
 
         .day-consume{
             color: $ERROR;
+            text-align: right;
+            width: 5rem;
         }
 
         .day-income{
             color: blue;
-
-            
+            text-align: right;
+            width: 6rem;
         }
     }
 }

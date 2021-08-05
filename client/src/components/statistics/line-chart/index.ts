@@ -69,9 +69,17 @@ export default class Line extends Component {
     }
 
   
-    mounted() {
-      const { data } = this.state
+  mounted() { 
 
+      addClassSelector($('.container-line').get(), 'fadein')
+
+      setTimeout(() => {
+          removeClassSelector($('.container-line').get(), 'fadein')
+      }, 1500);
+
+
+      const { data } = this.state
+      
       if (!data) return;
  
       let monthPay = [];

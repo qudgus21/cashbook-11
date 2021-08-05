@@ -11,6 +11,7 @@
     min-width: 12rem;
     padding: 0 0.7rem;
 
+
     .container-nav,
     .container-fab-button,
     .container-date-control {
@@ -30,8 +31,10 @@
                 
             }
 
-            &:not(.title-main, .active):hover{
-                background-color: #084fb9;
+            @media screen and (min-width: 701px) {
+                &:not(.title-main, .active):hover{
+                    background-color: #084fb9;
+                }
             }
 
             &.active{
@@ -79,18 +82,20 @@
 
         .button-container {
 
-            &:hover {
-                transform: translateY(-0.5rem);
-                transition: transform 0.5s;
+            @media screen and (min-width: 701px) {
+                &:hover {
+                    transform: translateY(-0.5rem);
+                    transition: transform 0.5s;
+                }
+    
+                &.animated {
+                    animation-duration: 1.7s;
+                    animation-fill-mode: both;
+                    animation-timing-function: linear;
+                    animation-iteration-count: infinite;
+                } 
             }
 
-            &.animated {
-                animation-duration: 1.7s;
-                animation-fill-mode: both;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-            } 
-              
 
             @keyframes bounce { 
                 0%, 100% {
@@ -229,5 +234,91 @@
     .button-user{
         width: 35px;
         height: 35px;
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .appbar{
+        display: flex;
+        flex-direction: row;
+        height: 10vh;
+        width: 100%;
+        // min-width: 375px;
+        position: relative;
+
+        .container-nav{
+            display: flex;
+            flex-direction: row;
+            .title-main{
+                display: none;
+            }
+            .nav-page-move{
+                display: flex;
+                flex-direction: row;
+                
+                .nav-button-container{
+                    width: 1rem;
+                    border-radius: 10px;
+                    &.active{
+                        background-color:  #084fb9;;
+
+                    }
+
+                    .text{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .container-date-control{
+            display: flex;
+            flex-direction: row;
+
+            .button-prev-month img {
+                transform: rotate(0deg);
+                width: 1.5rem;
+            }
+    
+    
+            .button-next-month img {
+                transform: rotate(0deg);
+                width: 1.5rem;
+                margin-right: 1rem;
+            }
+
+            .flip{
+                height: 3rem;
+                .flip-front{
+
+                    .text-now-month{
+                        font-size: 3rem;
+                    }
+    
+                    .text-now-year{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .container-fab-button{
+            width: 10rem;
+
+            .button-container-user{
+                width: 3rem;
+                button{
+                    position: absolute;
+                    right: 1rem;
+                    
+                }
+    
+                .text{
+                    display: none;
+                }
+            }
+        }
     }
 }
