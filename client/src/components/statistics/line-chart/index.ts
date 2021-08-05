@@ -36,9 +36,9 @@ export default class Line extends Component {
         })
     }
 
-  tooltipHandler(e) { 
-      $('.svg-line-description').get().style.left = `${e.pageX-250}px`
-      $('.svg-line-description').get().style.top = `${e.pageY-550}px`
+  tooltipHandler(e) {
+      $('.svg-line-description').get().style.left = `${e.offsetX}px`
+      $('.svg-line-description').get().style.top = `${e.offsetY-20}px`
   }
 
   
