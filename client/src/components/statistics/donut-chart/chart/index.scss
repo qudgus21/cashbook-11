@@ -5,7 +5,14 @@
       width:20rem; 
       height:20rem;
       transform:rotate(-90deg);
-      //일정이하로 줄어들면 퍼센트로
+
+
+      @media screen and (max-width: 400px) { 
+            width:10rem; 
+            height:10rem;
+    
+        }
+
       path{
           transition: transform 0.5s ease 0s;
           cursor:pointer;

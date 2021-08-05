@@ -9,11 +9,13 @@ const pathToRegex = (path) =>
 	new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$');
 
 const navigateTo = (url, props = null) => {
+
 	history.pushState({ url }, null, url);
 	router();
 };
 
-const router = () => {
+const router = (appbar?: any) => {
+	
 	const routes = [
 		{ path: '/home', view: Home },
 		{ path: '/calendar', view: Calendar },
@@ -40,18 +42,18 @@ const router = () => {
 	$content.innerHTML = '';
 
 
-
 	if (checkLogin(false)) {
 		new match.route.view($content);
 	} else if (match.route.path === '/home') {
 		new Home($content);
-	} else if (match.route.path === '/callback') { 
-		new Callback($content);
+	} else if (match.route.path === '/callback') {
+		new Callback($content, { appbar });
+	} else if (location.pathname==='/') { 
+		history.pushState(null, null, '/home');
+		new Home($content);
 	}else{
 		history.pushState(null, null, '/notfound');
 		new NotFound($content);
-		// history.pushState(null, null, '/home');
-		// new Home($content);
 	}
 };
 

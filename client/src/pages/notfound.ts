@@ -11,8 +11,8 @@ export default class NotFound extends Component {
 
     mounted () {
         $('.container-notfound').get().innerHTML = `
-            <div class="wrapper-img-notfound"> 
-                누구쎄용?
+            <div class="wrapper-img-notfound">
+                존재하지 않는 페이지입니다.
             </div>
         `;
     }

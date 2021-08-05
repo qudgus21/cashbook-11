@@ -57,7 +57,7 @@ export default class ModalContent extends Component {
                 <div class="input-alert">4자</div>
             </form>
             <button class="button-signin">로그인</button>
-            <a href="https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://localhost:8080/callback"><button id="button-github">깃허브     로그인</button></a>
+            <a href="https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://ec2-15-165-75-122.ap-northeast-2.compute.amazonaws.com/callback"><button id="button-github">깃허브     로그인</button></a>
             <div class="button-move-signup">회원가입 하러가기</div>
         `;
     }
@@ -117,12 +117,12 @@ export default class ModalContent extends Component {
             const { id, password } = this.getIdAndPasswordFromInput();
             const response: any = await api('POST', '/user/signup', { id, password });
             if (response.isFail) {
-                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+                new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: '#f45552', duration: 2000 });
             } else {
                 new Snackbar($('.snackbar').get(), { msg: '회원가입 성공', duration: 2000 });
                 this.setState({ isSignInForm: true , isSignupId: false, isSignupPassword : false});
             }
-        } else {
+        } else {    
             new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: '#f45552'});
         }
     }
@@ -225,7 +225,7 @@ export default class ModalContent extends Component {
             $passwordAlert.textContent = ' ';
         } else { 
             this.state.isSignupPassword = false;
-            $passwordAlert.textContent = '최소 8자, 문자,숫자,특수문자가 최소 하나씩 포함되게 만들어주세요'
+            $passwordAlert.textContent = '최소 8자, 문자,숫자,특수문자가 최소 하나씩 포함되게 만들어주세요.'
         }
     }
 

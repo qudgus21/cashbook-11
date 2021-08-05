@@ -9,7 +9,9 @@
     flex-grow: 1;    
     padding-right: 3rem;
 
-
+    @media screen and (max-width: 1030px) { 
+        margin-top: 8vh !important;
+    }
 
 
     .container-history{
