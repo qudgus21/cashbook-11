@@ -4,7 +4,7 @@ import api from "@utils/api";
 import { $ } from '@utils/select';
 import { addClassSelector } from '@utils/selectHandler';
 import Snackbar from '@components/base/snackbar';
-import { dateStore } from '@src/models';
+import { dateStore, filterStore } from '@src/models';
 import { SEARCH_HISTORY } from '@models/date-store';
 import { checkLogin } from '@utils/cookie';
 
@@ -83,7 +83,7 @@ export default class SearchBar extends Component {
 
     getDateLiteralTemplate() {
         return `
-            <label for="start-date">일자</label>
+            <label class="label-for-calendar" for="start-date">일자</label>
             <div class="container-date">
                 <input name="start-date" type="date" class="input-start-date" />
                 <div> ~ </div>
@@ -113,28 +113,30 @@ export default class SearchBar extends Component {
 
     getValueLiteralTemplate() {
         return `
-            <label for="minimum">금액</label>
+            <label class="label-for-value" for="minimum">금액</label>
             <div class="container-value">
-                
-                <div class="container-value-minimum">
-                    <input name="minimum" class="input-search-value" placeholder="min" /> 
-                    <div>원</div>
-                </div>
-                
+                <input
+                    type="number"
+                    name="minimum" 
+                    class="input-search-value min" 
+                    min="1"
+                    placeholder="최소 금액를 입력하세요" 
+                /> 
                 <div>~</div>
-                
-                <div class="container-value-maximum">
-                    <input class="input-search-value" placeholder="max" />
-                    <div>원</div>
-                </div>
+                <input 
+                    type="number" 
+                    min="1"
+                    class="input-search-value max" 
+                    placeholder="최대 금액을 입력하세요" 
+                />
             </div>
         `;
     }
 
     getContentLiteralTemplate() {
         return `
-            <label>내용</label>
-            <input class="input-search-content" placeholder="입력하세요" />
+            <label for="input-content">내용</label>
+            <input class="input-search-content" name="input-content" placeholder="입력하세요" />
         `;
     }
 
@@ -151,8 +153,10 @@ export default class SearchBar extends Component {
                     month: dateStore.state.month,
                     historys,
                     type: SEARCH_HISTORY, 
-                }; 
+                };
 
+                filterStore.state.delay = 0;   
+                
                 dateStore.setState(nextState);
             }
         });
@@ -166,8 +170,8 @@ export default class SearchBar extends Component {
         const content = $('.input-search-content').get().value;
         let PayTypePk = $('.select-payType').get().value;
         
-        const minimumValue = $('.input-search-value').get().value;
-        const maximumValue = $('.input-search-value').get().value;
+        const minimumValue = $('.input-search-value.min').get().value;
+        const maximumValue = $('.input-search-value.max').get().value;
         
         if (CategoryPk <= 0) CategoryPk = '';
         if (PayTypePk <= 0) PayTypePk = '';

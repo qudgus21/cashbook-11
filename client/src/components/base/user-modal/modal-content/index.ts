@@ -36,7 +36,7 @@ export default class ModalContent extends Component {
             <div class="modal-logout">
                 <div>현재 계정에서 로그이웃 하시겠습니까?</div>
                 <div class="buttons-logout">
-                    <button id="button-logout-cancle">취소</button>
+                    <button id="button-logout-cancel">취소</button>
                     <button id="button-logout-confirm">확인</button>
                 </div>
             </div>
@@ -94,7 +94,7 @@ export default class ModalContent extends Component {
         });
         this.addEvent('keyup', '#input-signup-id', (e) => { this.canSignup() });
         this.addEvent('keyup', '#input-signup-password', (e) => { this.canSignup() });
-        this.addEvent('click', '#button-logout-cancle', () => {removeModal();});
+        this.addEvent('click', '#button-logout-cancel', () => {removeModal();});
         this.addEvent('click', '#button-logout-confirm', () => { this.logout() });
         
 

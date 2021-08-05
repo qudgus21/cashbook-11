@@ -1,4 +1,4 @@
-const path = (file) => '../src/assets/' + file; 
+const path = (file) => 'https://cashbook-11.s3.ap-northeast-2.amazonaws.com/assets/' + file; 
 
 const imgPath = {
     ACCOUNT: path('account.svg'),
