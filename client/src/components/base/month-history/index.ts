@@ -35,15 +35,23 @@ export default class MonthHistory extends Component {
     }
 
     setDailyHistoryOrderedByDescendingDay() {
-        this.state.dayArray.forEach((time) => {
-            let historys = this.state.historys[time];
-            new DailyHistory(
-                $(`#daily-history-${time}`).get(), 
-                { 
-                    historys,
-                    time
-                },
-            );
-        });
+        if (this.state.dayArray.length === 0) {
+            $('.wrapper-month-history').get().innerHTML = `
+                <div class="main-empty-img">
+                    <img src="https://cashbook-11.s3.ap-northeast-2.amazonaws.com/assets/empty-removebg.png"/>
+                </div>
+            `
+        } else { 
+            this.state.dayArray.forEach((time) => {
+                let historys = this.state.historys[time];
+                new DailyHistory(
+                    $(`#daily-history-${time}`).get(), 
+                    { 
+                        historys,
+                        time
+                    },
+                );
+            });
+        }
     }
 }
