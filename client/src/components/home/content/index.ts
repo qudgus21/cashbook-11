@@ -12,6 +12,7 @@ import { SEARCH_HISTORY } from '@models/date-store';
 import { category } from '@constants/category';
 import { img } from '@constants/img-path';
 import Fab from '@components/base/fab';
+import { convertHistorysToHandyObject } from '@utils/convert';
 
 
 export default class Content extends Component {
