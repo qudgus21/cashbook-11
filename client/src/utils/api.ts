@@ -2,7 +2,7 @@ import { getCookie } from './cookie';
 
 const api = async (method: string, url: string, data = {}) => {
 
-    const apiHost = 'http://localhost:3000/api'
+    const apiHost = 'http://ec2-15-165-75-122.ap-northeast-2.compute.amazonaws.com:3000/api'
 
     let options: any = { 
         method, 

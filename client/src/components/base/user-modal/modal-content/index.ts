@@ -57,7 +57,7 @@ export default class ModalContent extends Component {
                 <div class="input-alert">4자</div>
             </form>
             <button class="button-signin">로그인</button>
-            <a href="https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://localhost:8080/callback"><button id="button-github">깃허브     로그인</button></a>
+            <a href="https://github.com/login/oauth/authorize?client_id=ac4c75cd733116b5db3b&redirect_uri=http://ec2-15-165-75-122.ap-northeast-2.compute.amazonaws.com/callback"><button id="button-github">깃허브     로그인</button></a>
             <div class="button-move-signup">회원가입 하러가기</div>
         `;
     }
