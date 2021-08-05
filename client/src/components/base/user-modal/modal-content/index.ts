@@ -144,7 +144,11 @@ export default class ModalContent extends Component {
                 let pathName = window.location.pathname
                 // navigateTo(window.location.pathname);
                 setTimeout(() => {
-                    this.props.appbar.routingEventHandler(window.location.pathname, pathName === '/home' ? false : true);
+                    
+
+                    this.props.appbar.routingEventHandler(
+                        '/home'
+                        , pathName === '/home' ? false : true);
                     this.afterLogin();
                 }, 300);
 
