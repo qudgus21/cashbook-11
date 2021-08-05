@@ -140,7 +140,12 @@ export default class ModalContent extends Component {
                 removeModal();
                 dateStore.setup()
                 this.afterLogin();
-                navigateTo(window.location.pathname);
+
+
+                let pathName = window.location.pathname
+                // navigateTo(window.location.pathname);
+                this.props.appbar.routingEventHandler(window.location.pathname, pathName==='/home'? false:true);
+
             }
         } else { 
             new Snackbar($('.snackbar').get(), { msg: '아이디와 비밀번호를 입력해주세요', duration: 2000, backgroundColor: '#f45552'});
@@ -148,6 +153,8 @@ export default class ModalContent extends Component {
     }
 
     logout(): void {
+
+
         setCookie('JWT', 'none', 0);
 
         $('.button-container-user img').get().src = "../../../src/assets/account.svg";
@@ -156,11 +163,17 @@ export default class ModalContent extends Component {
         addClassSelector($('.button-container-write').get(), 'invisible');
         $('.text.user-text').get().innerHTML = !checkLogin()? 'LOGIN': 'LOGOUT';
         removeModal();
-        navigateTo('/home');
 
-        const $imgs = $('.appbar .container-nav img').getAll();
-        $imgs.forEach(img => { img.classList.remove('active') });
-        $imgs[0].classList.add('active');
+        new Snackbar($('.snackbar').get(), { msg: '로그아웃 되었습니다.', duration: 2000 });
+
+
+        const $btns = $('.appbar .nav-button-container').getAll();
+        $btns.forEach(img => { img.classList.remove('active') });
+        $btns[0].classList.add('active');
+
+
+        this.props.appbar.routingEventHandler('/home', false);
+
 
         this.setState({
             isSignInForm: true

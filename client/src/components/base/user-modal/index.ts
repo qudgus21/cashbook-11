@@ -24,7 +24,8 @@ export default class Modal extends Component {
     mounted () {
         const $modalContent = $('.modal .modal-content').get();
 
-        new ModalContent($modalContent);
+
+        new ModalContent($modalContent, {appbar : this.props.appbar});
     }
 
     setEvent() {

@@ -9,10 +9,10 @@ import Modal from '@components/base/user-modal';
 window.addEventListener('load', router);
 
 window.addEventListener('popstate', () => {
+    appbar.currentPageImg(history.state.url);
     router();
-    appbar.currentPageImg(history.state.url.split('/').pop());
 });
 
 const appbar = new Appbar($('.appbar').get());
 // new Fab($('.fab').get());
-new Modal($('.modal-user').get());
+new Modal($('.modal-user').get(), {appbar});

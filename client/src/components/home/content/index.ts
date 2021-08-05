@@ -79,9 +79,6 @@ export default class Content extends Component {
                 { historys : this.state.historys }
             );
             new AddHistory($('.wrapper-add-history').get());
-            console.log("로그인 이후, this.state의 dayArray 와 historyObj 를 보자!");
-            console.log(this.state.dayArray,);
-            console.log(this.state.historysObj);
             this.$monthHistory = new MonthHistory(
                 $('.wrapper-month-history').get(), 
                 { 
@@ -140,9 +137,7 @@ export default class Content extends Component {
 
     filteringHistory() {
         let historys = dateStore.getHistorys();
-        console.log(historys);
         this.state.historys = historys.filter(h => {
-            console.log(h);
             
             if (filterStore.state.categorys !== category.ALL) {
                 return h.CategoryPk == filterStore.state.categorys;
@@ -150,12 +145,10 @@ export default class Content extends Component {
 
             if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
             else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
-            console.log('패스!');
             return true;
         });
 
         this.convertHistorysToHandyObject();
-        console.log(this.state.historysObj)
         this.state.dayArray = this.getDayArray();
     }
 }

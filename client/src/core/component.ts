@@ -14,18 +14,9 @@ export default class Component {
     mounted () {}
     template (): any { return ''; }
     render () {
-      console.log('렌더한다.');
-      console.log('target:');
-      console.log(this.$target);
-      console.log('기존의 innerHTML');
-      console.log(this.$target);
       const template = this.template();
-      console.log('바뀔 innerHTML');
-      console.log(this.$target.innerHTML);
       if (template) {
         this.$target.innerHTML = template;
-        console.log("업데이트후 ");
-        console.log(this.$target.innerHTML);
         this.mounted();
       }
     }

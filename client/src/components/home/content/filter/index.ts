@@ -74,11 +74,8 @@ export default class Filter extends Component {
 
         this.addEvent('click','.checkbox-consume', (e) => {
             e.preventDefault();
-            console.log("지출 필터 체크박스 체크함.");
             
-            console.log(`현재 filterStore 상태: ${filterStore.state}`);
 
-            console.log(`현재 dateStore 상태: ${dateStore.state}`);
 
             
             this.customCheckboxClickEventHandler(
@@ -86,7 +83,6 @@ export default class Filter extends Component {
                 $('.img-consume-checkbox').get(),
                 false
             );
-            console.log(filterStore.state.isConsumeBoxClicked ? '눌림':'해제');
         });
     }
 

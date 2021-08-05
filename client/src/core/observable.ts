@@ -12,7 +12,6 @@ export default class Observable {
     }
 
     fixedSubscribe(observer) {
-        console.log('고정 구독 했습니다.', observer);
         this.fixedObservers.push(observer);
     }
 
@@ -27,15 +26,10 @@ export default class Observable {
     }
 
     notify(state) {
-        console.log(state);
-        console.log('일반 옵저버');
         this.observers.forEach(obs => {
-            console.log(obs);
             obs(state)
         });
-        console.log('고정 옵저버');
         this.fixedObservers.forEach(obs => {
-            console.log(obs);
             obs(state)
         });
     }

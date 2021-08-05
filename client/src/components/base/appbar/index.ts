@@ -89,11 +89,14 @@ export default class Appbar extends Component {
 
 
     mounted() {
+
+
+
         if (location.pathname !== '/home' && !checkLogin(false)) {
             const $navContainers = $('.appbar .container-nav .nav-button-container').getAll();
             $navContainers[0].classList.add('active');
         } else { 
-            this.currentPageImg();
+            this.currentPageImg(location.pathname);
         }
     }
 
@@ -155,13 +158,13 @@ export default class Appbar extends Component {
         $navContainers.forEach($navContainer => { $navContainer.classList.remove('active') });
         const currentPage = url;
         switch (history || currentPage) {
-            case 'home':
+            case '/home':
                 $navContainers[0].classList.add('active');
                 break;
-            case 'calendar':
+            case '/calendar':
                 $navContainers[1].classList.add('active');
                 break;
-            case 'statistics':
+            case '/statistics':
                 $navContainers[2].classList.add('active');
                 break;
         }
@@ -176,7 +179,7 @@ export default class Appbar extends Component {
                 setTimeout(()=> {
                     navigateTo(url);
                 }, 1000);
-                this.currentPageImg(undefined, url.substring(1,url.length))
+                this.currentPageImg(undefined, url)
                 return true;
             } else {
                 return false;
@@ -187,7 +190,7 @@ export default class Appbar extends Component {
             setTimeout(()=> {
                 navigateTo(url);
             }, 1000);
-            this.currentPageImg(undefined, url.substring(1,url.length))
+            this.currentPageImg(undefined, url)
             return true;
         }
     }

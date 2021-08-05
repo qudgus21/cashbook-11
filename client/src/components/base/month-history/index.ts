@@ -7,11 +7,9 @@ export default class MonthHistory extends Component {
 
     setup () {
         this.state = this.props;
-        console.log('Month history 의 setup() 실행!');
     }
 
     template (): string {
-        console.log('month history template() 호출!');
         // <div class="container-month-history">
         const text = `
             ${this.state.dayArray
@@ -20,7 +18,6 @@ export default class MonthHistory extends Component {
                 }).join('\n')
             }
         `;
-        console.log(text);
         //</div>
         return text;
     }
@@ -28,11 +25,7 @@ export default class MonthHistory extends Component {
     setState(newState) {
 
         this.state = { ...this.state, ...newState};
-        console.log("나의 부모는 누구냐?");
-        console.log(this.$target);
 
-        console.log("나의 스테이트는 다음과 같다.");
-        console.log(this.state);
         this.render();
     }
 
@@ -42,12 +35,8 @@ export default class MonthHistory extends Component {
     }
 
     setDailyHistoryOrderedByDescendingDay() {
-        console.log(`setDailyHistoryOrderedByDescendingDay 함수 호출`);
-        console.log(this.state.dayArray);
-        console.log(`dayArray 배열입니다.`);
         this.state.dayArray.forEach((time) => {
             let historys = this.state.historys[time];
-            console.log(`#daily-history-${time}`);
             new DailyHistory(
                 $(`#daily-history-${time}`).get(), 
                 { 

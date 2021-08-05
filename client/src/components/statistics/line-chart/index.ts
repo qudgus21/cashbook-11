@@ -85,7 +85,7 @@ export default class Line extends Component {
       let idx = CATEGORY_TAG.findIndex((item) => { 
         return item.title === data[0].Category.name
       })
-
+      
       lineSvg(monthPay, CATEGORY_TAG[idx].color);
 
       this.addChartEvent()

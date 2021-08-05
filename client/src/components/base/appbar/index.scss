@@ -1,4 +1,4 @@
-@import '@src/color.scss';
+@import  '@src/color.scss';
 
 
 .appbar{
@@ -29,6 +29,10 @@
                 align-items: center;
                 cursor: pointer;
                 
+            }
+
+            &:not(.title-main, .active):hover{
+                background-color: #084fb9;
             }
 
             &.active{
@@ -95,23 +99,23 @@
                     box-shadow: 0px 0px 0px 0px #757575;
                 }
                 10%, 90% {
-                    transform: translateY(-2px) scale(1.03);
+                    transform: translateY(-2px) scale(1.01);
                     box-shadow: 0px 0px 1px 1px #858585;
                 }
                 20%, 80% {
-                    transform: translateY(-4px) scale(1.06);
+                    transform: translateY(-4px) scale(1.02);
                     box-shadow: 0px 0px 3px 3px #959595;
                 }
                 30%, 70% {
-                    transform: translateY(-7px) scale(1.1);
+                    transform: translateY(-7px) scale(1.03);
                     box-shadow: 0px 0px 3px 4px #a5a5a5;
                 }
                 40%, 60%  {
-                    transform: translateY(-10px) scale(1.14);
+                    transform: translateY(-10px) scale(1.04);
                     box-shadow: 0px 0px 5px 5px #b5b5b5;
                 }
                 50% {
-                    transform: translateY(-12px) scale(1.17);
+                    transform: translateY(-12px) scale(1.05);
                     box-shadow: 0px 0px 7px 7px #c5c5c5;
                 }
             }
@@ -221,5 +225,10 @@
                 transform: rotateX(-90deg) rotateY(10deg);
             }
         }
+    }
+
+    .button-user{
+        width: 35px;
+        height: 35px;
     }
 }
