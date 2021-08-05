@@ -139,12 +139,14 @@ export default class ModalContent extends Component {
                 new Snackbar($('.snackbar').get(), { msg: '로그인에 성공했습니다.', duration: 2000 });
                 removeModal();
                 dateStore.setup()
-                this.afterLogin();
 
 
                 let pathName = window.location.pathname
                 // navigateTo(window.location.pathname);
-                this.props.appbar.routingEventHandler(window.location.pathname, pathName==='/home'? false:true);
+                setTimeout(() => {
+                    this.props.appbar.routingEventHandler(window.location.pathname, pathName === '/home' ? false : true);
+                    this.afterLogin();
+                }, 300);
 
             }
         } else { 
@@ -172,13 +174,14 @@ export default class ModalContent extends Component {
         $btns[0].classList.add('active');
 
 
-        this.props.appbar.routingEventHandler('/home', false);
-
-
-        this.setState({
-            isSignInForm: true
-        })
+        setTimeout(() => {
+            this.props.appbar.routingEventHandler('/home', false);
+            this.setState({
+                isSignInForm: true
+            })
+        }, 300);
     }
+    
 
     afterLogin(): void {
         $('.button-container-user img').get().src = "../../../src/assets/on-off-button.svg";

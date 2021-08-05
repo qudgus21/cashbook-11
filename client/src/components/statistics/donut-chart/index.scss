@@ -1,4 +1,5 @@
 @import '@src/color.scss';
+@import '@src/animation.scss';
 
 
 .wrapper-donut{
@@ -28,7 +29,15 @@
             width: 50%;
         }
         
-
+        &.fadein,
+        .fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
+        }
 
         .wrapper-donut-chart{
             display: flex;

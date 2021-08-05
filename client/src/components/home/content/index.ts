@@ -92,8 +92,6 @@ export default class Content extends Component {
     getLoginImgTemplate() {
         return `
         <div class="wrapper-img-login"> 
-            <!--img src="${img.BAEDAL}" class="img-baedal" /> 
-            <div class= "footer"> 로그인을 먼저 하겠어!</div-->
         </div>
         `;
     }

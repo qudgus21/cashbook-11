@@ -1,3 +1,4 @@
+import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 import { img } from "@constants/img-path";
 import Component from "@core/component";
 import { dateStore } from "@src/models";
@@ -23,7 +24,11 @@ export default class Donut extends Component {
     }
 
     mounted() {
+        addClassSelector($('.container-donut').get(), 'fadein')
 
+        setTimeout(() => {
+            removeClassSelector($('.container-donut').get(), 'fadein')
+        }, 1300);
 
         $('.container-donut').get().innerHTML =
         `
