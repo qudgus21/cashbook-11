@@ -8,6 +8,7 @@ import { setCookie, checkLogin } from '@utils/cookie';
 import Snackbar from "@components/base/snackbar"
 import { removeModal } from '@utils/modal';
 import { dateStore} from "@src/models";
+import { img } from '@constants/img-path';
 
 export default class ModalContent extends Component {
     setup () {
@@ -163,7 +164,7 @@ export default class ModalContent extends Component {
 
         setCookie('JWT', 'none', 0);
 
-        $('.button-container-user img').get().src = "../../../src/assets/account.svg";
+        $('.button-container-user img').get().src = img.ACCOUNT;
         addClassSelector($('.button-container-user').get(), 'animated', 'bounce');
 
         addClassSelector($('.button-container-write').get(), 'invisible');
@@ -188,7 +189,7 @@ export default class ModalContent extends Component {
     
 
     afterLogin(): void {
-        $('.button-container-user img').get().src = "../../../src/assets/on-off-button.svg";
+        $('.button-container-user img').get().src = img.ON_OFF_BUTTON;
         removeClassSelector($('.button-container-user').get(), 'animated', 'bounce');
 
         removeClassSelector($('.button-container-write').get(), 'invisible');
