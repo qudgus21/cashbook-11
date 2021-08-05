@@ -3,8 +3,9 @@
 .wrapper-add-history {
 
     .container-add-history-input {
+        // background-color: burlywood;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
@@ -14,9 +15,73 @@
         border-bottom: 1px solid $BORDER;
         margin-bottom: 2rem;
         
+
+        .container-input-first-floor,
+        .container-input-second-floor,
+        .container-input-third-floor,
+        .container-input-fourth-floor,
+        .container-input-five-floor {
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            flex-direction: row;
+
+            >* {
+                height: 2rem;
+            }
+        }
+        
+        .container-input-first-floor {
+            justify-content: center;
+            align-items: center;
+
+            .consume,
+            .income {
+                display:flex;
+                flex-direction: row;
+                align-items:center;
+                height: 2rem;
+                width: fit-content;
+            }
+        }
+
+        .container-input-second-floor {
+            justify-content: space-around;
+            align-items: center;
+
+            input,
+            select {
+               width: 44%;
+               text-align: center;
+           }
+        }
+
+        .container-input-third-floor {
+            justify-content: center;
+            align-items: center;
+            input {
+                width: 94%;
+            }
+        }
+
+        .container-input-fourth-floor {
+            justify-content: space-around;
+            align-items: center;
+            input {
+                width: 44%;
+            }
+        }
+
+        .container-input-five-floor {
+            justify-content: space-around;
+            align-items: center;
+            button {
+                width: 44%;
+            }
+        }
+
         .select {
-            font-size: 1.2rem;
-            margin-left: 1rem;
+            font-size: 1.1rem;
             height: 2rem;
             border-radius: 0.5rem;
             border: 2px solid $BORDER;
@@ -24,8 +89,7 @@
         }
     
         .select:focus {
-            font-size: 1.2rem;
-            margin-left: 1rem;
+            font-size: 1.1rem;
             height: 2rem;
             border-radius: 0.5rem;
             outline: none;
@@ -35,8 +99,7 @@
     
         .input {
             all: unset;
-            font-size: 1.2rem;
-            margin-left: 1rem;
+            font-size: 1.1rem;
             height: 2rem;
             border-radius: 0.5rem;
             border: 2px solid $BORDER;
@@ -51,15 +114,13 @@
             border: 2px solid $PRIMARY;
             border-radius: 0.5rem;
         }
-    
+        
         .input-date {
-            width: 10rem;
-            height: 2rem;
             background-color: transparent;
-            border: 1px solid $BORDER;
+            border: 2px solid $BORDER;
             border-radius: 0.5rem;
         }
-    
+        
         .input-date:hover {
             border: 2px solid rgba(177, 227, 225, 0.94);
         }
@@ -68,9 +129,9 @@
             outline: none;
             border: 2px solid $PRIMARY;
         }
-    
+        
         .input-status {
-            appearance: none;
+            // appearance: none;
             width: 1rem;
             height: 1rem;
             border-radius: 100%;
@@ -79,51 +140,11 @@
             border: 1px solid $BORDER;
             margin-left: 1rem;
         }
-    
+        
         .input-status:checked {
             background-color: $PRIMARY;
         }
-    
-        .input-content {
-            flex-grow: 1;
-            width: 5rem;
-            overflow: hidden;
-            min-width: 10rem;
-            text-overflow: ellipsis;
-        }
-    
-        .input-category {
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 5rem;
-            margin-left: 1rem;
-            margin-right: 1rem;
-            height: 1.6rem;
-            font-size: 0.8rem;
-            border-radius: 0.8rem;
-            
-    
-            >div {
-                text-align: center;
-                width:fit-content;
-                border: none;
-                color: white;    
-            }
-        }
-    
-        .input-paytype {
-            min-width: 5rem;
-            width: 10rem;
-        }
         
-        
-        .input-value {
-            width: 7rem;
-            text-align: right;
-        }
-    
         button {
             all: unset;
             height: 2.5rem;

@@ -25,6 +25,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+
+    .content {
+        line-height: 1.1rem;
+    }
 }
 ol, ul {
 	list-style: none;
