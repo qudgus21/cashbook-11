@@ -8,6 +8,7 @@ import Snackbar from "../components/base/snackbar";
 import { dateStore } from '@src/models';
 import Modal from '@components/base/user-modal';
 import { removeClassSelector } from '@utils/selectHandler';
+import { img } from '@constants/img-path';
 
 export default class Callback extends Component {
     
@@ -40,7 +41,7 @@ export default class Callback extends Component {
             removeClassSelector($('.button-container-user').get(), 'animated', 'bounce');
             removeClassSelector($('.button-container-write').get(), 'invisible');
             navigateTo('/home');
-            $('.button-container-user img').get().src = "../../../src/assets/on-off-button.svg"
+            $('.button-container-user img').get().src = img.ON_OFF_BUTTON;
         }
     }
 }

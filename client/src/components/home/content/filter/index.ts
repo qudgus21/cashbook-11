@@ -50,12 +50,12 @@ export default class Filter extends Component {
     mounted() {
         if (filterStore.state.isIncomeBoxClicked) {
             $('.checkbox-income').get().style.backgroundColor = '#2AC0BC'; 
-            $('.img-income-checkbox').get().src = 'src/assets/check-white.svg';
+            $('.img-income-checkbox').get().src = img.CHECK_WHITE;
         }
 
         if (filterStore.state.isConsumeBoxClicked) {
             $('.checkbox-consume').get().style.backgroundColor = '#2AC0BC';
-            $('.img-consume-checkbox').get().src = 'src/assets/check-white.svg';
+            $('.img-consume-checkbox').get().src = img.CHECK_WHITE;
         }
     }
 
@@ -122,7 +122,7 @@ export default class Filter extends Component {
         }   
 
         $checkbox.style.backgroundColor = booleanValue ? '#2AC0BC' : 'transparent';
-        $img.src = 'src/assets/' + (booleanValue ? 'check-white.svg': 'check-primary.svg');
+        $img.src = booleanValue ? img.CHECK_WHITE: img.CHECK_PRIMARY;
         
         this.filteringShownData();
     }
