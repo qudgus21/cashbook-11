@@ -9,26 +9,7 @@
     flex-grow: 1;    
     padding-right: 3rem;
 
-    @media screen and (min-width: 1030px) {
-        overflow-y: scroll;
-    }
 
-
-    @media screen and (max-width: 700px) {
-        min-width: 375px;
-        margin-top: 1rem;
-        padding: 0 1rem 0 3rem;
-        height: fit-content;
-
-        *{
-            font-size: 13px !important;
-
-        }
-
-        .info-price{
-            width: 10rem;
-        }
-    }
 
 
     .container-history{
@@ -44,12 +25,36 @@
     }
 
 
+
+    @media screen and (min-width: 1030px) {
+        overflow-y: scroll;
+    }
+
+
+
+
+
     @media screen and (max-width: 1030px) { 
         padding-left: 0;
         margin-top: 1rem;
-        height: fit-content;
         *{
             font-size: 15px;
+        }
+    }
+    
+    @media screen and (max-width: 700px) {
+        min-width: 345px;
+        margin-top: 1rem;
+        padding: 0 1rem 0 1rem;
+        height: fit-content;
+
+        *{
+            font-size: 13px !important;
+
+        }
+
+        .info-price{
+            width: 10rem;
         }
     }
 }
