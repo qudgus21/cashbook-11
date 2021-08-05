@@ -47,20 +47,7 @@ export default class Content extends Component {
         `
     }
 
-    makeFooterData(historyData) {
-        let totalConsume = 0;
-        let totalIncome = 0;
-        let totalSum = 0;
-        historyData.forEach((history) => {
-            totalConsume += history.consume;
-            totalIncome += history.income;
-        })
-        totalSum = totalConsume + totalIncome;
 
-        $('.total-income').get().textContent = `총 수입 ${comma(totalIncome)}`;
-        $('.total-consume').get().textContent = `총 지출 ${comma(totalConsume)}`;
-        $('.total-sum').get().textContent = `총계 ${comma(totalSum)}`;
-    }
 
 
     paintCalendar(dates: any): void {
@@ -113,7 +100,6 @@ export default class Content extends Component {
             this.addDateClickEvent();
    
         }
-        this.makeFooterData(historyData);
     }
 
     makeCalendar() {
