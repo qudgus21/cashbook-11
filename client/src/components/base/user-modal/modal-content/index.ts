@@ -117,12 +117,12 @@ export default class ModalContent extends Component {
             const { id, password } = this.getIdAndPasswordFromInput();
             const response: any = await api('POST', '/user/signup', { id, password });
             if (response.isFail) {
-                new Snackbar($('.snackbar').get(), { msg: response.message, duration: 2000 });
+                new Snackbar($('.snackbar').get(), { msg: response.message, backgroundColor: '#f45552', duration: 2000 });
             } else {
                 new Snackbar($('.snackbar').get(), { msg: '회원가입 성공', duration: 2000 });
                 this.setState({ isSignInForm: true , isSignupId: false, isSignupPassword : false});
             }
-        } else {
+        } else {    
             new Snackbar($('.snackbar').get()  , { msg: '회원가입 요건이 충족되지 않았습니다', duration: 2000, backgroundColor: '#f45552'});
         }
     }
@@ -225,7 +225,7 @@ export default class ModalContent extends Component {
             $passwordAlert.textContent = ' ';
         } else { 
             this.state.isSignupPassword = false;
-            $passwordAlert.textContent = '최소 8자, 문자,숫자,특수문자가 최소 하나씩 포함되게 만들어주세요'
+            $passwordAlert.textContent = '최소 8자, 문자,숫자,특수문자가 최소 하나씩 포함되게 만들어주세요.'
         }
     }
 
