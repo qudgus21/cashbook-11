@@ -13,7 +13,7 @@ const navigateTo = (url, props = null) => {
 	router();
 };
 
-const router = () => {
+const router = (appbar?:any) => {
 	const routes = [
 		{ path: '/home', view: Home },
 		{ path: '/calendar', view: Calendar },
@@ -46,7 +46,7 @@ const router = () => {
 	} else if (match.route.path === '/home') {
 		new Home($content);
 	} else if (match.route.path === '/callback') { 
-		new Callback($content);
+		new Callback($content,{appbar});
 	}else{
 		history.pushState(null, null, '/notfound');
 		new NotFound($content);
