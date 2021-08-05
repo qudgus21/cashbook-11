@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const router = require('./routes');
 const db = require('./models');
 const errorHandler = require('./middlewares/error-handler');
+const log = require('./middlewares/log');
 const app = express();
 
 const isForced = false;
@@ -24,6 +25,8 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(log);
 
 app.use('/api', router);
 
