@@ -20,6 +20,31 @@ window.addEventListener('popstate', () => {
     }
 });
 
+// window.addEventListener('resize', (e) => {
+//     const currentPage = location.pathname
+//     const width = window.innerWidth;
+//     switch (currentPage) { 
+//         case '/home':
+//             if (width < 975) {
+                
+//                 alert('안돼')
+//             }
+//             break;
+//         case '/calendar':
+//             if (width < 655) { 
+//                 alert('안돼')
+//             }
+//             break;
+//         case '/statistics':
+//             if (width < 700) { 
+//                 alert('안돼')
+//             }
+//             break;
+//     }
+//     console.log(window.innerWidth)
+// });
+
+
 const appbar = new Appbar($('.appbar').get());
-// new Fab($('.fab').get());
-new Modal($('.modal-user').get(), {appbar});
+new Modal($('.modal-user').get(), { appbar });
+

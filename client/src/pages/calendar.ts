@@ -13,7 +13,7 @@ export default class Calendar extends Component {
         return ` 
             <div class="container-calendar">
                 <div class="wrapper-daybar"></div>
-                <div class="wrapper-content wrapper-content-calendar"></div>
+                <div class="wrapper-content-c wrapper-content-calendar"></div>
             </div>
         `
     }
@@ -26,10 +26,10 @@ export default class Calendar extends Component {
             if ($('.container-mini-calendar').get()) { 
                 $('.container-calendar').get().innerHTML = `
                     <div class="wrapper-daybar"></div>
-                    <div class="wrapper-content wrapper-content-calendar"></div>
+                    <div class="wrapper-content-c wrapper-content-calendar"></div>
                 `
                 new Daybar($('.container-calendar .wrapper-daybar').get())
-                new Content($('.container-calendar .wrapper-content').get())
+                new Content($('.container-calendar .wrapper-content-c').get())
             }
         } else if (!$('.container-mini-calendar').get()) {
             new MinCalendar($('.container-calendar').get())
@@ -44,7 +44,7 @@ export default class Calendar extends Component {
         window.addEventListener('resize', this.calendarResize);
         if (matchMedia("screen and (min-width: 900px)").matches) {
             new Daybar($('.container-calendar .wrapper-daybar').get())
-            new Content($('.container-calendar .wrapper-content').get())
+            new Content($('.container-calendar .wrapper-content-c').get())
         } else { 
             new MinCalendar($('.container-calendar').get())
         }

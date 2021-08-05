@@ -72,7 +72,7 @@ export default class Content extends Component {
         // TODO
         if (!checkLogin(false)) { 
             addClassSelector($('.container-filter').get(), 'hidden');
-            $('.wrapper-month-history').get().innerHTML = this.getLoginImgTemplate();
+            $('.wrapper-content').get().innerHTML = this.getLoginImgTemplate();
         } else {
             this.$filter = new Filter(
                 $('.container-filter').get(), 
@@ -92,8 +92,8 @@ export default class Content extends Component {
     getLoginImgTemplate() {
         return `
         <div class="wrapper-img-login"> 
-            <img src="${img.BAEDAL}" class="img-baedal" /> 
-            <div class= "footer"> 로그인을 먼저 하겠어! </div>
+            <!--img src="${img.BAEDAL}" class="img-baedal" /> 
+            <div class= "footer"> 로그인을 먼저 하겠어!</div-->
         </div>
         `;
     }
