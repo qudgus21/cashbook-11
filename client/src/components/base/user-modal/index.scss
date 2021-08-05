@@ -1,4 +1,6 @@
 @import '@src/color.scss';
+@import '@src/animation.scss';
+
 
 .modal {
     position: fixed;
@@ -10,7 +12,25 @@
     justify-content: center;
     align-items: center;
     
-    
+    &.fadein,
+    .fadein {
+        opacity: 0;
+        animation: fadein 0.7s;
+        -moz-animation: fadein 0.7s; /* Firefox */
+        -webkit-animation: fadein 0.7s; /* Safari and Chrome */
+        -o-animation: fadein 0.7s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
+    &.fadeout,
+    .fadeout {
+        animation: fadeout 0.3s;
+        -moz-animation: fadeout 0.3s; /* Firefox */
+        -webkit-animation: fadeout 0.3s; /* Safari and Chrome */
+        -o-animation: fadeout 0.3s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
     .modal-background {
         z-index: 2;
         position: fixed;

@@ -1,0 +1,73 @@
+@import "../../../color.scss";
+@import "../../../animation.scss";
+
+
+.wrapper-mini-calendar{
+    padding: 2rem;
+}
+
+
+.container-mini-calendar {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+
+    
+
+
+
+    li{
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #C1C5C5;
+        .day-history {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        align-items: center;
+
+        &.fadein {
+            opacity: 0;
+            animation-name: fadein;
+            animation-duration: 1.3s;
+            -moz-animation-duration: 1.3s;
+            -o-animation-duration: 1.3s;
+            -webkit-animation-duration: 1.3s;
+            animation-fill-mode: forwards;
+        }
+
+        &.fadeout {
+            animation-name: fadeout;
+            animation-duration: 1.3s;
+            -moz-animation-duration: 1.3s;
+            -o-animation-duration: 1.3s;
+            -webkit-animation-duration: 1.3s;
+            animation-fill-mode: forwards;
+        }
+
+        .dateNum{
+            width: 3rem;
+        }
+
+
+        .day-consume{
+            color: $ERROR;
+            text-align: right;
+            width: 5rem;
+        }
+
+        .day-income{
+            color: blue;
+            text-align: right;
+            width: 6rem;
+        }
+    }
+}

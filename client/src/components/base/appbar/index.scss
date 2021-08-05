@@ -1,4 +1,4 @@
-@import '@src/color.scss';
+@import  '@src/color.scss';
 
 
 .appbar{
@@ -7,114 +7,318 @@
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background-color: $PRIMARY;
-    width: 15vw;
-    min-width: 10rem;
-    
+    width: 12vw;
+    min-width: 12rem;
+    padding: 0 0.7rem;
+
+
     .container-nav,
-    .container-fab-button {
+    .container-fab-button,
+    .container-date-control {
         width: 100%;
         display: flex;
         flex-direction: column;
 
         .button-container,
         .nav-button-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-left: 5%;
-            height: 4vh;
-            width: 95%;
-
-            button {
-                flex-grow: 0;
-            }
-
-            .text {
-                flex-grow: 1;
-                text-align: center;
-            }
-
-            img, & {
+            border-radius: 7px;
+            
+            
+            >*{
+                display: flex;
+                align-items: center;
                 cursor: pointer;
-                filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+                
             }
-        
-            img, & {
-                filter: invert(93%) sepia(13%) saturate(828%) hue-rotate(124deg) brightness(95%) contrast(85%);
-                &:hover{
-                    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+
+            @media screen and (min-width: 701px) {
+                &:not(.title-main, .active):hover{
+                    background-color: #084fb9;
                 }
             }
 
             &.active{
-                filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(32deg) brightness(94%) contrast(118%);
+                background-color: #063781;
+                -webkit-transition: background-color 500ms linear;
+                -ms-transition: background-color 500ms linear;
+                transition: background-color 500ms linear;
+
+                button{
+                    -webkit-transition: background-color 500ms linear;
+                    -ms-transition: background-color 500ms linear;
+                    transition: background-color 500ms linear;
+                    background-color:   #063781;
+                }
             }
-            
-            &.invisible {
-                visibility: hidden;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 4.5vh;
+            width: 95%;
+            padding: 1rem;
+
+            button {
+                flex-grow: 0;
+                background-color:  #0051CB;
+                border: none;
             }
+
+            .text {
+                flex-grow: 1;
+                text-align: left;
+                padding-left: 0.5rem;
+                color: $OFF_WHITE;
+            }
+
+  
+            img{
+                cursor: pointer;
+                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(202deg) brightness(106%);
+            }
+        
+
         }
 
         .button-container {
 
-            &:hover {
-                transform: translateY(-0.5rem);
-                transition: transform 0.5s;
-                background-color: #309e9a;
+            @media screen and (min-width: 701px) {
+                &:hover {
+                    transform: translateY(-0.5rem);
+                    transition: transform 0.5s;
+                }
+    
+                &.animated {
+                    animation-duration: 1.7s;
+                    animation-fill-mode: both;
+                    animation-timing-function: linear;
+                    animation-iteration-count: infinite;
+                } 
             }
 
-            &.animated {
-                animation-duration: 1.7s;
-                animation-fill-mode: both;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-            } 
-              
+
             @keyframes bounce { 
                 0%, 100% {
                     transform: translateY(0px) scale(1);
                     box-shadow: 0px 0px 0px 0px #757575;
                 }
                 10%, 90% {
-                    transform: translateY(-2px) scale(1.03);
+                    transform: translateY(-2px) scale(1.01);
                     box-shadow: 0px 0px 1px 1px #858585;
                 }
                 20%, 80% {
-                    transform: translateY(-4px) scale(1.06);
+                    transform: translateY(-4px) scale(1.02);
                     box-shadow: 0px 0px 3px 3px #959595;
                 }
                 30%, 70% {
-                    transform: translateY(-7px) scale(1.1);
+                    transform: translateY(-7px) scale(1.03);
                     box-shadow: 0px 0px 3px 4px #a5a5a5;
                 }
                 40%, 60%  {
-                    transform: translateY(-10px) scale(1.14);
+                    transform: translateY(-10px) scale(1.04);
                     box-shadow: 0px 0px 5px 5px #b5b5b5;
                 }
                 50% {
-                    transform: translateY(-12px) scale(1.17);
+                    transform: translateY(-12px) scale(1.05);
                     box-shadow: 0px 0px 7px 7px #c5c5c5;
                 }
             }
             
+            @keyframes in {
+                0% { 
+                      opacity: 0;
+                      transform: translateY(50px) rotate(90deg);
+                  }
+                  100% { 
+                      opacity: 1;
+                      transform: translateY(0) rotate(0);
+                  }
+            }
+
+
             &.bounce { 
                 animation-name: bounce;
             }
+
+            &.title-main{
+                width: 20vw;
+                min-width: 20rem;
+                height: 5vh;
+                margin-top: 2vh;
+                margin-bottom: 2vh;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+                span {
+                    display: inline-block;
+                    opacity: 0;
+                    transform: translateY(20px) rotate(90deg);
+                    transform-origin: left;
+                    animation: in 0.5s forwards;
+                    @for $i from 1 to 8 {
+                        &:nth-child(#{$i}) { 
+                            animation-delay: $i * 0.1s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .container-date-control {
+        align-items: center;
+        color: white;
+
+        .button-prev-month img {
+            transform: rotate(90deg);
+            width: 3rem;
+            cursor: pointer;
         }
 
-        .title {
-            width: 20vw;
-            min-width: 20rem;
-            height: 5vh;
-            margin-top: 2vh;
-            margin-bottom: 2vh;
+        .button-next-month img {
+            transform: rotate(90deg);
+            width: 3rem;
+            cursor: pointer;
         }
-        .title a {
-            font-size: 3rem;
-            text-decoration: none;
-            color: white;
-            
+
+
+        .flip {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+            height: 5rem;
+            overflow-y: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+            // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border: 3px solid snow;
+            // border-bottom: 3px solid black;
+            border-radius: 10px;
+
+            .flip-front, .flip-back {
+                position: absolute;
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 5rem;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;    
+            }
+
+            .flip-front {
+                .text-now-month {
+                    font-size: 5rem;
+                    font-weight: 100;
+                    flex-grow: 1;
+                }
+
+                .text-now-year {
+                    font-size:x-large;
+                    margin-right: 5px;
+                    margin-top: 5px;
+                }
+            }
+
+            &.flipup {
+                transform: rotateX(90deg) rotateY(10deg);
+            }
+
+            &.flipdown {
+                transform: rotateX(-90deg) rotateY(10deg);
+            }
+        }
+    }
+
+    .button-user{
+        width: 35px;
+        height: 35px;
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .appbar{
+        display: flex;
+        flex-direction: row;
+        height: 10vh;
+        width: 100%;
+        // min-width: 375px;
+        position: relative;
+
+        .container-nav{
+            display: flex;
+            flex-direction: row;
+            .title-main{
+                display: none;
+            }
+            .nav-page-move{
+                display: flex;
+                flex-direction: row;
+                
+                .nav-button-container{
+                    width: 1rem;
+                    border-radius: 10px;
+                    &.active{
+                        background-color:  #084fb9;;
+
+                    }
+
+                    .text{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .container-date-control{
+            display: flex;
+            flex-direction: row;
+
+            .button-prev-month img {
+                transform: rotate(0deg);
+                width: 1.5rem;
+            }
+    
+    
+            .button-next-month img {
+                transform: rotate(0deg);
+                width: 1.5rem;
+                margin-right: 1rem;
+            }
+
+            .flip{
+                height: 3rem;
+                .flip-front{
+
+                    .text-now-month{
+                        font-size: 3rem;
+                    }
+    
+                    .text-now-year{
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .container-fab-button{
+            width: 10rem;
+
+            .button-container-user{
+                width: 3rem;
+                button{
+                    position: absolute;
+                    right: 1rem;
+                    
+                }
+    
+                .text{
+                    display: none;
+                }
+            }
         }
     }
 }

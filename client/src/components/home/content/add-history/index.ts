@@ -94,7 +94,6 @@ export default class AddHistory extends Component {
 
         this.addEvent('click','.button-cancel', (e) => {
             e.preventDefault();
-
             // api create 전송
             addClassSelector($('.wrapper-add-history').get(), 'wrapper-add-history-hidden');
         });

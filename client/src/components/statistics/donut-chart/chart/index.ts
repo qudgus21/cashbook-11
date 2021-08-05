@@ -30,7 +30,7 @@ export default class Chart extends Component {
 
     tooltipHandler(e) { 
         $('.svg-description').get().style.left = `${e.pageX}px`
-        $('.svg-description').get().style.top = `${e.pageY - 200}px`
+        $('.svg-description').get().style.top = `${e.pageY-60}px`
     }
 
 
@@ -67,9 +67,11 @@ export default class Chart extends Component {
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), filled = 0;
         svg.setAttribute("viewBox", "-1.5 -1.5 3 3");
         donut.innerHTML = ``;
-        donut.appendChild(svg);
-        svg.innerHTML = this.getDoughnutChartPaths(data)
-        this.addChartEvent()
+        donut.appendChild(svg); 
+        setTimeout(() => {
+            svg.innerHTML = this.getDoughnutChartPaths(data)
+            this.addChartEvent()
+        }, 100);
     }
 
 

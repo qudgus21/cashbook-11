@@ -1,16 +1,27 @@
 @import '@src/color.scss';
-
+@import '@src/animation.scss';
 
 .container-filter {
     display: flex;
     flex-direction: row;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 
     .container-checkbox {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: right;
         align-items: center;
-        min-width: 15rem;
+
+        &.fadein,
+        .fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
+        }
 
         .div-space-layout {
             width: 1rem;
@@ -29,20 +40,24 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: $PRIMARY;
                 border-radius: 0.5rem;
-                margin-right: 0.2rem;
-        
-                &:hover {
-                    transition: 0.4s;
-                }
+                margin-right: 0.3rem;
+                cursor: pointer;
 
                 img {
                     width: 1.3rem;
                     height: 1.3rem;
                 }
+
+
+            }
+
+            .text-total-consume,
+            .text-total-income {
+                cursor: pointer;
             }
         }
+        
     }
 }
 

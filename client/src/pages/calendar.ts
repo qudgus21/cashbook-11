@@ -3,6 +3,9 @@ import Daybar from "@components/calendar/daybar";
 import Content from "@components/calendar/content";
 import "@components/calendar/index.scss";
 import { $ } from "@utils/select";
+import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
+import MinCalendar from "@components/calendar/min-calendar";
+
 
 export default class Calendar extends Component {
     
@@ -10,15 +13,41 @@ export default class Calendar extends Component {
         return ` 
             <div class="container-calendar">
                 <div class="wrapper-daybar"></div>
-                <div class="wrapper-content"></div>
-                <div class="wrapper-footer"></div>
+                <div class="wrapper-content-c wrapper-content-calendar"></div>
             </div>
         `
     }
 
+
+
+    calendarResize(e) { 
+        if (location.pathname !== '/calendar') return;
+        if (matchMedia("screen and (min-width: 900px)").matches) {
+            if ($('.container-mini-calendar').get()) { 
+                $('.container-calendar').get().innerHTML = `
+                    <div class="wrapper-daybar"></div>
+                    <div class="wrapper-content-c wrapper-content-calendar"></div>
+                `
+                new Daybar($('.container-calendar .wrapper-daybar').get())
+                new Content($('.container-calendar .wrapper-content-c').get())
+            }
+        } else if (!$('.container-mini-calendar').get()) {
+            new MinCalendar($('.container-calendar').get())
+        }
+    }
+
+
+
+
+
     mounted() {
-        new Daybar($('.container-calendar .wrapper-daybar').get())
-        new Content($('.container-calendar .wrapper-content').get())
+        window.addEventListener('resize', this.calendarResize);
+        if (matchMedia("screen and (min-width: 900px)").matches) {
+            new Daybar($('.container-calendar .wrapper-daybar').get())
+            new Content($('.container-calendar .wrapper-content-c').get())
+        } else { 
+            new MinCalendar($('.container-calendar').get())
+        }
     }
 
 

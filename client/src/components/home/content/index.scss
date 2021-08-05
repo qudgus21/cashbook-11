@@ -1,26 +1,39 @@
 @import '@src/color.scss';
-
+@import '@src/animation.scss';
 
 .content {
     display: flex;
-    width: 60vw;
     flex-direction: row;
-    min-width: 20rem;
+    overflow-y: hidden;
 
+    .container-filter,
+    .wrapper-add-history,
+    .wrapper-month-history {
+        width: 100%;
+        padding-left: 1%;
+        padding-right: 3%;
+    }
     .container-filter {
         display: flex;
         flex-direction: row;
-        width: 100%;
         height: 3rem;
         margin-bottom: 2rem;
         align-items: center;
         justify-content: space-between;
         font-size: 1.3rem;
         color: $PRIMARY;
+
+        &.fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
+        }
     }
     
     .wrapper-add-history {
-        width: 60vw;
         height: 10rem;
         display: flex;
         flex-direction: row;
@@ -29,37 +42,111 @@
     }
     
     .wrapper-month-history {
+        
         display: flex;
         flex-direction: column;
-        align-items: center;
-        width: 60vw;
+        align-items: right;
+
         height: 80vh;
-        overflow-y: scroll;
-    
-        .wrapper-img-login {
-            margin-top: 2rem;
-            width: 100%;
-            border-radius: 1.5rem;
-    
-            .footer {
-                display: block;
-                width: 100%;
-                text-align: center;
-                background-color: rgb(29, 29, 29);
-                color: white;
-                font-weight: bold;
-                font-size: 2vw;
-                margin-top: -1.5rem;
-                border-bottom-left-radius: 1.5rem;
-                border-bottom-right-radius: 1.5rem;
-            }
-    
-            .img-baedal {
-                width: 100%;
-                border-radius: 1.5rem;
+        overflow-y: auto;
+        
+        .container-month-history {
+            padding-right: 1rem;
+        }
+    }
+
+    .fadein {
+        opacity: 0;
+        animation: fadein 1.3s;
+        -moz-animation: fadein 1.3s; /* Firefox */
+        -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+        -o-animation: fadein 1.3s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+}
+
+
+@media screen and (max-width:1177px) {
+
+    .content {
+        .wrapper-content {
+            .wrapper-month-history {
+                .wrapper-daily-history {
+                    .container-unit-history {
+                        .into {
+                            line-height: 1.6rem;
+                        }
+                        .info.info-paytype {
+                            text-align: right;
+                        }
+                        
+                    }
+                }
             }
         }
     }
 }
 
+
+@media screen and (max-width: 860px) {
+    .content {
+        .wrapper-content {
+            .container-unit-history-info {
+                .info.info-paytype {
+                    text-align: right;
+                }
+                .info.info-price {
+                    width:100%;
+                    text-align: right;
+                }
+
+                .info.info-content {
+                    min-width: 9rem;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 741px) {
+    .content {
+        .wrapper-content {
+            .container-unit-history {
+                .container-unit-history-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .info {
+                        text-align: center !important;
+                        width: 100%;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .info.info-category {
+                        width: 100%;
+                        border-radius: 0 !important;
+                        margin-left: 0;
+                    }
+
+                    .info.info-content {
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 

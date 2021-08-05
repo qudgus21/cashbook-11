@@ -1,5 +1,5 @@
 export default function lineSvg(monthPay, color){ 
-    var _svg = document.getElementById('line-svg'),
+    let _svg = document.getElementById('line-svg'),
         dati = monthPay,   
         chart_padding = 20,
         padding_asse_y = 40, 
@@ -21,12 +21,12 @@ export default function lineSvg(monthPay, color){
     ;
     
 
-    var parametro_arrotondamento = 10;
+    let parametro_arrotondamento = 10;
     if( valore_massimo_asse_y > 100 ) { parametro_arrotondamento = 100; }
     if( valore_massimo_asse_y > 1000 ) { parametro_arrotondamento = 1000; }
     valore_massimo_asse_y = Math.ceil( valore_massimo_asse_y/parametro_arrotondamento )* parametro_arrotondamento;
     
-    var asse_y = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+    let asse_y = document.createElementNS("http://www.w3.org/2000/svg", 'line');
     asse_y.setAttribute("x1", (chart_padding + padding_asse_y).toString() );
     asse_y.setAttribute("y1", (chart_padding).toString() );
     asse_y.setAttribute("x2", (chart_padding + padding_asse_y).toString() );
@@ -35,7 +35,7 @@ export default function lineSvg(monthPay, color){
     asse_y.setAttribute("class", 'asse' );
     _svg.appendChild( asse_y );
     
-    var asse_x = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+    let asse_x = document.createElementNS("http://www.w3.org/2000/svg", 'line');
     asse_x.setAttribute("x1", (chart_padding + padding_asse_y).toString() );
     asse_x.setAttribute("y1", (chart_padding + altezza_corretta).toString());
     asse_x.setAttribute("x2", (chart_padding + padding_asse_y + base_corretta).toString() );
@@ -45,7 +45,7 @@ export default function lineSvg(monthPay, color){
     _svg.appendChild( asse_x );
 
     
-    var _step = 8,
+    let _step = 8,
         _lunghezza_trattino = 5,
         _trattino,
         _etichetta,
@@ -59,7 +59,7 @@ export default function lineSvg(monthPay, color){
         y_etichetta
     ;
     
-    for(var i = 0; i <= _step; i++ ) {
+    for(let i = 0; i <= _step; i++ ) {
         valore_step = (valore_massimo_asse_y / _step) * i;
     
         y_etichetta = (chart_padding + altezza_corretta) - ((altezza_corretta / _step) * i);
@@ -93,13 +93,13 @@ export default function lineSvg(monthPay, color){
     
     _step = punti_asse_x;
     
-    var y1_trattino = chart_padding + altezza_corretta - _lunghezza_trattino,
+    let y1_trattino = chart_padding + altezza_corretta - _lunghezza_trattino,
         y2_trattino = y1_trattino + (_lunghezza_trattino * 2)
     ;
     
     y_etichetta = y2_trattino + (_lunghezza_trattino * 2);
     
-    for(i = 0; i <= punti_asse_x; i++ ) {
+    for(let i = 0; i <= punti_asse_x; i++ ) {
         x_etichetta = chart_padding + padding_asse_y + ((base_corretta/_step) * i);
     
         _trattino= document.createElementNS("http://www.w3.org/2000/svg", 'line');
@@ -122,20 +122,20 @@ export default function lineSvg(monthPay, color){
     
     }
     
-    var coord = [],
+    let coord = [],
         points =[];
     
     
     dati.forEach(function (item: any, idx) {
 
-        var i:any = {label: item[0], value: item[1], index: idx};
+        let i:any = {label: item[0], value: item[1], index: idx};
         i.x = Math.round((base_corretta / punti_asse_x) * idx) + chart_padding + padding_asse_y;
         i.y = Math.round(altezza - ((altezza_corretta * item[1]) / valore_massimo_asse_y)  - chart_padding - padding_asse_x);
         coord.push(i);
         points.push(i.x +',' +i.y);
     });
     
-    var poly = document.createElementNS("http://www.w3.org/2000/svg", 'polyline');
+    let poly = document.createElementNS("http://www.w3.org/2000/svg", 'polyline');
     poly.setAttribute("points", points.join(' '));
     _svg.appendChild(poly);
     poly.setAttribute('stroke-dasharray', `${poly.getTotalLength()}`);
@@ -143,7 +143,7 @@ export default function lineSvg(monthPay, color){
     poly.style.stroke = color;
     coord.forEach(function (item) {
 
-        var _circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+        let _circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
         _circle.setAttribute("cx", item.x);
         _circle.setAttribute("cy", item.y);
         _circle.setAttribute("r", '5');

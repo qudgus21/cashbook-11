@@ -8,8 +8,10 @@ export default class Statistics extends Component {
     template (): string { 
         return ` 
             <div class="container-statistics">
-                <div class="wrapper-donut"></div>
-                <div class="wrapper-line"></div>
+                <div class="wrapper-left">
+                    <div class="wrapper-donut"></div>
+                    <div class="wrapper-line"></div>
+                </div>
                 <div class="wrapper-history"></div>
             </div>
         `

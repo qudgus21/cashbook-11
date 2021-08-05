@@ -11,17 +11,19 @@ import { getDateInfo, isEmpty } from '@utils/util-func';
 import { SEARCH_HISTORY } from '@models/date-store';
 import { category } from '@constants/category';
 import { img } from '@constants/img-path';
+import Fab from '@components/base/fab';
+import { convertHistorysToHandyObject } from '@utils/convert';
 
 
 export default class Content extends Component {
     $monthHistory: MonthHistory;
     $filter: Filter;
+    $fab: Fab;
+    state: { dayArray: any; historys: any; historysObj: any; };
 
     setup () {
-        this.state = { dayArray: null, historys: null };
+        this.state = { dayArray: null, historys: null, historysObj: null, };
         this.filteringHistory();
-        console.log("Home 의 Content 가 dateStore를 subscribe 시작합니다.");
-        console.log("Home 의 Content 가 filterStore를 subscribe 시작합니다.");
         dateStore.subscribe(this.update.bind(this));
         filterStore.subscribe(this.partialRender.bind(this));
     }
@@ -31,10 +33,11 @@ export default class Content extends Component {
     }
 
     partialRender() {
+
         this.filteringHistory();
         this.$monthHistory.setState({ 
-            dayArray: this.state.dayArray,
-            historys: this.state.historysObj,
+            dayArray: [...this.state.dayArray],
+            historys: {...this.state.historysObj},
         });
 
         let num = 0;
@@ -59,9 +62,17 @@ export default class Content extends Component {
 
     template (): string { 
         return `
-            <div class="container-filter"></div>
+            <div 
+                class="container-filter fadein"></div>
             <div class="wrapper-add-history wrapper-add-history-hidden"></div>
-            <div class="wrapper-month-history"></div>
+            <div
+                class="wrapper-month-history fadein"
+                style="animation-delay:${filterStore.state.delay}s;">
+            </div>
+            <div
+                class="fab fadein"
+                style="animation-delay:${filterStore.state.delay + 0.5}s;">
+            </div>
         `;
     }
 
@@ -69,7 +80,7 @@ export default class Content extends Component {
         // TODO
         if (!checkLogin(false)) { 
             addClassSelector($('.container-filter').get(), 'hidden');
-            $('.wrapper-month-history').get().innerHTML = this.getLoginImgTemplate();
+            $('.wrapper-content').get().innerHTML = this.getLoginImgTemplate();
         } else {
             this.$filter = new Filter(
                 $('.container-filter').get(), 
@@ -83,16 +94,12 @@ export default class Content extends Component {
                     historys: this.state.historysObj,
                 }
             );
+            this.$fab = new Fab($('.fab').get());
         }
     }
 
     getLoginImgTemplate() {
-        return `
-        <div class="wrapper-img-login"> 
-            <img src="${img.BAEDAL}" class="img-baedal" /> 
-            <div class= "footer"> 로그인을 먼저 하겠어! </div>
-        </div>
-        `;
+        return `<div class="wrapper-img-login"></div>`;
     }
 
     setEvent() {
@@ -134,15 +141,14 @@ export default class Content extends Component {
 
     filteringHistory() {
         let historys = dateStore.getHistorys();
-        
         this.state.historys = historys.filter(h => {
+            
             if (filterStore.state.categorys !== category.ALL) {
                 return h.CategoryPk == filterStore.state.categorys;
             }
 
             if (!filterStore.state.isIncomeBoxClicked && h.status === 1) return false;
             else if (!filterStore.state.isConsumeBoxClicked && h.status === -1) return false;
-  
             return true;
         });
 

@@ -36,9 +36,9 @@ export default class Line extends Component {
         })
     }
 
-    tooltipHandler(e) { 
-      $('.svg-line-description').get().style.left = `${e.pageX}px`
-      $('.svg-line-description').get().style.top = `${e.pageY - 200}px`
+  tooltipHandler(e) {
+      $('.svg-line-description').get().style.left = `${e.offsetX}px`
+      $('.svg-line-description').get().style.top = `${e.offsetY-20}px`
   }
 
   
@@ -59,7 +59,7 @@ export default class Line extends Component {
 
     addChartEvent() { 
       $('.container-line circle').getAll().forEach((circle) => { 
-          circle.addEventListener('mouseover', (e) => {
+        circle.addEventListener('mouseover', (e) => {
               this.tooltipOn(e);
           })
           circle.addEventListener('mouseleave', (e) => {
@@ -69,9 +69,17 @@ export default class Line extends Component {
     }
 
   
-    mounted() {
-      const { data } = this.state
+  mounted() { 
 
+      addClassSelector($('.container-line').get(), 'fadein')
+
+      setTimeout(() => {
+          removeClassSelector($('.container-line').get(), 'fadein')
+      }, 1500);
+
+
+      const { data } = this.state
+      
       if (!data) return;
  
       let monthPay = [];
@@ -85,7 +93,7 @@ export default class Line extends Component {
       let idx = CATEGORY_TAG.findIndex((item) => { 
         return item.title === data[0].Category.name
       })
-
+      
       lineSvg(monthPay, CATEGORY_TAG[idx].color);
 
       this.addChartEvent()

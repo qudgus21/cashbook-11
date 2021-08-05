@@ -4,14 +4,13 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    height: 9rem;
+    height: 4rem;
     justify-content: space-between;
     border: none;
     border-radius:2rem;
     bottom: 3rem;
     right: 3rem;
     z-index: 10;
-
 
     .button {
         border: none;
@@ -45,17 +44,19 @@
         animation-timing-function: linear;
         animation-iteration-count: infinite;
     } 
-      
-   
+    
     .bounce { 
         animation-name: bounce;
     }
-      
 
     .invisible {
         visibility: hidden;
     }
 }
+
+
+
+
 
 @keyframes bounce { 
     0%, 100% {

@@ -1,22 +1,25 @@
 @import './color.scss';
 
+
+
 body{
     background-color: $BACKGROUND;
 
+
     .app {
+        
+        @media screen and (max-width: 700px) {
+            display: flex;
+            flex-direction: column;
+        }
+
         display: flex;
         flex-direction: row;
-        background-color: $PRIMARY;
+        background-color: #0051CB;
 
-        min-width: 60rem;
+        // min-width: 60rem;
         overflow-x: hidden;
         overflow-y: hidden;
-
-        .appbar {
-            .appbar {
-                z-index: 0;
-            }
-        }
 
         .container-content {
             // z-index: 1;
@@ -26,17 +29,59 @@ body{
             margin-top: 7vh;
             display: flex;
             flex-direction: column;
-            min-width: 30rem;
+            // min-width: 30rem;
             overflow-x: hidden;
             border-top-left-radius: 2rem;
             box-shadow: -3px -3px 15px 3px $LABEL;
 
+            @media screen and (max-width: 700px) { 
+                width: 100vw;
+                border-radius: 0;
+                margin-top: 0;
+            }
+
+   
             .content {
                 width:100%;
+                height: 100%;
+
+                .wrapper-content{
+                    width: 100%;
+                    height: 100%;
+
+                    
+                    .wrapper-img-login {
+                        margin-top: 0;
+                        height: 100% !important;
+                        width: 100%;
+                        background: url("https://cashbook-11.s3.ap-northeast-2.amazonaws.com/assets/loginrequest.png");
+                        background-position: center center;
+                        background-size: 100% 100%;
+                        background-repeat: no-repeat;
+            
+                        .footer {
+                            display: block;
+                            width: 100%;
+                            text-align: center;
+                            background-color: rgb(29, 29, 29);
+                            color: white;
+                            font-weight: bold;
+                            font-size: 2vw;
+                            margin-top: -1.5rem;
+                            border-bottom-left-radius: 1.5rem;
+                            border-bottom-right-radius: 1.5rem;
+                        }
+                
+                        .img-baedal {
+                            width: 100%;
+                            border-radius: 1.5rem;
+                        }
+                    }
+                }
             }
 
             &.move-down {
-                transform: translateX(80vw) translateY(70vh);
+                transform: translateX(82vw) translateY(79vh);
                 transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
             }
             
@@ -57,3 +102,4 @@ body{
         justify-content: center;
     }
 }
+

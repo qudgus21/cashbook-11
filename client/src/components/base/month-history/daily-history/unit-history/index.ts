@@ -16,7 +16,7 @@ export default class UnitHistory extends Component {
     template (): string {
         const { CategoryPk, content, PayTypePk, PayType, status, value, pk } = this.state.history;
         return `
-            <div class="container-unit-history-info"> 
+            <div class="container-unit-history-info" title="클릭시 삭제 알람이 뜹니다!"> 
                 <div id="history-pk-${pk}"class="info info-category"><div>${CATEGORY_TAG[CategoryPk].title}</div></div>
                 <div 
                     class="info info-content" 

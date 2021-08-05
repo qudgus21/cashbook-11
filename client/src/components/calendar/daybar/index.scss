@@ -1,10 +1,8 @@
 @import '@src/color.scss';
 
 .wrapper-daybar{
-    z-index: 1;
-    position: fixed;
-    top: 14%;
-
+    width: 100%;
+    margin-bottom: 1.5rem;
     &, .container-daybar, ul {
         width: 100%;
     }
@@ -12,15 +10,17 @@
     .container-daybar{
         display: flex;
         justify-content: center;
+        width: 100%;
     }
 
     ul{
+        margin-top: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 3.3rem;
         background-color: $OFF_WHITE;
-        width: 65%;
+        width: 85%;
         border-radius: 15px;
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         >li{

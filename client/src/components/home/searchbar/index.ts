@@ -4,7 +4,7 @@ import api from "@utils/api";
 import { $ } from '@utils/select';
 import { addClassSelector } from '@utils/selectHandler';
 import Snackbar from '@components/base/snackbar';
-import { dateStore } from '@src/models';
+import { dateStore, filterStore } from '@src/models';
 import { SEARCH_HISTORY } from '@models/date-store';
 import { checkLogin } from '@utils/cookie';
 
@@ -15,7 +15,6 @@ export default class SearchBar extends Component {
         if (checkLogin(false)) {
             this.getData();
         }
-        console.log("Home 의 SearchBar 가 dateStore를 subscribe 시작합니다.");
         dateStore.subscribe(this.updateUserPayType.bind(this));
     }
 
@@ -44,43 +43,49 @@ export default class SearchBar extends Component {
     
     template (): string { 
         return `
-            <ul>
-                <li class="li-date">
+            <ul class="fadein">
+                <li class="li-date fadein"
+                style="animation-delay: 0.05s;">
                     ${this.getDateLiteralTemplate()}
                 </li>
 
-                <li class="li-category">
+                <li class="li-category fadein"
+                style="animation-delay: 0.1s;">
                     ${this.getSelectLiteralTemplate(
                         this.state.categorys,
                         {name:'category', text:'분류'}
                     )}
                 </li>
 
-                <li class="li-content">
+                <li class="li-content fadein"
+                style="animation-delay: 0.15s;">
                     ${this.getContentLiteralTemplate()}
                 </li>
 
-                <li class="li-paytype">
+                <li class="li-paytype fadein"
+                style="animation-delay: 0.2s;">
                     ${this.getSelectLiteralTemplate(
                         this.state.userPayTypes,
                         {name:'payType', text:'결제수단'}
                     )}
                 </li>
 
-                <li class="li-value">
+                <li class="li-value fadein"
+                style="animation-delay: 0.25s;">
                     ${this.getValueLiteralTemplate()}
                 </li>
 
-                <button class="button-search">조회</button>
+                <button class="button-search fadein"
+                style="animation-delay: 0.3s;">조회</button>
             </ul>
         `;
     }
 
     getDateLiteralTemplate() {
         return `
-            <label>일자</label>
+            <label class="label-for-calendar" for="start-date">일자</label>
             <div class="container-date">
-                <input type="date" class="input-start-date" />
+                <input name="start-date" type="date" class="input-start-date" />
                 <div> ~ </div>
                 <input type="date" class="input-end-date" />
             </div>
@@ -92,7 +97,7 @@ export default class SearchBar extends Component {
         label: {name: string, text: string}) {
         
         return `
-            <label name="${label.name}">${label.text}</label>
+            <label for="${label.name}">${label.text}</label>
             <select class="select-${label.name}" name="${label.name}">
                 <option value="-1" selected disabled>선택하세요</option>
                 <option value="-1">선택안함</option>
@@ -108,20 +113,30 @@ export default class SearchBar extends Component {
 
     getValueLiteralTemplate() {
         return `
-            <label>금액</label>
+            <label class="label-for-value" for="minimum">금액</label>
             <div class="container-value">
-                <input class="input-search-value" placeholder="min" /> 
-                <div>-</div>
-                <input class="input-search-value" placeholder="max" />
-                <div>원<div>
+                <input
+                    type="number"
+                    name="minimum" 
+                    class="input-search-value min" 
+                    min="1"
+                    placeholder="최소 금액를 입력하세요" 
+                /> 
+                <div>~</div>
+                <input 
+                    type="number" 
+                    min="1"
+                    class="input-search-value max" 
+                    placeholder="최대 금액을 입력하세요" 
+                />
             </div>
         `;
     }
 
     getContentLiteralTemplate() {
         return `
-            <label>내용</label>
-            <input class="input-search-content" placeholder="입력하세요" />
+            <label for="input-content">내용</label>
+            <input class="input-search-content" name="input-content" placeholder="입력하세요" />
         `;
     }
 
@@ -138,8 +153,10 @@ export default class SearchBar extends Component {
                     month: dateStore.state.month,
                     historys,
                     type: SEARCH_HISTORY, 
-                }; 
+                };
 
+                filterStore.state.delay = 0;   
+                
                 dateStore.setState(nextState);
             }
         });
@@ -153,8 +170,8 @@ export default class SearchBar extends Component {
         const content = $('.input-search-content').get().value;
         let PayTypePk = $('.select-payType').get().value;
         
-        const minimumValue = $('.input-search-value').get().value;
-        const maximumValue = $('.input-search-value').get().value;
+        const minimumValue = $('.input-search-value.min').get().value;
+        const maximumValue = $('.input-search-value.max').get().value;
         
         if (CategoryPk <= 0) CategoryPk = '';
         if (PayTypePk <= 0) PayTypePk = '';
