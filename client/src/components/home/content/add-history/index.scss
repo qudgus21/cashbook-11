@@ -75,9 +75,29 @@
         .container-input-five-floor {
             justify-content: space-around;
             align-items: center;
+            margin-bottom: 1rem;
+
             button {
+                display: block;
+                all: unset;
                 width: 44%;
+                border-radius: 0.5rem;
+                border: 2px solid $BORDER;
+                text-align: center;
+                height: 2rem;
+                font-weight: bold;
+
+                &:first-child:hover {
+                    color: $PRIMARY;
+                    font-weight: bold;
+                }
+    
+                &:nth-child(2):hover {
+                    color: red;
+                    font-weight: bold;
+                }
             }
+    
         }
 
         .select {
@@ -143,23 +163,6 @@
         
         .input-status:checked {
             background-color: $PRIMARY;
-        }
-        
-        button {
-            all: unset;
-            height: 2.5rem;
-            width: 2.5rem;
-            margin-left: 1rem;
-            font-weight: bold;
-        }
-    
-        button:hover {
-            all: unset;
-            height: 2.5rem;
-            width: 2.5rem;
-            margin-left: 1rem;
-            color: $PRIMARY;
-            font-weight: bold;
         }
     }
     &.wrapper-add-history-hidden {

@@ -51,8 +51,6 @@ export default class Content extends Component {
 
 
     paintCalendar(dates: any): void {
-        console.log('history is...', dateStore.state.historys)
-
         const historyData = this.sortHistory(dateStore.state.historys);
         const storeYear = dateStore.state.year;
         const storeMonth = dateStore.state.month;
