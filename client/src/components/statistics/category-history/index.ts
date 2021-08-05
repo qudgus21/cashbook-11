@@ -1,3 +1,4 @@
+import { getDateInfo } from './../../../utils/util-func';
 import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 import { category } from '@constants/category';
 import { checkLogin } from '@utils/cookie';
@@ -96,21 +97,22 @@ export default class CategoryHistory extends Component {
     convertHistorysToHandyObject() {
         if (!isEmpty(this.state.historys)) {
             this.state.historys = this.state.historys.map((h: any) => {
-                let date = new Date(h.time);
-                h.month = date.getMonth() + 1;
-                h.date = date.getDate();
-                h.dayOfWeek = date.getDay();
+                const date = new Date(h.time);
+                h = { ...h, ...getDateInfo(h.time)};
                 h.time = `${date.getHours()}:${date.getMinutes()}`;
                 return h;
             });
+
             const historysObj = {};
+
             this.state.historys.forEach((h: any)=> {
-                if (isEmpty(historysObj[h.date])) {
-                    historysObj[h.date] = [h];
+                if (isEmpty(historysObj[`${h.year}-${h.month}-${h.date}`])) {
+                    historysObj[`${h.year}-${h.month}-${h.date}`] = [h];
                 } else {
-                    historysObj[h.date].push(h);
+                    historysObj[`${h.year}-${h.month}-${h.date}`].push(h);
                 }
             });
+
             this.state.historysObj = historysObj;
         }
     }
