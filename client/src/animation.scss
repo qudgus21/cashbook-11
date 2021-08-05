@@ -64,3 +64,45 @@
         opacity: 0;
     }
 }
+
+@-moz-keyframes slideright { /* Firefox */
+    from {
+        background-color: blue;
+        transform: translateX(0rem);
+    }
+    to {
+        background-color: blue;
+        transform: translateY(-20rem);
+    }
+}
+@-webkit-keyframes slideright { /* Safari and Chrome */
+    from {
+        background-color: blue;
+        transform: translateX(0rem);
+    }
+    to {
+        background-color: blue;
+        transform: translateY(-20rem);
+    }
+}
+
+@-o-keyframes slideright { /* Opera */
+    from {
+        background-color: blue;
+        transform: translateX(0rem);
+    }
+    to {
+        background-color: blue;
+        transform: translateY(-20rem);
+    }
+}
+@keyframes slideright {
+    from {
+        background-color: blue;
+        transform: translateX(0rem);
+    }
+    to {
+        background-color: blue;
+        transform: translateY(-20rem);
+    }
+}

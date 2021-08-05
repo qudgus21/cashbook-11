@@ -1,10 +1,26 @@
 @import '@src/color.scss';
 @import '@src/animation.scss';
 
-.container-month-history {
+
+@keyframes movedown {
+    from {
+        transform: translate(0rem);
+    } 
+    to {
+        transform: translate(10rem);
+    }        
+}
+
+.wrapper-month-history {
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    &.movedown {
+        animation-name: movedown;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
 
     .wrapper-daily-history {
         width: 100%;
@@ -23,10 +39,10 @@
     &.fadeout,
     .fadeout {
         opacity: 1;
-        animation: fadeout 3s;
-        -moz-animation: fadeout 3s; /* Firefox */
-        -webkit-animation: fadeout 3s; /* Safari and Chrome */
-        -o-animation: fadeout 3s; /* Opera */
+        animation: fadeout 1.3s;
+        -moz-animation: fadeout 1.3s; /* Firefox */
+        -webkit-animation: fadeout 1.3s; /* Safari and Chrome */
+        -o-animation: fadeout 1.3s; /* Opera */
         animation-fill-mode: forwards;
     }
 }

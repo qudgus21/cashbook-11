@@ -17,11 +17,13 @@ export default class Filter extends Component {
     
     template (): string { 
         return `
-            <div class="text-num-of-historys"> 
+            <div class="text-num-of-historys fadein"
+            style="animation-delay: 0.05s;"> 
                 전체 내역 ${this.state.length}건
             </div>
             <div class="container-checkbox">
-                <div class="custom-checkbox">
+                <div class="custom-checkbox fadein"
+                style="animation-delay: 0.25s;">
                     <label>
                         <div class="checkbox checkbox-income">
                             <img src="${img.CHECK_WHITE}" class="img-income-checkbox" />
@@ -31,7 +33,8 @@ export default class Filter extends Component {
                     <div class="text-total-income">수입 ${comma(this.state.income)}</div>
                 </div>
                 <div class="div-space-layout"></div>
-                <div class="custom-checkbox">
+                <div class="custom-checkbox fadein"
+                style="animation-delay: 0.45s;">
                     <label>
                         <div class="checkbox checkbox-consume">
                             <img src="${img.CHECK_WHITE}" class="img-consume-checkbox" />
@@ -46,7 +49,7 @@ export default class Filter extends Component {
 
     mounted() {
         if (filterStore.state.isIncomeBoxClicked) {
-            $('.checkbox-income').get().style.backgroundColor = '#2AC0BC';
+            $('.checkbox-income').get().style.backgroundColor = '#2AC0BC'; 
             $('.img-income-checkbox').get().src = 'src/assets/check-white.svg';
         }
 
@@ -72,11 +75,28 @@ export default class Filter extends Component {
             );
         });
 
+        this.addEvent('click','.text-total-income', (e) => {
+            e.preventDefault();
+
+            this.customCheckboxClickEventHandler(
+                $('.checkbox-income').get(),
+                $('.img-income-checkbox').get(),
+                true
+            );
+        });
+
         this.addEvent('click','.checkbox-consume', (e) => {
             e.preventDefault();
             
+            this.customCheckboxClickEventHandler(
+                $('.checkbox-consume').get(),
+                $('.img-consume-checkbox').get(),
+                false
+            );
+        });
 
-
+        this.addEvent('click','.text-total-consume', (e) => {
+            e.preventDefault();
             
             this.customCheckboxClickEventHandler(
                 $('.checkbox-consume').get(),

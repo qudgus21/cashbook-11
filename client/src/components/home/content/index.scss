@@ -4,9 +4,7 @@
 .content {
     display: flex;
     flex-direction: row;
-    // min-width: 20rem;
     overflow-y: hidden;
-
 
     .container-filter,
     .wrapper-add-history,
@@ -51,24 +49,104 @@
 
         height: 80vh;
         overflow-y: auto;
-
-        &.fadein {
-            opacity: 0;
-            animation: fadein 1.3s;
-            -moz-animation: fadein 1.3s; /* Firefox */
-            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
-            -o-animation: fadein 1.3s; /* Opera */
-            animation-fill-mode: forwards;
-        }
-
         
         .container-month-history {
-            // overflow-y:;
             padding-right: 1rem;
         }
     }
 
-
+    .fadein {
+        opacity: 0;
+        animation: fadein 1.3s;
+        -moz-animation: fadein 1.3s; /* Firefox */
+        -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+        -o-animation: fadein 1.3s; /* Opera */
+        animation-fill-mode: forwards;
+    }
 }
 
+
+@media screen and (max-width:1177px) {
+
+    .content {
+        .wrapper-content {
+            .wrapper-month-history {
+                .wrapper-daily-history {
+                    .container-unit-history {
+                        .into {
+                            line-height: 1.6rem;
+                        }
+                        .info.info-paytype {
+                            text-align: right;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 860px) {
+    .content {
+        .wrapper-content {
+            .container-unit-history-info {
+                .info.info-paytype {
+                    text-align: right;
+                }
+                .info.info-price {
+                    width:100%;
+                    text-align: right;
+                }
+
+                .info.info-content {
+                    min-width: 9rem;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 741px) {
+    .content {
+        .wrapper-content {
+            .container-unit-history {
+                .container-unit-history-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .info {
+                        text-align: center !important;
+                        width: 100%;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .info.info-category {
+                        width: 100%;
+                        border-radius: 0 !important;
+                        margin-left: 0;
+                    }
+
+                    .info.info-content {
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 

@@ -1,57 +1,30 @@
 @import '@src/color.scss';
 @import '@src/animation.scss';
+
 .content {
     overflow: hidden;
 
-    // @media screen and (max-width:1300px) and (min-width: 520px) {
-        
-    //     & .wrapper-searchbar {
-    //         background-color: violet;
-    //         animation-name: move-and-hide;
-    //         animation-duration: 1s;
-    //         animation-fill-mode: forwards;
-    //     }
-
-    //     @keyframes move-and-hide {
-    //         from {
-    //             display: none;
-    //             transform: translateX(-20rem);
-    //         }
-            
-    //         to {
-    //             // margin-left: 0%;
-    //             display: none;
-    //             margin-left:-18rem;
-    //         }      
-    //     }
-
-    //     & .wrapper-month-history { 
-    //     }
-
-    // }
-    
-    // @media screen and (min-width:1300px)/* and (min-width: 520px)*/ {
-    //     & .wrapper-month-history { 
-    //     }
-    // }
-
     .wrapper-searchbar{
-        z-index: 1;
         width: 40vw;
         height: 90vh;
         display: flex;
         display: row;
         justify-content: center;
         align-items: center;
-    
-        // @media screen and (min-width:1300px)/* and (min-width: 520px)*/ {
-        //     background-color: violet;
-        //     transform: translateX(0rem);
-        //     transition: transform 1s;
-        // }
+
 
         &.hidden {
             display: none;
+        }
+
+        &.fadein,
+        .fadein {
+            opacity: 0;
+            animation: fadein 1.3s;
+            -moz-animation: fadein 1.3s; /* Firefox */
+            -webkit-animation: fadein 1.3s; /* Safari and Chrome */
+            -o-animation: fadein 1.3s; /* Opera */
+            animation-fill-mode: forwards;
         }
 
         ul {
@@ -68,9 +41,7 @@
             background-color: $OFF_WHITE;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-
             
-
             &.fadein {
                 opacity: 0;
                 animation: fadein 1.3s;
@@ -79,6 +50,7 @@
                 -o-animation: fadein 1.3s; /* Opera */
                 animation-fill-mode: forwards;
             }
+            
 
             li {
                 min-width: 12rem;
@@ -175,3 +147,14 @@
         }
     }
 }
+
+
+
+@media screen and (max-width:1200px) {
+    .content {
+        .wrapper-searchbar {
+            display: none;
+        }
+    }
+}
+

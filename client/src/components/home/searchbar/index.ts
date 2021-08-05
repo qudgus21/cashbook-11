@@ -44,42 +44,48 @@ export default class SearchBar extends Component {
     template (): string { 
         return `
             <ul class="fadein">
-                <li class="li-date">
+                <li class="li-date fadein"
+                style="animation-delay: 0.05s;">
                     ${this.getDateLiteralTemplate()}
                 </li>
 
-                <li class="li-category">
+                <li class="li-category fadein"
+                style="animation-delay: 0.1s;">
                     ${this.getSelectLiteralTemplate(
                         this.state.categorys,
                         {name:'category', text:'분류'}
                     )}
                 </li>
 
-                <li class="li-content">
+                <li class="li-content fadein"
+                style="animation-delay: 0.15s;">
                     ${this.getContentLiteralTemplate()}
                 </li>
 
-                <li class="li-paytype">
+                <li class="li-paytype fadein"
+                style="animation-delay: 0.2s;">
                     ${this.getSelectLiteralTemplate(
                         this.state.userPayTypes,
                         {name:'payType', text:'결제수단'}
                     )}
                 </li>
 
-                <li class="li-value">
+                <li class="li-value fadein"
+                style="animation-delay: 0.25s;">
                     ${this.getValueLiteralTemplate()}
                 </li>
 
-                <button class="button-search">조회</button>
+                <button class="button-search fadein"
+                style="animation-delay: 0.3s;">조회</button>
             </ul>
         `;
     }
 
     getDateLiteralTemplate() {
         return `
-            <label>일자</label>
+            <label for="start-date">일자</label>
             <div class="container-date">
-                <input type="date" class="input-start-date" />
+                <input name="start-date" type="date" class="input-start-date" />
                 <div> ~ </div>
                 <input type="date" class="input-end-date" />
             </div>
@@ -91,7 +97,7 @@ export default class SearchBar extends Component {
         label: {name: string, text: string}) {
         
         return `
-            <label name="${label.name}">${label.text}</label>
+            <label for="${label.name}">${label.text}</label>
             <select class="select-${label.name}" name="${label.name}">
                 <option value="-1" selected disabled>선택하세요</option>
                 <option value="-1">선택안함</option>
@@ -107,11 +113,11 @@ export default class SearchBar extends Component {
 
     getValueLiteralTemplate() {
         return `
-            <label>금액</label>
+            <label for="minimum">금액</label>
             <div class="container-value">
                 
                 <div class="container-value-minimum">
-                    <input class="input-search-value" placeholder="min" /> 
+                    <input name="minimum" class="input-search-value" placeholder="min" /> 
                     <div>원</div>
                 </div>
                 

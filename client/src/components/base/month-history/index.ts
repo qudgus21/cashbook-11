@@ -14,7 +14,7 @@ export default class MonthHistory extends Component {
         const text = `
             ${this.state.dayArray
                 .map((time:any, idx: number): string => {
-                    return `<div id="daily-history-${time}" class="wrapper-daily-history fadein" style="animation-delay:${filterStore.state.delay + 0.15 * idx}s;"></div>`;
+                    return `<div id="daily-history-${time}" class="wrapper-daily-history fadein" style="animation-delay:${filterStore.state.delay + 0.20 * idx}s;"></div>`;
                 }).join('\n')
             }
         `;

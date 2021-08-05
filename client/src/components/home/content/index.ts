@@ -11,11 +11,13 @@ import { getDateInfo, isEmpty } from '@utils/util-func';
 import { SEARCH_HISTORY } from '@models/date-store';
 import { category } from '@constants/category';
 import { img } from '@constants/img-path';
+import Fab from '@components/base/fab';
 
 
 export default class Content extends Component {
     $monthHistory: MonthHistory;
     $filter: Filter;
+    $fab: Fab;
     state: { dayArray: any; historys: any; historysObj: any; };
 
     setup () {
@@ -64,7 +66,12 @@ export default class Content extends Component {
             <div class="wrapper-add-history wrapper-add-history-hidden"></div>
             <div
                 class="wrapper-month-history fadein"
-                style="animation-delay:${0.6}s;"></div>
+                style="animation-delay:${filterStore.state.delay}s;">
+            </div>
+            <div
+                class="fab fadein"
+                style="animation-delay:${filterStore.state.delay + 0.5}s;">
+            </div>
         `;
     }
 
@@ -86,14 +93,12 @@ export default class Content extends Component {
                     historys: this.state.historysObj,
                 }
             );
+            this.$fab = new Fab($('.fab').get());
         }
     }
 
     getLoginImgTemplate() {
-        return `
-        <div class="wrapper-img-login"> 
-        </div>
-        `;
+        return `<div class="wrapper-img-login"></div>`;
     }
 
     setEvent() {
