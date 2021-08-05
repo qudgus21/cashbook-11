@@ -43,8 +43,6 @@ const createHistory = async (req, res, next) => {
     try {
         transaction = await db.sequelize.transaction();
 	
-	console.log(req.body.time);
-	console.log(typeof req.body.time);
         const user = req.user;
         const UserPk = user.pk;
         let { time, CategoryPk, status, payType, content, value } = req.body;
