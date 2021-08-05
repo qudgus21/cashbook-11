@@ -11,7 +11,7 @@ import comma from "@utils/comma";
 export default class History extends Component {
 
     setup () {
-        dateStore.subscribe(this.makeHistory.bind(this));
+        
         
     }
     

@@ -1,3 +1,4 @@
+import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 import { category } from '@constants/category';
 import { checkLogin } from '@utils/cookie';
 import { isEmpty } from '@utils/util-func';
@@ -37,7 +38,15 @@ export default class CategoryHistory extends Component {
 
 
 
-    mounted () {
+    mounted() {
+        addClassSelector($('.container-history').get(), 'fadein')
+
+        setTimeout(() => {
+            removeClassSelector($('.container-history').get(), 'fadein')
+        }, 1600);
+  
+
+
         if (checkLogin(false)) { 
             this.$monthHistory = new MonthHistory(
                 $('.container-history').get(), 

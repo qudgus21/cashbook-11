@@ -38,15 +38,7 @@ export default class Donut extends Component {
         new Chart($('.wrapper-donut-chart').get());
         new History($('.wrapper-donut-history').get());
 
-        // if (dateStore.getHistorys().length !== 0) {
 
-        // } else {
-        //     $('.container-donut').get().innerHTML = `
-        //         <div class="wrapper-img-empty"> 
-        //             <img src="${img.BAEDAL}" class="img-empty-statistic" /> 
-        //         </div>
-        //     `;
-        // }
         
     }
 
