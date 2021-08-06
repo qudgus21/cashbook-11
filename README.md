@@ -38,5 +38,8 @@
   
   
 
+ ## 이야기 거리
+ [영우가 쏘아올린 작은 레이아웃](https://github.com/woowa-techcamp-2021/cashbook-11/wiki/레이아웃변경계기)
+ [눈물겨운 트러블 슈팅](https://github.com/woowa-techcamp-2021/cashbook-11/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
 
   
