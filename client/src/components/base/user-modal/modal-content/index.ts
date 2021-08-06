@@ -49,10 +49,10 @@ export default class ModalContent extends Component {
         return `
             <form class="form signin-form">
                 <h1>로그인</h1>
-                <label for="id">아이디</label>
+                <label for="id">아이디 (테스트 아이디: youngwoo)</label>
                 <input type="text" name="id" class="input-id" id="input-signin-id" placeholder="아이디를 입력하세요"/>
                 <div class="input-alert">4자</div>
-                <label for="password">비밀번호</label>
+                <label for="password">비밀번호 (테스트 비밀번호: qwer223!)</label>
                 <input type="password" name="current-password" class="input-password" id="input-signin-password" placeholder="비밀번호를 입력하세요"/>
                 <div class="input-alert">4자</div>
             </form>
