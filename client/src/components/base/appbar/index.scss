@@ -33,12 +33,12 @@
 
             @media screen and (min-width: 701px) {
                 &:not(.title-main, .active):hover{
-                    background-color: #084fb9;
+                    background-color: #2AC0BC;
                 }
             }
 
             &.active{
-                background-color: #063781;
+                background-color: #1c8581;
                 -webkit-transition: background-color 500ms linear;
                 -ms-transition: background-color 500ms linear;
                 transition: background-color 500ms linear;
@@ -47,7 +47,7 @@
                     -webkit-transition: background-color 500ms linear;
                     -ms-transition: background-color 500ms linear;
                     transition: background-color 500ms linear;
-                    background-color:   #063781;
+                    background-color : #1c8581;
                 }
             }
 
@@ -60,7 +60,7 @@
 
             button {
                 flex-grow: 0;
-                background-color:  #0051CB;
+                background-color:  #2AC0BC;
                 border: none;
             }
 
@@ -267,8 +267,10 @@
                     width: 1rem;
                     border-radius: 10px;
                     &.active{
-                        background-color:  #084fb9;;
+                        // background-color:  #1c8581;
+                        background-color:   #2AC0BC;
 
+                       
                     }
 
                     .text{
