@@ -2,7 +2,34 @@
 11팀 황병현, 남영우 의 우아한 병영생활
 
 </br>  
-  
+
+
+## 배포 링크
+
+
+ <a href="http://13.125.10.132/">우아한 가계부</a>
+
+
+</br>
+
+
+
+## 영상 링크
+
+ <a href="https://youtu.be/iS2HhUeky-M">회고 및 시연 영상</a>
+
+
+</br>
+
+
+
+
+
+## 사용한 기술
+
+
+
+
   | Area     | Tech Stack                                                   |
 | -------- | ------------------------------------------------------------ |
 | Frontend | [![img](https://img.shields.io/badge/typescript-3178C6?style=flat-square&logo=TypeScript&logoColor=white)](https://camo.githubusercontent.com/4322f68df7c86211437334af770c73c206af84454f223ade9bf4387ae2c8e343/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970657363726970742d626c75653f636f6c6f723d303037414343266c6f6e6743616368653d74727565266c6f676f3d54797065736372697074266c6f676f436f6c6f723d7768697465) [![img](https://img.shields.io/badge/scss-CC6699?style=flat-square&logo=Sass&logoColor=white) ![img](https://img.shields.io/badge/Webpack-8DD6F9?style=flat-square&logo=Webpack&logoColor=white) ![img](https://img.shields.io/badge/Babel-F9DC3E?style=flat-square&logo=Babel&logoColor=white) ![img](https://camo.githubusercontent.com/697ceb22b84ef7295ef48eb7ed52400210c6d0b6c52b3bcb84bf1cb9a202c7e7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769746875625f4f417574685f322e302d626c75653f636f6c6f723d343238354634266c6f6e6743616368653d74727565266c6f676f3d476f6f676c65266c6f676f436f6c6f723d7768697465)](https://camo.githubusercontent.com/697ceb22b84ef7295ef48eb7ed52400210c6d0b6c52b3bcb84bf1cb9a202c7e7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769746875625f4f417574685f322e302d626c75653f636f6c6f723d343238354634266c6f6e6743616368653d74727565266c6f676f3d476f6f676c65266c6f676f436f6c6f723d7768697465) |
