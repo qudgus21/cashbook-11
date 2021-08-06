@@ -42,12 +42,13 @@ const createHistory = async (req, res, next) => {
 
     try {
         transaction = await db.sequelize.transaction();
-0
+	
         const user = req.user;
         const UserPk = user.pk;
-        const { time, CategoryPk, status, payType, content, value } = req.body;
-        console.log(typeof time);
-        console.log(time);
+        let { time, CategoryPk, status, payType, content, value } = req.body;
+        
+	time += ' 01:00:00';
+
         // payType 으로 입력받은 값을 name으로 가지는 payType 이 있는지 조회
         const payTypeInDB = await db.PayType.findOne({where: { name: payType }});
         

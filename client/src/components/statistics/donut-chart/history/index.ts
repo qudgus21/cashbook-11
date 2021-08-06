@@ -79,7 +79,15 @@ export default class History extends Component {
 
         const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)
         if (response.isFail) return;
-        const sortedData = sortTrendData(response.payTrends)
+
+
+        let temp = response.payTrends.filter((item) => {
+            return (item.CategoryPk != 8 && item.CategoryPk != 9 && item.CategoryPk != 10)
+        })
+
+        const sortedData = sortTrendData(temp)
+        
+        
         this.paintHistory(sortedData)
     }
 
