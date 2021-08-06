@@ -1,3 +1,4 @@
+import  api  from '@utils/api';
 import { getDateInfo } from './../../../utils/util-func';
 import { addClassSelector, removeClassSelector } from '@utils/selectHandler';
 import { category } from '@constants/category';
@@ -39,7 +40,7 @@ export default class CategoryHistory extends Component {
 
 
 
-    mounted() {
+    async mounted() {
         addClassSelector($('.container-history').get(), 'fadein')
 
         setTimeout(() => {
@@ -49,13 +50,17 @@ export default class CategoryHistory extends Component {
 
 
         if (checkLogin(false)) { 
-            this.$monthHistory = new MonthHistory(
-                $('.container-history').get(), 
-                {
-                    dayArray: this.state.dayArray,
-                    historys: this.state.historysObj,
-                }
-            );
+            const response = await api('GET', `/statistics/paytrend?month=${dateStore.state.month}&year=${dateStore.state.year}`)
+            if (response.isFail) return;
+            if (response.payTrends.length > 0) { 
+                this.$monthHistory = new MonthHistory(
+                    $('.container-history').get(), 
+                    {
+                        dayArray: this.state.dayArray,
+                        historys: this.state.historysObj,
+                    }
+                );
+            }
         }
     }
 
