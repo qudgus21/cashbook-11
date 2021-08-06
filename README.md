@@ -7,7 +7,7 @@
 ## 배포 링크
 
 
- <a href="http://13.125.10.132/">우아한 가계부</a>
+ <a href="http://ec2-15-165-75-122.ap-northeast-2.compute.amazonaws.com">우아한 가계부</a>
 
 
 </br>
