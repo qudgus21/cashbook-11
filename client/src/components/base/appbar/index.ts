@@ -175,6 +175,7 @@ export default class Appbar extends Component {
         if (mustUser) {
             if (checkLogin(mustUser)) {
                 this.unsubscribeAllStore();
+                dateStore.refresh();
                 filterStore.reset();
                 setTimeout(()=> {
                     navigateTo(url);
